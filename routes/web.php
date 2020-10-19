@@ -16,3 +16,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('admin')->name('admin.')/*->middleware('admin')*/
+->group(function () {
+    Route::get('/', 'AdminController@index')->name('admin');
+    Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
+
+    //CRUD for builds
+    Route::get('/builds/datatable', 'BuildController@datatableData')->name('build.datatable.data');
+    Route::resource('builds', 'BuildController');
+    //CRUD for checks
+    Route::get('/checks/datatable', 'BuildController@datatableData')->name('build.datatable.data');
+    Route::resource('checks', 'CheckController');
+    //AJAX
+    Route::get('change_permission', 'UserController@change_permission')->name('change.permission');
+});
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
