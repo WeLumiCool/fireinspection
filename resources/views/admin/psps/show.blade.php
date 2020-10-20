@@ -3,9 +3,9 @@
     <div class="container bg-form card-body-admin py-4">
         <div class="row p-4 " id="show_articles">
             <div class="col-2">id</div>
-            <div class="col-10">{{ $typeViolation->id }}</div>
+            <div class="col-10">{{ $Psp->id }}</div>
             <div class="col-2">Заголовок:</div>
-            <div class="col-10">{{ $typeViolation->name }}</div>
+            <div class="col-10">{{ $Psp->name }}</div>
 
         </div>
     </div>

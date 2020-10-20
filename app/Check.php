@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -34,4 +34,5 @@ class Check extends Model
     {
         return $this->hasMany(Violation::class);
     }
+
 }
