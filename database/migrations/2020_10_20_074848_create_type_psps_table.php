@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangePspCountColumnInChecksTable extends Migration
+class CreateTypePspsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class ChangePspCountColumnInChecksTable extends Migration
      */
     public function up()
     {
-        Schema::table('checks', function (Blueprint $table) {
-            $table->longText('psp_count')->nullable()->change();
+        Schema::create('type_psps', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ class ChangePspCountColumnInChecksTable extends Migration
      */
     public function down()
     {
-        Schema::table('checks', function (Blueprint $table) {
-            $table->text('psp_count')->change();
-        });
+        Schema::dropIfExists('type_psps');
     }
 }

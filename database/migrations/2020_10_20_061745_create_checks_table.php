@@ -17,7 +17,7 @@ class CreateChecksTable extends Migration
             $table->id();
             $table->boolean('has_aups')->default(false);
             $table->boolean('has_aupt')->default(false);
-            $table->text('psp_count');
+            $table->longText('psp_count');
             $table->boolean('has_hydrant')->default(false);
             $table->boolean('has_reservoir')->default(false);
             $table->boolean('has_cranes')->default(false);
