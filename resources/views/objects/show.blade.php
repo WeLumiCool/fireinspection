@@ -25,6 +25,16 @@
             </div>
 
         </div>
+        <div class="row justify-content-between align-items-center">
+            <div class="col-4">
+                <h2>Инспекция</h2>
+            </div>
+            <div class="col-2">
+                <button data-toggle="modal" data-target="#addStages" type="button" class="btn btn-success rounded" style="padding: 11px 19px; ">
+                    Добавить Инспекцию
+                </button>
+            </div>
+        </div>
         <div class="col-12 bg-white py-4 mt-4 shadow" style="border-radius: 10px">
             <div class="accordion md-accordion accordion-blocks" id="accordionExample">
                 <div class="card">
@@ -307,4 +317,5 @@
             </div>
         </div>
     </div>
+    @include('models.model_add_fireinspection')
 @endsection
