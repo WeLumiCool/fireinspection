@@ -1,0 +1,29 @@
+.bg-red{
+    background: #CD533D;
+}
+.btn-map{
+    background: #B63A22!important;
+    border-radius: 20px!important;
+    padding: 10px 15px;
+    color: white!important;
+    margin-right: 10px;
+    text-decoration: none;
+}
+.btn-exit{
+    background: #B63A22!important;
+    border-radius: 20px!important;
+    padding: 10px 15px;
+    color: white;
+    margin-right: 10px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.btn-admin{
+    background: #B63A22!important;
+    border-radius: 20px!important;
+    padding: 10px 15px;
+    color: white!important;
+    text-decoration: none!important;
+    margin-right: 10px;
+    cursor: pointer;
+}

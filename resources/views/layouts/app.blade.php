@@ -29,10 +29,11 @@
     @stack('styles')
 </head>
 <body>
-<div id="app">
-
-    @yield('content')
+<div class="mb-5 pb-5">
+    @include('includes.header')
 </div>
+@yield('content')
+@include('includes.footer')
 <script src="https://api-maps.yandex.ru/2.1/?apikey=a2435f91-837f-4a88-87c0-7ac7813eb317&lang=ru_RU"
         type="text/javascript"></script>
 <script
