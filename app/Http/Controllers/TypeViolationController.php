@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TypeViolation;
+use App\Typeviolation;
 use Illuminate\Http\Request;
 
-class TypeViolationController extends Controller
+class TypeviolationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class TypeViolationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\TypeViolation  $typeViolation
+     * @param  \App\Typeviolation  $typeviolation
      * @return \Illuminate\Http\Response
      */
-    public function show(TypeViolation $typeViolation)
+    public function show(Typeviolation $typeviolation)
     {
         //
     }
@@ -52,10 +52,10 @@ class TypeViolationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\TypeViolation  $typeViolation
+     * @param  \App\Typeviolation  $typeviolation
      * @return \Illuminate\Http\Response
      */
-    public function edit(TypeViolation $typeViolation)
+    public function edit(Typeviolation $typeviolation)
     {
         //
     }
@@ -64,10 +64,10 @@ class TypeViolationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TypeViolation  $typeViolation
+     * @param  \App\Typeviolation  $typeviolation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TypeViolation $typeViolation)
+    public function update(Request $request, Typeviolation $typeviolation)
     {
         //
     }
@@ -75,10 +75,10 @@ class TypeViolationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TypeViolation  $typeViolation
+     * @param  \App\Typeviolation  $typeviolation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TypeViolation $typeViolation)
+    public function destroy(Typeviolation $typeviolation)
     {
         //
     }

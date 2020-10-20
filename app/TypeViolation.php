@@ -1,17 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TypeViolation extends Model
+class Typeviolation extends Model
 {
-    use HasFactory;
-    protected $fillable = ['name'];
-
-    public function violations()
-    {
-        return $this->hasMany(Violation::class, 'type_id');
-    }
+    //
 }
