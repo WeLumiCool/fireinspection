@@ -25,7 +25,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"/>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
 <body style="background: #FFFAF9;">
@@ -41,7 +40,6 @@
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 @stack('scripts')
 </body>
 </html>

@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
+Route::get('/show', function () {
+    return view('objects.show');
+})->name('show');
 
 Route::prefix('admin')->name('admin.')/*->middleware('admin')*/
 ->group(function () {

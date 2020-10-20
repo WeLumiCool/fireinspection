@@ -1,72 +1,321 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
+    <div class="container py-5">
+
+        <div class="row bg-white px-5 pb-4 mb-4 shadow" style="border-radius: 10px">
+            <div class="col-5 py-4">
+                <p>
+                    <span class="h3 pr-2">Имя объекта:</span> ГУМ
+                </p>
+
+                <p>
+                    <span class="h3 pr-2">Адресс:</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aperiam ducimus eius, enim est explicabo ipsa laborum maxime nostrum optio provident quam quas quidem temporibus ullam veritatis voluptatibus. Harum.
+                </p>
+
+                <p>
+                    <span class="h3 pr-2">Район:</span> Lorem ipsum
+                </p>
+                <p>
+                    <span class="h3 pr-2">Район:</span> Lorem ipsum
+                </p>
+            </div>
+            <div class="col-7 mx-auto py-4">
+                <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A509077053c8294c7f409760ef365f9ab054949a326b8fb1d4b78dc03afb4f255&amp;source=constructor" width="100%" height="300" frameborder="0"></iframe>
+            </div>
 
         </div>
-        <div class="row">
-            <div class="col-10">
-                <div class="accordion md-accordion accordion-blocks border-0" id="accordionStages" role="tablist" aria-multiselectable="true">
-                    <div class="card border-bottom py-4">
-                        <div class="card-header d-flex justify-content-between border-0" style="background: white" role="tab" id="Stage-3">
-                            <a class="text-left collapsed" data-toggle="collapse" data-parent="#accordionStages" href="#build-1Stage-3" aria-expanded="false" aria-controls="build-1Stage-3">
-                                <h6 class="mt-1 mb-0">
-                                    <span>Этап: <span>всмит</span></span>
-                                    <i class="fas fa-angle-down rotate-icon" style="margin-top: 2px;"></i>
-                                </h6>
-                            </a>
-                        </div>
+        <div class="row justify-content-between align-items-center">
+            <div class="col-4">
+                <h2>Инспекция</h2>
+            </div>
+            <div class="col-2">
+                <button data-toggle="modal" data-target="#addStages" type="button" class="btn btn-success rounded" style="padding: 11px 19px; ">
+                    Добавить Инспекцию
+                </button>
+            </div>
+        </div>
+        <div class="col-12 bg-white py-4 mt-4 shadow" style="border-radius: 10px">
+            <div class="accordion md-accordion accordion-blocks" id="accordionExample">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Collapsible Group Item #1
+                                <i class="fas fa-angle-down rotate-icon" style="margin-top: 2px;"></i>
+                            </button>
+                        </h2>
+                    </div>
 
-                        <div id="build-1Stage-3" class="collapse" role="tabpanel" aria-labelledby="Stage-3" data-parent="#accordionStages" style="">
-                            <div class="card-body p-0">
-                                <div class="table-ui  mb-3  mb-4">
-                                    <div class="row col-lg-12 col-12 pt-0 justify-content-lg-end text-lg-right text-center">
-                                        <p class="font-weight-bold font-small ">21.10.2020</p>
-                                    </div>
-                                    <div class="row border mx-2">
-                                        <div class="col-lg-3 col-12 text-lg-left py-2 text-center border-right">
-                                            <p class="h6 font-weight-bold ">Этап:</p>
-                                            <p class="text-muted">всмит</p>
-                                        </div>
-                                        <div class="col-lg-6 col-12 text-lg-left py-2 text-center border-right">
-                                            <p class="h6 font-weight-bold ">Описание:</p>
-                                            <p class="text-muted">qeqweqweqw</p>
-                                        </div>
-                                        <div class="col-lg-3 col-12 text-lg-left py-2 text-center border-right">
-                                            <p class="h6 font-weight-bold">Документы: Докии</p>
-                                            <a href="http://inspection/storage/files/stage/document_5f8d7a6bda642.txt" class="mx-auto" download="">
-                                                <i class="fas pt-3 fa-file-pdf fa-4x" style="color: red;"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="row border border-top-0 mx-2">
-                                        <div class="col-lg-6 border-right pt-3 col-12 text-lg-left text-center">
-                                            <p class="h6 font-weight-bold ">Фото объекта:</p>
-                                            <div class="row">
-                                                <div class="col-3 position-relative">
-                                                    <a href="http://inspection/storage/files/stage/image_5f8d7a6bd8c0e.docx" data-fancybox="media1" class="img-fluid">
-                                                        <img src="http://inspection/storage/files/stage/image_5f8d7a6bd8c0e.docx" class="mediafile img-fluid m-2" alt=""></a>
-                                                    <a href="http://inspection/storage/files/stage/image_5f8d7a6bd8c0e.docx" download="">
-                                                        <i class="fas fa-arrow-alt-circle-down stage position-absolute"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-12 pt-3 text-lg-left text-center">
-                                            <p class="h6 font-weight-bold ">Примечание:</p>
-                                            <p class=" text-muted">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                            </p>
-                                        </div>
-                                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-2">
+                                    <h6 class=font-weight-bolder>
+                                        АУПС
+                                    </h6>
+                                    <p>
+                                        <i class="fa fa-check-circle text-success"></i>
+                                    </p>
+                                </div>
+                                <div class="col-2">
+                                    <h6 class=font-weight-bolder>
+                                        АУПТ
+                                    </h6>
+                                    <p>
+                                        <i class="fa fa-times-circle text-danger"></i>
+                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <h6 class=font-weight-bolder>
+                                        Первичные средства пожаротушения
+                                    </h6>
+
+                                    @for($i = 0; $i < 5; $i++)
+                                        <p>
+                                            Оп-{{$i+1}} колличество {{$i+rand(1, 5)}}ед
+                                        </p>
+                                    @endfor
+
+                                </div>
+                                <div class="col-4">
+                                    <h6 class=font-weight-bolder>
+                                        Водоснабжение (пожарный гидрант, водоем)
+                                    </h6>
+                                    <p>
+                                        <i class="fa fa-check-circle text-success"></i>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-4">
+                                    <h6 class=font-weight-bolder>
+                                        Внутренние противопожарные краны (наличие)
+                                    </h6>
+                                    <p>
+                                        <i class="fa fa-check-circle text-success"></i>
+                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <h6 class=font-weight-bolder>
+                                        Планы эвакуации (наличие)
+                                    </h6>
+                                    <p>
+                                        <i class="fa fa-check-circle text-success"></i>
+                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <h6 class=font-weight-bolder>
+                                        Запасы пенообразования
+                                    </h6>
+                                    <p>
+                                        <i class="fa fa-check-circle text-success"></i>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-9">
+                                    <h6 class=font-weight-bolder>
+                                        Примичание
+                                    </h6>
+                                    @for($i = 0; $i < 3; $i++)
+                                        <p>
+                                            Lorem ipsum-{{$i}} dolor sit-{{$i}}.
+                                        </p>
+                                    @endfor
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Collapsible Group Item #2
+                                <i class="fas fa-angle-down rotate-icon" style="margin-top: 2px;"></i>
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-2">
+                                    <h6 class=font-weight-bolder>
+                                        АУПС
+                                    </h6>
+                                    <p>
+                                        <i class="fa fa-check-circle text-success"></i>
+                                    </p>
+                                </div>
+                                <div class="col-2">
+                                    <h6 class=font-weight-bolder>
+                                        АУПТ
+                                    </h6>
+                                    <p>
+                                        <i class="fa fa-times-circle text-danger"></i>
+                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <h6 class=font-weight-bolder>
+                                        Первичные средства пожаротушения
+                                    </h6>
 
+                                    @for($i = 0; $i < 5; $i++)
+                                        <p>
+                                            Оп-{{$i+1}} колличество {{$i+rand(1, 5)}}ед
+                                        </p>
+                                    @endfor
+
+                                </div>
+                                <div class="col-4">
+                                    <h6 class=font-weight-bolder>
+                                        Водоснабжение (пожарный гидрант, водоем)
+                                    </h6>
+                                    <p>
+                                        <i class="fa fa-check-circle text-success"></i>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-4">
+                                    <h6 class=font-weight-bolder>
+                                        Внутренние противопожарные краны (наличие)
+                                    </h6>
+                                    <p>
+                                        <i class="fa fa-check-circle text-success"></i>
+                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <h6 class=font-weight-bolder>
+                                        Планы эвакуации (наличие)
+                                    </h6>
+                                    <p>
+                                        <i class="fa fa-check-circle text-success"></i>
+                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <h6 class=font-weight-bolder>
+                                        Запасы пенообразования
+                                    </h6>
+                                    <p>
+                                        <i class="fa fa-check-circle text-success"></i>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-9">
+                                    <h6 class=font-weight-bolder>
+                                        Примичание
+                                    </h6>
+                                    @for($i = 0; $i < 3; $i++)
+                                        <p>
+                                            Lorem ipsum-{{$i}} dolor sit-{{$i}}.
+                                        </p>
+                                    @endfor
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Collapsible Group Item #3
+                                <i class="fas fa-angle-down rotate-icon" style="margin-top: 2px;"></i>
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-2">
+                                    <h6 class=font-weight-bolder>
+                                        АУПС
+                                    </h6>
+                                    <p>
+                                        <i class="fa fa-check-circle text-success"></i>
+                                    </p>
+                                </div>
+                                <div class="col-2">
+                                    <h6 class=font-weight-bolder>
+                                        АУПТ
+                                    </h6>
+                                    <p>
+                                        <i class="fa fa-times-circle text-danger"></i>
+                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <h6 class=font-weight-bolder>
+                                        Первичные средства пожаротушения
+                                    </h6>
+
+                                    @for($i = 0; $i < 5; $i++)
+                                        <p>
+                                            Оп-{{$i+1}} колличество {{$i+rand(1, 5)}}ед
+                                        </p>
+                                    @endfor
+
+                                </div>
+                                <div class="col-4">
+                                    <h6 class=font-weight-bolder>
+                                        Водоснабжение (пожарный гидрант, водоем)
+                                    </h6>
+                                    <p>
+                                        <i class="fa fa-check-circle text-success"></i>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-4">
+                                    <h6 class=font-weight-bolder>
+                                        Внутренние противопожарные краны (наличие)
+                                    </h6>
+                                    <p>
+                                        <i class="fa fa-check-circle text-success"></i>
+                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <h6 class=font-weight-bolder>
+                                        Планы эвакуации (наличие)
+                                    </h6>
+                                    <p>
+                                        <i class="fa fa-check-circle text-success"></i>
+                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <h6 class=font-weight-bolder>
+                                        Запасы пенообразования
+                                    </h6>
+                                    <p>
+                                        <i class="fa fa-check-circle text-success"></i>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-9">
+                                    <h6 class=font-weight-bolder>
+                                        Примичание
+                                    </h6>
+                                    @for($i = 0; $i < 3; $i++)
+                                        <p>
+                                            Lorem ipsum-{{$i}} dolor sit-{{$i}}.
+                                        </p>
+                                    @endfor
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    @include('models.model_add_fireinspection')
 @endsection
