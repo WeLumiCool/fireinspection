@@ -1,7 +1,7 @@
 @extends('admin.layouts.dashboard')
 @section('dashboard_content')
-    <div class="container bg-form card-body-admin my-3 py-3">
-        <div class="row p-4" id="show_articles">
+    <div class="container bg-form card-body-admin mt-3 pt-3">
+        <div class="row pt-4 px-4" id="show_articles">
             <div class="col-2 py-3"><span class="font-weight-bold">id</span></div>
             <div class="col-10 py-3">{{ $build->id }}</div>
             <div class="col-2 py-3"><span class="font-weight-bold">Заголовок:</span></div>
@@ -10,11 +10,18 @@
             <div class="col-10 py-3">{{ $build->address }}</div>
             <div class="col-2 py-3 "><span class="font-weight-bold">Тип:</span></div>
             <div class="col-10 py-3">{{ $build->type->name }}</div>
-            {{--@if($build->latitude && $build->longitude)--}}
-            {{--<div class="col-12 mt-4 border-0 p-0">--}}
-            {{--<div id="map"  class="border-0" style="width: 100%; height: 400px;"></div>--}}
-            {{--</div>--}}
-            {{--@endif--}}
+            @if($build->latitude && $build->longitude)
+                <div class="col-12 mt-4 border-0 p-0">
+                    <div id="map" class="border-0" style="width: 100%; height: 400px;"></div>
+                </div>
+            @endif
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <a href="{{ route('admin.checks.create', $build->id) }}" class="btn btn-success mt-3 mb-5" style="padding: 15px;">
+                    Добавить проверку
+                </a>
+            </div>
         </div>
         <div class="row mt-4 ">
             <div class="col-12 text-center ">
@@ -101,75 +108,9 @@
             </div>
 
         </div>
-        <div class="row">
-            <div class="col-12 text-center">
-                <button type="button" class="btn btn-success mt-3 mb-5 " style="padding: 15px;" data-toggle="modal"
-                        data-target="#exampleModalCenter">
-                    Добавить этап
-                </button>
-            </div>
-        </div>
     </div>
 
 
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                {{--form create stage--}}
-                <form action="{{ route('admin.checks.store') }}" method="post" id="save_form"
-                      enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <input id="aups_check" type="checkbox" name="has_aups" required>
-                            <label for="aups_check"> АУПС<span class="text-danger">*</span></label>
-                        </div>
-                        <div class="form-group">
-                            <input id="aupt_check" type="checkbox" name="has_aupt" required>
-                            <label for="aupt_check">АУПТ<span class="text-danger">*</span></label>
-                        </div>
-                        <div class="form-group">
-                            <input id="aupt_check" type="checkbox" name="has_cranes" required>
-                            <label for="aupt_check">Кран<span class="text-danger">*</span></label>
-                        </div>
-                        <div class="form-group">
-                            <input id="aupt_check" type="checkbox" name="has_evacuation" required>
-                            <label for="aupt_check">План эвакуации<span class="text-danger">*</span></label>
-                        </div>
-                        <div class="form-group">
-                            <input id="aupt_check" type="checkbox" name="has_foam" required>
-                            <label for="aupt_check">Запасы пенооброзование<span class="text-danger">*</span></label>
-                        </div>
-                        <div class="form-group">
-                            <input id="aupt_check" type="checkbox" name="has_hydrant" required>
-                            <label for="aupt_check">Гидрант<span class="text-danger">*</span></label>
-                        </div>
-                        <div class="form-group">
-                            <input id="aupt_check" type="checkbox" name="has_reservoir" required>
-                            <label for="aupt_check">Водоем<span class="text-danger">*</span></label>
-                        </div>
-                        <input type="hidden" name="build_id" value="{{ $build->id }}">
-                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                        <button>
-add field
-                        </button>
-                    </div>
-                    <div class="modal-footer ">
-                        <button id="save_button" type="submit" class="btn btn-primary">Сохранить</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 @endsection
 @push('styles')
     <style>

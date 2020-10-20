@@ -27,7 +27,8 @@ Route::prefix('admin')->name('admin.')/*->middleware('admin')*/
     Route::resource('builds', 'BuildController');
     //CRUD for checks
     Route::get('/checks/datatable', 'BuildController@datatableData')->name('build.datatable.data');
-    Route::resource('checks', 'CheckController');
+    Route::resource('checks', 'CheckController')->except('create');
+    Route::get('/checks/create/{id}', 'CheckController@create')->name('checks.create');
     //AJAX
     Route::get('change_permission', 'UserController@change_permission')->name('change.permission');
 });
