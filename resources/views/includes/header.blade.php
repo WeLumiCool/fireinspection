@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark scrolling-navbar bg-red fixed-top" id="header">
     <div class="container-fluid">
-        <a class="navbar-brand" href=""><img src="{{ asset('image/logo.svg') }}" alt=""></a>
+        <a class="navbar-brand" href="{{ route('welcome') }}"><img src="{{ asset('image/logo.svg') }}" alt=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -15,7 +15,7 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item pt-2 text-center">
-                    <a href="" class="btn btn-map font-small text-decoration-none">Карта объектов
+                    <a href="{{ route('maps') }}" class="btn btn-map font-small text-decoration-none">Карта объектов
                     </a>
                 </li>
                 <li class="nav-item pt-2 text-center">

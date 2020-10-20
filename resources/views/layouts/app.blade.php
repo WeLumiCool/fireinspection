@@ -28,7 +28,7 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
-<body>
+<body style="background: #FFFAF9;">
 <div class="mb-5 pb-5">
     @include('includes.header')
 </div>

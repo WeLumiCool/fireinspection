@@ -13,15 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/create', function () {
+    return view('objects.create');
+})->name('create');
 
+Route::get('/maps', function () {
+    return view('objects.maps');
+})->name('maps');
 //Route::middleware('auth')->group(function () {
 //    Route::get('/', function () {
 //        return view('welcome', ['types' => \App\Type::all()]);
