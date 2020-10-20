@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Typeviolation;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Violation extends Model
@@ -22,6 +21,6 @@ class Violation extends Model
 
     public function type()
     {
-        return $this->belongsTo(TypeViolation::class, 'type_id');
+        return $this->belongsTo(Typeviolation::class, 'type_id');
     }
 }

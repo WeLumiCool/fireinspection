@@ -28,22 +28,20 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
-<body>
-
-    <div id="app">
-
-        @yield('content')
-    </div>
-
-
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=a2435f91-837f-4a88-87c0-7ac7813eb317&lang=ru_RU"
-            type="text/javascript"></script>
-    <script
-        src="https://code.jquery.com/jquery-3.5.1.js"
-        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    @stack('scripts')
+<body style="background: #FFFAF9;">
+<div class="mb-5 pb-5">
+    @include('includes.header')
+</div>
+@yield('content')
+@include('includes.footer')
+<script src="https://api-maps.yandex.ru/2.1/?apikey=a2435f91-837f-4a88-87c0-7ac7813eb317&lang=ru_RU"
+        type="text/javascript"></script>
+<script
+    src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+@stack('scripts')
 </body>
 </html>
