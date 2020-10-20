@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Check extends Model
 {
-    use HasFactory;
     protected $fillable =
         [
             'has_aups',
@@ -35,4 +34,5 @@ class Check extends Model
     {
         return $this->hasMany(Violation::class);
     }
+
 }

@@ -14,7 +14,7 @@ class TypePspController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.psp.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class TypePspController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.psps.create');
     }
 
     /**
@@ -35,7 +35,6 @@ class TypePspController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**

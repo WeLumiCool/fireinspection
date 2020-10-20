@@ -2,19 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d53f6d2-f52d-4078-9e68-aa18d06e3bff" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/TypePspController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/TypePsp.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/psps/create.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/psps/edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/psps/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/psps/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_19_065444_create_builds_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_19_072640_create_roles_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_10_20_074848_create_type_psps_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_19_072735_create_checks_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_19_073314_create_violations_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_19_092443_add_type_id_in_builds_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_19_094024_add_column_in_roles_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_19_111843_change_psp_count_column_in_checks_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_20_061745_create_checks_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_10_20_061745_create_checks_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_20_061837_create_typeviolations_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_20_062549_create_type_objects_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Check.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Check.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TypePspController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TypePspController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/TypePsp.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/TypePsp.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Violation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Violation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/layouts/app.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -149,9 +147,14 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admin" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.zend.framework.tool" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\OpenServer\domains\fireinspection\resources\views\admin" />
+    </key>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
