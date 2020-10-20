@@ -2,17 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d53f6d2-f52d-4078-9e68-aa18d06e3bff" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/psps/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/psps/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/psps/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/psps/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/UserStore.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/UserUpdate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/typeBuilds/create.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/typeBuilds/edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/typeBuilds/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/typeBuilds/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Build.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Build.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Check.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Check.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TypeBuildController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TypeBuildController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TypePspController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TypePspController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/TypePsp.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/TypePsp.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TypeViolationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TypeViolationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Role.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Role.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/TypeBuild.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/TypeBuild.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/TypeViolation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/TypeViolation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Violation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Violation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/queue.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/queue.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/session.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/session.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/partials/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/partials/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/psps/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/psps/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/psps/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/psps/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/psps/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/psps/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/psps/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/psps/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/types/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/types/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/types/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/types/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/types/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/types/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/console.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/console.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.php" beforeDir="false" afterPath="$PROJECT_DIR$/server.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -137,6 +163,10 @@
       <path value="$PROJECT_DIR$/vendor/fideloper/proxy" />
       <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
       <path value="$PROJECT_DIR$/vendor/laravel/ui" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-oracle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
     </include_path>
   </component>
   <component name="ProjectId" id="1j83YDSfMzio44cnpzXuQcqXfOK" />
@@ -147,12 +177,19 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admin" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admin/objectTypes" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.zend.framework.tool" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\OpenServer\domains\fireinspection\resources\views\admin\types" />
+      <recent name="E:\OpenServer\domains\fireinspection\resources\views\admin\types\violation" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\OpenServer\domains\fireinspection\resources\views\admin\objectTypes" />
+      <recent name="E:\OpenServer\domains\fireinspection\app\Http\Controllers" />
+      <recent name="E:\OpenServer\domains\fireinspection\app\Http" />
       <recent name="E:\OpenServer\domains\fireinspection\resources\views\admin" />
     </key>
   </component>
@@ -168,6 +205,7 @@
       <command value="art migrate:rollback" />
       <command value="art make:model TypePsp -crm" />
       <command value="art migrate" />
+      <command value="art make:model TypeBuild -c" />
     </option>
   </component>
   <component name="RunDashboard">
@@ -210,7 +248,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

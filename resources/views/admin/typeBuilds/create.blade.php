@@ -4,10 +4,10 @@
     <div class="p-3 bg-form card-body-admin">
         <div class="row">
             <div class="col-12 col-sm-10 col-lg-12 col-md-10">
-                <form action="{{ route('admin.psps.store') }}" method="POST">
+                <form action="{{ route('admin.typeBuilds.store') }}" method="POST">
                     @csrf
                     <div class="row justify-content-center">
-                        <p class="font-weight-bold h2">Добавление средства пожаротушения</p>
+                        <p class="font-weight-bold h2">Добавления типа</p>
                     </div>
                     <div class="form-group">
                         <label for="name_field">Наименование<span class="text-danger">*</span></label>
