@@ -135,7 +135,19 @@
 
                             <div class="row mb-4">
                                 <div class="col-12">
-                                    <p class="h4 h3-lg"></p>
+                                    <p class="h4 h3-lg">
+                                        Изображения
+                                    </p>
+                                    <div class="row">
+
+                                        @for($i = 0; $i < 6; $i++)
+                                            <div class="col-3">
+                                                <a class="grouped_elements" rel="group2" href="image_big_3.jpg">
+                                                    <img src="{{ asset }}" alt=""/>
+                                                </a>
+                                            </div>
+                                        @endfor
+                                    </div>
                                 </div>
                                 <div class="col-12 col-lg-9">
                                     <h6 class=font-weight-bolder>
