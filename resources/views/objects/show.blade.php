@@ -96,9 +96,17 @@
                                     @endfor
 
                                 </div>
-                                <div class="col-12 col-lg-4">
+                                <div class="col-12 col-lg-2">
                                     <h6 class=font-weight-bolder>
-                                        Водоснабжение (пожарный гидрант, водоем)
+                                        Водоем
+                                    </h6>
+                                    <p>
+                                        <i class="fa fa-check-circle text-success"></i>
+                                    </p>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <h6 class=font-weight-bolder>
+                                        Гидрант
                                     </h6>
                                     <p>
                                         <i class="fa fa-check-circle text-success"></i>
@@ -134,16 +142,16 @@
                             </div>
 
                             <div class="row mb-4">
-                                <div class="col-12">
+                                <div class="col-12 my-4">
                                     <p class="h4 h3-lg">
                                         Изображения
                                     </p>
                                     <div class="row">
 
                                         @for($i = 0; $i < 6; $i++)
-                                            <div class="col-3">
-                                                <a class="grouped_elements" rel="group2" href="image_big_3.jpg">
-                                                    <img src="{{ asset }}" alt=""/>
+                                            <div class="col-3 mb-3">
+                                                <a class="grouped_elements" rel="group2" href="{{ asset('image/image-1.jpg') }}" data-fancybox="media-check1">
+                                                    <img src="{{ asset('image/image-1.jpg') }}" class="img-fluid" alt=""/>
                                                 </a>
                                             </div>
                                         @endfor
@@ -154,8 +162,7 @@
                                         Примичание
                                     </h6>
                                     @for($i = 0; $i < 3; $i++)
-                                        <img src="" alt="">
-                                        <p>
+                                        <p class="alert alert-danger" role="alert">
                                             Lorem ipsum-{{$i}} dolor sit-{{$i}}.
                                         </p>
                                     @endfor
