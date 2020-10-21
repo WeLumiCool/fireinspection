@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Typeviolation;
+use App\TypeViolation;
 use Illuminate\Http\Request;
-use Yajra\DataTables\Facades\DataTables;
 
-class TypeviolationController extends Controller
+class TypeViolationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class TypeviolationController extends Controller
      */
     public function index()
     {
-        return view('admin.types.index');
+        //
     }
 
     /**
@@ -25,7 +24,7 @@ class TypeviolationController extends Controller
      */
     public function create()
     {
-        return view('admin.types.create');
+        //
     }
 
     /**
@@ -36,62 +35,51 @@ class TypeviolationController extends Controller
      */
     public function store(Request $request)
     {
-        Typeviolation::create($request->all());
-        return redirect()->route('admin.types.index');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param Typeviolation $typeViolation
+     * @param  \App\TypeViolation  $typeviolation
      * @return \Illuminate\Http\Response
      */
-    public function show(Typeviolation $typeViolation)
+    public function show(TypeViolation $typeviolation)
     {
-        return view('admin.types.show', compact('typeViolation'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Typeviolation $typeViolation
+     * @param  \App\TypeViolation  $typeviolation
      * @return \Illuminate\Http\Response
      */
-    public function edit(Typeviolation $typeViolation)
+    public function edit(TypeViolation $typeviolation)
     {
-        return view('admin.types.edit', compact('typeViolation'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param Typeviolation $typeViolation
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\TypeViolation  $typeviolation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Typeviolation $typeViolation)
+    public function update(Request $request, TypeViolation $typeviolation)
     {
-        $typeViolation->update($request->all());
-        return redirect()->route('admin.typeViolations.index');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param Typeviolation $typeViolation
+     * @param  \App\TypeViolation  $typeviolation
      * @return \Illuminate\Http\Response
-     * @throws \Exception
      */
-    public function destroy(Typeviolation $typeViolation)
+    public function destroy(TypeViolation $typeviolation)
     {
-        $typeViolation->delete();
-        return redirect()->route('admin.types.index');
-    }
-    public function datatableData() {
-        return DataTables::of(Typeviolation::query())
-            ->addColumn('actions', function (Typeviolation $typeViolation) {
-                return view('admin.actions', ['type' => 'typeViolations', 'model' => $typeViolation]);
-            })
-            ->make(true);
+        //
     }
 }
