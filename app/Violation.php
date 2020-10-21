@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Typeviolation;
 use Illuminate\Database\Eloquent\Model;
 
 class Violation extends Model
