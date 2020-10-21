@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
-use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Check extends Model
@@ -18,6 +17,7 @@ class Check extends Model
             'has_evacuation',
             'user_id',
             'build_id',
+            'type_id',
         ];
 
     public function build()
@@ -33,5 +33,10 @@ class Check extends Model
     public function violations()
     {
         return $this->hasMany(Violation::class);
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(TypeCheck::class);
     }
 }

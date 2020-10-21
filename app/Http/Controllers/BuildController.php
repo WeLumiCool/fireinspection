@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Build;
-use App\Models\TypeBuild;
+use App\Build;
+use App\TypeBuild;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -32,8 +32,8 @@ class BuildController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @return void
      */
     public function store(Request $request)
     {
@@ -43,7 +43,7 @@ class BuildController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Build  $build
+     * @param Build $build
      * @return \Illuminate\Http\Response
      */
     public function show(Build $build)
@@ -54,8 +54,8 @@ class BuildController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Build  $build
-     * @return \Illuminate\Http\Response
+     * @param Build $build
+     * @return void
      */
     public function edit(Build $build)
     {
@@ -65,9 +65,9 @@ class BuildController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Build  $build
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @param Build $build
+     * @return void
      */
     public function update(Request $request, Build $build)
     {
@@ -77,8 +77,8 @@ class BuildController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Build  $build
-     * @return \Illuminate\Http\Response
+     * @param Build $build
+     * @return void
      */
     public function destroy(Build $build)
     {
