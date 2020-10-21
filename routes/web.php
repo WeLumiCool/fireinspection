@@ -32,7 +32,6 @@ Route::prefix('admin')->name('admin.')/*->middleware('admin')*/
     Route::get('/checks/datatable', 'BuildController@datatableData')->name('build.datatable.data');
     Route::resource('checks', 'CheckController')->except('create');
     Route::get('/checks/create/{id}', 'CheckController@create')->name('checks.create');
-    Route::resource('checks', 'CheckController');
     //CRUD for psps
     Route::get('/psps/datatable', 'TypePspController@datatableData')->name('psp.datatable.data');
     Route::resource('psps', 'TypePspController');
