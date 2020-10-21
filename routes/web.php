@@ -32,9 +32,23 @@ Route::prefix('admin')->name('admin.')/*->middleware('admin')*/
     Route::get('/checks/datatable', 'BuildController@datatableData')->name('build.datatable.data');
     Route::resource('checks', 'CheckController')->except('create');
     Route::get('/checks/create/{id}', 'CheckController@create')->name('checks.create');
+    Route::resource('checks', 'CheckController');
+    //CRUD for psps
+    Route::get('/psps/datatable', 'TypePspController@datatableData')->name('psp.datatable.data');
+    Route::resource('psps', 'TypePspController');
+    //CRUD for users
+    Route::get('/user/datatable', 'UserController@datatableData')->name('user.datatable.data');
+    Route::resource('users', 'UserController');
+    //CRUD for typesViolation
+    Route::get('/type/datatable', 'TypeViolationController@datatableData')->name('type.datatable.data');
+    Route::resource('typeViolations', 'TypeViolationController');
+    //CRUD for typesBuild
+    Route::get('/typeBuild/datatable', 'TypeBuildController@datatableData')->name('typeBuild.datatable.data');
+    Route::resource('typeBuilds', 'TypeBuildController');
     //AJAX
     Route::get('change_permission', 'UserController@change_permission')->name('change.permission');
 });
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

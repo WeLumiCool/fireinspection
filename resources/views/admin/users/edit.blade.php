@@ -28,7 +28,7 @@
                     <label for="role-select">Роль:</label>
                     <select name="role_id" id="role-select" class="form-control">
                         @foreach($roles as $role)
-                            <option value="{{ $role->id }}" {{ $role->id == old('role_id', $user->role_id) ?'selected':'' }}>{{ $role->role }}</option>
+                            <option value="{{ $role->id }}" {{ $role->id == old('role_id', $user->role_id) ?'selected':'' }}>{{ $role->name }}</option>
                         @endforeach
                     </select>
                 </div>
