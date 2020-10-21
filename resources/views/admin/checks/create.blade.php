@@ -141,19 +141,21 @@
         function triggerOff(){
             document.getElementById('aups_check').checked = false;
         }
-        document.getElementById("yes_check").style.color = 'black';
+        let yes = document.getElementById("yes_check");
+        yes.style.color = 'black';
         function yes_check(el) {
+            no.style.color = 'black';
             if (el.style.color === 'black') {
                 el.style.color = 'green';
             }
-            else el.style.color = 'black';
         }
-        document.getElementById("no_check").style.color = 'black';
+        let no = document.getElementById("no_check");
+        no.style.color = 'black';
         function no_check(el) {
+            yes.style.color = 'black';
             if (el.style.color === 'black') {
                 el.style.color = 'red';
             }
-            else el.style.color = 'black';
         }
 
     </script>
