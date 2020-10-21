@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TypeBuild;
+use App\TypeBuild;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class TypeBuildController extends Controller
 {
@@ -14,7 +15,7 @@ class TypeBuildController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.typeBuilds.index');
     }
 
     /**
@@ -24,7 +25,7 @@ class TypeBuildController extends Controller
      */
     public function create()
     {
-        //
+        return  view('admin.typeBuilds.create');
     }
 
     /**
@@ -35,18 +36,19 @@ class TypeBuildController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        TypeBuild::create($request->all());
+        return redirect()->route('admin.typeBuilds.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\TypeBuild  $typeBuild
+     * @param TypeBuild $typeBuild
      * @return \Illuminate\Http\Response
      */
     public function show(TypeBuild $typeBuild)
     {
-        //
+        return view('admin.typeBuilds.show', compact('typeBuild'));
     }
 
     /**
@@ -57,7 +59,7 @@ class TypeBuildController extends Controller
      */
     public function edit(TypeBuild $typeBuild)
     {
-        //
+        return view('admin.typeBuilds.edit', compact('typeBuild'));
     }
 
     /**
@@ -69,7 +71,8 @@ class TypeBuildController extends Controller
      */
     public function update(Request $request, TypeBuild $typeBuild)
     {
-        //
+        $typeBuild->update($request->all());
+        return redirect()->route('admin.typeBuilds.index');
     }
 
     /**
@@ -80,6 +83,15 @@ class TypeBuildController extends Controller
      */
     public function destroy(TypeBuild $typeBuild)
     {
-        //
+        $typeBuild->delete();
+        return redirect()->route('admin.typeBuilds.index');
+    }
+
+    public function datatableData() {
+        return DataTables::of(TypeBuild::query())
+            ->addColumn('actions', function (TypeBuild $typeBuild) {
+                return view('admin.actions', ['type' => 'typeBuilds', 'model' => $typeBuild]);
+            })
+            ->make(true);
     }
 }

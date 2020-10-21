@@ -1,4 +1,4 @@
-    @extends('admin.layouts.dashboard')
+@extends('admin.layouts.dashboard')
 
 @section('dashboard_content')
     <div class="p-3 bg-form card-body-admin">
@@ -6,10 +6,9 @@
             <div class="col-sm-12 table-responsive">
                 <div class="row justify-content-end pb-2">
                     <div class="col-auto">
-                        <a href="{{ route('admin.typeViolations.create') }}" class="btn btn-success">{{ __('Создать') }}</a>
+                        <a href="{{ route('admin.psps.create') }}" class="btn btn-success">{{ __('Создать') }}</a>
                     </div>
                 </div>
-
                     <table class="table table-striped  table-hover" id="types-table">
                         <thead class="bg-primary text-light">
                         <tr>
@@ -36,7 +35,7 @@
             $('#types-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('admin.type.datatable.data') !!}',
+                ajax: '{!! route('admin.psp.datatable.data') !!}',
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},

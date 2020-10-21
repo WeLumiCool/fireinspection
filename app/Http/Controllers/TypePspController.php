@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Type;
 use App\TypePsp;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class TypePspController extends Controller
 {
@@ -14,7 +16,7 @@ class TypePspController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.psps.index');
     }
 
     /**
@@ -24,7 +26,7 @@ class TypePspController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.psps.create');
     }
 
     /**
@@ -35,7 +37,8 @@ class TypePspController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        TypePsp::create($request->all());
+        return redirect()->route('admin.psps.index');
     }
 
     /**
@@ -44,9 +47,9 @@ class TypePspController extends Controller
      * @param  \App\TypePsp  $typePsp
      * @return \Illuminate\Http\Response
      */
-    public function show(TypePsp $typePsp)
+    public function show(TypePsp $Psp)
     {
-        //
+        return view('admin.psps.show', compact('Psp'));
     }
 
     /**
@@ -55,9 +58,9 @@ class TypePspController extends Controller
      * @param  \App\TypePsp  $typePsp
      * @return \Illuminate\Http\Response
      */
-    public function edit(TypePsp $typePsp)
+    public function edit(TypePsp $Psp)
     {
-        //
+        return view('admin.psps.edit', compact('Psp'));
     }
 
     /**
@@ -67,9 +70,10 @@ class TypePspController extends Controller
      * @param  \App\TypePsp  $typePsp
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TypePsp $typePsp)
+    public function update(Request $request, TypePsp $Psp)
     {
-        //
+        $Psp->update($request->all());
+        return redirect()->route('admin.psps.index');
     }
 
     /**
@@ -78,8 +82,17 @@ class TypePspController extends Controller
      * @param  \App\TypePsp  $typePsp
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TypePsp $typePsp)
+    public function destroy(TypePsp $Psp)
     {
-        //
+        $Psp->delete();
+        return redirect()->route('admin.psps.index');
+    }
+
+    public function datatableData() {
+        return DataTables::of(TypePsp::query())
+            ->addColumn('actions', function (TypePsp $Psp) {
+                return view('admin.actions', ['type' => 'psps', 'model' => $Psp]);
+            })
+            ->make(true);
     }
 }
