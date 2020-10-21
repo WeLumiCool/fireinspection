@@ -84,9 +84,10 @@ class CheckController extends Controller
         if ($request->has('type_violations')) {
             foreach ($request->type_violations as $key => $type_violation) {
                 $violation = new Violation();
-                $violation->type = $type_violation;
+                $violation->type_id = $type_violation;
                 $violation->note = $request->descs[$key];
-                $violation->type_id = $check->id;
+                $violation->check_id = $check->id;
+                $violation->save();
             }
         }
         return redirect()->route('admin.builds.show', $check->build_id);

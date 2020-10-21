@@ -1,24 +1,33 @@
 @extends('admin.layouts.dashboard')
 @section('dashboard_content')
     <div class="container bg-form card-body-admin mt-3 pt-3">
-        <div class="row pt-4 px-4" id="show_articles">
-            <div class="col-2 py-3"><span class="font-weight-bold">id</span></div>
-            <div class="col-10 py-3">{{ $build->id }}</div>
-            <div class="col-2 py-3"><span class="font-weight-bold">Заголовок:</span></div>
-            <div class="col-10 py-3">{{ $build->name }}</div>
-            <div class="col-2  py-3"><span class="font-weight-bold">Адрес:</span></div>
-            <div class="col-10 py-3">{{ $build->address }}</div>
-            <div class="col-2 py-3 "><span class="font-weight-bold">Тип:</span></div>
-            <div class="col-10 py-3">{{ $build->type->name }}</div>
+        <div class="row bg-white px-5 pb-4 mb-4 shadow" style="border-radius: 10px">
+            <div class="col-5 py-4">
+                <p>
+                    <span class="h4 pr-2">Имя объекта:</span>{{ $build->name }}
+                </p>
+
+                <p>
+                    <span class="h4 pr-2">Адресс:</span>{{ $build->address }}
+                </p>
+
+                <p>
+                    <span class="h4 pr-2">Район:</span>{{ $build->district }}
+                </p>
+                <p>
+                    <span class="h4 pr-2">Тип:</span>{{ $build->type->name }}
+                </p>
+            </div>
             @if($build->latitude && $build->longitude)
-                <div class="col-12 mt-4 border-0 p-0">
+                <div class="col-7 mx-auto py-4">
                     <div id="map" class="border-0" style="width: 100%; height: 400px;"></div>
                 </div>
             @endif
         </div>
         <div class="row">
             <div class="col-12 text-center">
-                <a href="{{ route('admin.checks.create', $build->id) }}" class="btn btn-success mt-3 mb-5" style="padding: 15px;">
+                <a href="{{ route('admin.checks.create', $build->id) }}" class="btn btn-success mt-3 mb-5"
+                   style="padding: 15px;">
                     Добавить проверку
                 </a>
             </div>
@@ -71,32 +80,129 @@
                                         <div class="row  pl-3">
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center">
                                                 <p class="h6 font-weight-bold ">АУПС:</p>
-                                                <p class="text-muted">{{ $check->has_aups }}</p>
+                                                @if($check->has_aups)
+                                                    <p><i class="fa fa-check-circle text-success"></i></p>
+                                                @else
+                                                    <p>
+                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                    </p>
+                                                @endif
                                             </div>
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
                                                 <p class="h6 font-weight-bold ">АУПТ:</p>
-                                                <p class="text-muted">{{ $check->has_aupt }}</p>
+                                                @if($check->has_aupt)
+                                                    <p><i class="fa fa-check-circle text-success"></i></p>
+                                                @else
+                                                    <p>
+                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                    </p>
+                                                @endif
                                             </div>
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
                                                 <p class="h6 font-weight-bold ">Кран:</p>
-                                                <p class="text-muted">{{ $check->has_cranes }}</p>
+                                                @if($check->has_cranes)
+                                                    <p><i class="fa fa-check-circle text-success"></i></p>
+                                                @else
+                                                    <p>
+                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                    </p>
+                                                @endif
                                             </div>
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
                                                 <p class="h6 font-weight-bold ">План эвакуации:</p>
-                                                <p class="text-muted">{{ $check->has_evacuation }}</p>
+                                                @if($check->has_evacuation)
+                                                    <p><i class="fa fa-check-circle text-success"></i></p>
+                                                @else
+                                                    <p>
+                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                    </p>
+                                                @endif
                                             </div>
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
                                                 <p class="h6 font-weight-bold ">Запасы пенооброзование:</p>
-                                                <p class="text-muted">{{ $check->has_foam }}</p>
+                                                @if($check->has_foam)
+                                                    <p><i class="fa fa-check-circle text-success"></i></p>
+                                                @else
+                                                    <p>
+                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                    </p>
+                                                @endif
                                             </div>
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
                                                 <p class="h6 font-weight-bold ">Гидрант:</p>
-                                                <p class="text-muted">{{ $check->has_hydrant }}</p>
+                                                @if($check->has_hydrant)
+                                                    <p><i class="fa fa-check-circle text-success"></i></p>
+                                                @else
+                                                    <p>
+                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                    </p>
+                                                @endif
                                             </div>
                                             <div class="col-lg-6 col-12 text-lg-left py-2 text-center ">
                                                 <p class="h6 font-weight-bold ">Водоем:</p>
-                                                <p class="text-muted">{{ $check->has_reservoir }}</p>
+                                                @if($check->has_reservoir)
+                                                    <p><i class="fa fa-check-circle text-success"></i></p>
+                                                @else
+                                                    <p>
+                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                    </p>
+                                                @endif
                                             </div>
+                                            @if(count(json_decode($check->psp_count)))
+                                                <div class="col-12 text-left">
+                                                    <p class="h5 font-weight-bold"> Первичные средства
+                                                        пожаротущения:</p>
+                                                    @foreach(json_decode($check->psp_count) as $psp)
+                                                        <p class="text-muted m-0">
+                                                        <span class="text-dark font-weight-bold">{{ $psp->type }}
+                                                            :</span>
+                                                            {{ $psp->count }}
+                                                        </p>
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                            <div class="col-12 my-5">
+                                                <p class="h5 text-left font-weight-bold">
+                                                    images
+                                                </p>
+                                                <div class="row">
+                                                    @foreach(json_decode($check->images) as $image)
+                                                        <div class="col-3">
+                                                            <a class="grouped_elements" rel="group1"
+                                                               href="{{ asset('storage/' .  $image) }}"
+                                                               data-fancybox="media-img-{{ $check->id }}">
+                                                                <img src="{{ asset('storage/' .  $image) }}"
+                                                                     class="img-fluid" alt=""/>
+                                                            </a>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+
+                                            @if($check->violations->count())
+                                                <div class="col-12 text-left">
+                                                    <p class="h5 font-weight-bold">Примечание:</p>
+                                                    @foreach($check->violations as $violation)
+                                                        <p class="text-muted m-0">
+                                                        <span class="text-dark font-weight-bold">{{ $violation->type->name }}
+                                                            :</span>
+                                                            {{ $violation->note }}
+                                                        </p>
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                            @if($check->violations->count())
+                                                <div class="col-12 text-left">
+                                                    <p class="h6 font-weight-bold">Примечание:</p>
+                                                    @foreach($check->violations as $violation)
+                                                        <p class="text-muted m-0">
+                                                            <span class="text-dark font-weight-bold">{{ $violation->type->name }}
+                                                                :</span>
+                                                            {{ $violation->note }}
+                                                        </p>
+                                                    @endforeach
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
