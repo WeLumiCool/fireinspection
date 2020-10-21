@@ -178,19 +178,6 @@
                                                     @endforeach
                                                 </div>
                                             </div>
-
-                                            @if($check->violations->count())
-                                                <div class="col-12 text-left">
-                                                    <p class="h5 font-weight-bold">Примечание:</p>
-                                                    @foreach($check->violations as $violation)
-                                                        <p class="text-muted m-0">
-                                                        <span class="text-dark font-weight-bold">{{ $violation->type->name }}
-                                                            :</span>
-                                                            {{ $violation->note }}
-                                                        </p>
-                                                    @endforeach
-                                                </div>
-                                            @endif
                                             @if($check->violations->count())
                                                 <div class="col-12 text-left">
                                                     <p class="h6 font-weight-bold">Примечание:</p>

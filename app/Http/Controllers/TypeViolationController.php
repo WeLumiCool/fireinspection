@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Typeviolation;
+use App\TypeViolation;
 use Illuminate\Http\Request;
 
-class TypeviolationController extends Controller
+class TypeViolationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class TypeviolationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Typeviolation  $typeviolation
+     * @param  \App\TypeViolation  $typeviolation
      * @return \Illuminate\Http\Response
      */
-    public function show(Typeviolation $typeviolation)
+    public function show(TypeViolation $typeviolation)
     {
         //
     }
@@ -52,10 +52,10 @@ class TypeviolationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Typeviolation  $typeviolation
+     * @param  \App\TypeViolation  $typeviolation
      * @return \Illuminate\Http\Response
      */
-    public function edit(Typeviolation $typeviolation)
+    public function edit(TypeViolation $typeviolation)
     {
         //
     }
@@ -64,10 +64,10 @@ class TypeviolationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Typeviolation  $typeviolation
+     * @param  \App\TypeViolation  $typeviolation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Typeviolation $typeviolation)
+    public function update(Request $request, TypeViolation $typeviolation)
     {
         //
     }
@@ -75,10 +75,10 @@ class TypeviolationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Typeviolation  $typeviolation
+     * @param  \App\TypeViolation  $typeviolation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Typeviolation $typeviolation)
+    public function destroy(TypeViolation $typeviolation)
     {
         //
     }

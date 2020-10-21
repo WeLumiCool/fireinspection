@@ -6,7 +6,7 @@ use App\Check;
 use App\Services\ImageUploader;
 use App\TypeCheck;
 use App\TypePsp;
-use App\Typeviolation;
+use App\TypeViolation;
 use App\Violation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +31,7 @@ class CheckController extends Controller
     public function create($id)
     {
         $typePsps = TypePsp::all();
-        $typeViolations = Typeviolation::all();
+        $typeViolations = TypeViolation::all();
         $typeChecks = TypeCheck::all();
         return view('admin.checks.create',
             compact(
