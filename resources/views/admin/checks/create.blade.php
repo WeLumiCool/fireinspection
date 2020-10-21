@@ -10,7 +10,7 @@
                         <p class="font-weight-bold h2">Добавление проверки</p>
                     </div>
                     <div class="form-group">
-                        <label for="type_check-select">Тип проверки:</label>
+                        <label class="font-weight-bold h5"  for="type_check-select ">Тип проверки:</label>
                         <select class="form-control" name="type_id" id="type_check-select">
                             @foreach($typeChecks as $typeCheck)
                                 <option value="{{ $typeCheck->id }}">{{ $typeCheck->name }}</option>
@@ -18,35 +18,49 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <input id="aups_check" type="checkbox" name="has_aups">
-                        <label for="aups_check"> АУПС</label>
+                        <input id="aups_check" type="checkbox" name="has_aups" >
+                        <label class="font-weight-bold h5 pr-3"  for="aups_check"> АУПС</label>
+                        <span  class="text-decoration-none yes_check" onclick="trigger()"><i id="yes_check" onclick="yes_check(this)" class="far fa-check-square fa-2x " ></i></span>
+                        <span class="text-decoration-none no_check" onclick="triggerOff()"><i id="no_check" onclick="no_check(this)"  class="far fa-times-circle fa-2x"></i></span>
                     </div>
                     <div class="form-group">
-                        <input id="aupt_check" type="checkbox" name="has_aupt">
-                        <label for="aupt_check">АУПТ</label>
+                        <input id="aupt_check" type="checkbox" name="has_aupt" class="d-none">
+                        <label class="font-weight-bold h5 pr-3"  for="aupt_check">АУПТ</label>
+                        <span  class="text-decoration-none yes_check" onclick="trigger()"><i id="yes_check" onclick="yes_check(this)" class="far fa-check-square fa-2x " ></i></span>
+                        <span class="text-decoration-none no_check" onclick="triggerOff()"><i id="no_check" onclick="no_check(this)"  class="far fa-times-circle fa-2x"></i></span>
                     </div>
                     <div class="form-group">
-                        <input id="aupt_check" type="checkbox" name="has_cranes">
-                        <label for="aupt_check">Кран</label>
+                        <input id="aupt_check" type="checkbox" name="has_cranes" class="d-none">
+                        <label class="font-weight-bold h5 pr-3"  for="aupt_check">Кран</label>
+                        <span  class="text-decoration-none yes_check" onclick="trigger()"><i id="yes_check" onclick="yes_check(this)" class="far fa-check-square fa-2x " ></i></span>
+                        <span class="text-decoration-none no_check" onclick="triggerOff()"><i id="no_check" onclick="no_check(this)"  class="far fa-times-circle fa-2x"></i></span>
                     </div>
                     <div class="form-group">
-                        <input id="aupt_check" type="checkbox" name="has_evacuation">
-                        <label for="aupt_check">План эвакуации</label>
+                        <input id="aupt_check" type="checkbox" name="has_evacuation" class="d-none">
+                        <label class="font-weight-bold h5 pr-3" for="aupt_check">План эвакуации</label>
+                        <span  class="text-decoration-none yes_check" onclick="trigger()"><i id="yes_check" onclick="yes_check(this)" class="far fa-check-square fa-2x " ></i></span>
+                        <span class="text-decoration-none no_check" onclick="triggerOff()"><i id="no_check" onclick="no_check(this)"  class="far fa-times-circle fa-2x"></i></span>
                     </div>
                     <div class="form-group">
-                        <input id="aupt_check" type="checkbox" name="has_foam">
-                        <label for="aupt_check">Запасы пенооброзование</label>
+                        <input id="aupt_check" type="checkbox" name="has_foam" class="d-none">
+                        <label class="font-weight-bold h5 pr-3"  for="aupt_check">Запасы пенооброзование</label>
+                        <span  class="text-decoration-none yes_check" onclick="trigger()"><i id="yes_check" onclick="yes_check(this)" class="far fa-check-square fa-2x " ></i></span>
+                        <span class="text-decoration-none no_check" onclick="triggerOff()"><i id="no_check" onclick="no_check(this)"  class="far fa-times-circle fa-2x"></i></span>
                     </div>
                     <div class="form-group">
-                        <input id="aupt_check" type="checkbox" name="has_hydrant">
-                        <label for="aupt_check">Гидрант</label>
+                        <input id="aupt_check" type="checkbox" name="has_hydrant" class="d-none">
+                        <label class="font-weight-bold h5 pr-3"  for="aupt_check">Гидрант</label>
+                        <span  class="text-decoration-none yes_check" onclick="trigger()"><i id="yes_check" onclick="yes_check(this)" class="far fa-check-square fa-2x " ></i></span>
+                        <span class="text-decoration-none no_check" onclick="triggerOff()"><i id="no_check" onclick="no_check(this)"  class="far fa-times-circle fa-2x"></i></span>
                     </div>
                     <div class="form-group">
-                        <input id="aupt_check" type="checkbox" name="has_reservoir">
-                        <label for="aupt_check">Водоем</label>
+                        <input id="aupt_check" type="checkbox" name="has_reservoir" class="d-none">
+                        <label class="font-weight-bold h5 pr-3"  for="aupt_check">Водоем</label>
+                        <span  class="text-decoration-none yes_check" onclick="trigger()"><i id="yes_check" onclick="yes_check(this)" class="far fa-check-square fa-2x " ></i></span>
+                        <span class="text-decoration-none no_check" onclick="triggerOff()"><i id="no_check" onclick="no_check(this)"  class="far fa-times-circle fa-2x"></i></span>
                     </div>
                     <div class="form-group">
-                        <label for="image_input">Изображении</label>
+                        <label  class="font-weight-bold h5" for="image_input">Изображении</label>
                         <input id="image_input" name="images[]" type="file" accept="image/*" multiple>
                     </div>
                     <div class="form-group">
@@ -116,4 +130,33 @@
             $(this).parent().remove();
         })
     </script>
+    <script>
+        // $(document).ready(function () {
+        //
+        // }
+
+        function trigger(){
+            document.getElementById('aups_check').checked = true;
+        }
+        function triggerOff(){
+            document.getElementById('aups_check').checked = false;
+        }
+        document.getElementById("yes_check").style.color = 'black';
+        function yes_check(el) {
+            if (el.style.color === 'black') {
+                el.style.color = 'green';
+            }
+            else el.style.color = 'black';
+        }
+        document.getElementById("no_check").style.color = 'black';
+        function no_check(el) {
+            if (el.style.color === 'black') {
+                el.style.color = 'red';
+            }
+            else el.style.color = 'black';
+        }
+
+    </script>
+
+
 @endpush
