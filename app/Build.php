@@ -17,7 +17,7 @@ class Build extends Model
 
     public function checks()
     {
-        return $this->hasMany(Check::class);
+        return $this->hasMany(Check::class)->orderBy('created_at', 'desc');
     }
 
     public function type()
