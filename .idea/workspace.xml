@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2b765ce-ed4b-4498-857e-d8fcbe8cbb6a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/fireinspection.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/fireinspection.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/models/model_add_fireinspection.blade.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/objects/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/objects/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -130,6 +134,9 @@
       <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-oracle" />
       <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
       <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/mobiledetect/mobiledetectlib" />
+      <path value="$PROJECT_DIR$/vendor/jaybizzle/crawler-detect" />
+      <path value="$PROJECT_DIR$/vendor/jenssegers/agent" />
     </include_path>
   </component>
   <component name="ProjectId" id="1j83YDSfMzio44cnpzXuQcqXfOK" />
@@ -172,16 +179,42 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6d53f6d2-f52d-4078-9e68-aa18d06e3bff" name="Default Changelist" comment="" />
+      <changelist id="b2b765ce-ed4b-4498-857e-d8fcbe8cbb6a" name="Default Changelist" comment="" />
       <created>1603171936409</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1603171936409</updated>
       <workItem from="1603171938516" duration="4844000" />
+      <workItem from="1603256959598" duration="542000" />
+      <workItem from="1603258494537" duration="11089000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/objects/show.blade.php</url>
+          <line>263</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
