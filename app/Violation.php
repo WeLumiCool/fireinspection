@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
-use App\Typeviolation;
 use Illuminate\Database\Eloquent\Model;
 
 class Violation extends Model

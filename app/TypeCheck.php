@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TypeBuild extends Model
+class TypeCheck extends Model
 {
     protected $fillable = ['name'];
 
-    public function builds()
+    public function checks()
     {
-        return $this->hasMany(Build::class, 'type_id');
+        return $this->hasMany(Check::class);
     }
 }
