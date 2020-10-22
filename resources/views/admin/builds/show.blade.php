@@ -162,18 +162,18 @@
                                                 </div>
                                             @endif
                                             @if(!is_null($check->images))
-                                                <div class="col-12 my-5">
+                                                <div class="col-12 my-2">
                                                     <p class="h5 text-left font-weight-bold">
                                                         images
                                                     </p>
                                                     <div class="row">
                                                         @foreach(json_decode($check->images) as $image)
-                                                            <div class="col-3">
+                                                            <div class="col-2">
                                                                 <a class="grouped_elements" rel="group1"
                                                                    href="{{ asset('storage/' .  $image) }}"
                                                                    data-fancybox="media-img-{{ $check->id }}">
                                                                     <img src="{{ asset('storage/' .  $image) }}"
-                                                                         class="img-fluid" alt=""/>
+                                                                         class="" alt="" height="200"/>
                                                                 </a>
                                                             </div>
                                                         @endforeach

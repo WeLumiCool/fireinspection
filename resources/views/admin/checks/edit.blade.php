@@ -4,8 +4,9 @@
     <div class="p-3 bg-form card-body-admin">
         <div class="row">
             <div class="col-12 col-sm-10 col-lg-12 col-md-10">
-                <form action="{{ route('admin.checks.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.checks.update', $check) }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="row justify-content-center">
                         <p class="font-weight-bold h2">Изменение проверки</p>
                     </div>
@@ -100,11 +101,34 @@
                     </div>
                     <div class="form-group">
                         <label class="font-weight-bold h5" for="image_input">Изображении</label>
-                        <input id="image_input" name="images[]" type="file" accept="image/*" multiple>
+                        <input id="image_input" name="images[]" type="file" accept="image/*" onchange="readURL(this);"
+                               multiple>
+                        @if(!is_null($check->images))
+                            <div id="images">
+                                @foreach(json_decode($check->images) as $image)
+                                    <img src="{{ asset('storage/'. $image) }}" alt="{{ $image }}" height="200">
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label for="type_psp_select">Тип первичной пажаротушение:</label>
                         <div id="psps_div">
+                            @if(!is_null($check->psp_count))
+                                @foreach(json_decode($check->psp_count) as $psp)
+                                    <div>
+                                        <select class="form-control-sm" name="type_psps[]" id="type_psp_select">
+                                            @foreach($typePsps as $typePsp)
+                                                <option value="{{ $typePsp->name }}" {{ $typePsp->name==$psp->type?'selected':'' }}>{{ $typePsp->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <input name="counts[]" type="number" min="1" value="{{ $psp->count }}" required>
+                                        <button class="btn delete-psp" type="button" style="color: red">
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                @endforeach
+                            @endif
                             {{--place for psps--}}
                         </div>
                         <button id="add_psp" class="btn btn-success" type="button">
@@ -114,6 +138,21 @@
                     <div class="form-group">
                         <label for="type_psp_select">Нарушения:</label>
                         <div id="violations_div">
+                            @if($check->violations->count())
+                                @foreach($check->violations as $violation)
+                                    <div class="border">
+                                        <select name="type_violations[]" id="type_psp_select">
+                                            @foreach($typeViolations as $typeViolation)
+                                                <option value="{{ $typeViolation->id }}" {{ $typeViolation->id==$violation->id?'select':'' }}>{{ $typeViolation->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <textarea name="descs[]" cols="40" rows="1">{{ $violation->note }}</textarea>
+                                        <button class="btn delete-violation" type="button" style="color: red">
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                @endforeach
+                            @endif
                             {{--place for violations--}}
                         </div>
                         <button id="add_violation" class="btn btn-success" type="button">
@@ -233,7 +272,7 @@
         $('#add_violation').click(function () {
             let html =
                 `<div class="border">
-                         <select class="" name="type_violations[]" id="type_psp_select">`
+                         <select name="type_violations[]" id="type_psp_select">`
                     @foreach($typeViolations as $typeViolation)
                 + `<option value="{{ $typeViolation->id }}">{{ $typeViolation->name }}</option>`
                     @endforeach
@@ -249,6 +288,20 @@
             $(this).parent().remove();
         })
     </script>
+    <script>
+        function readURL(input) {
 
+            if (input.files && input.files[0]) {
+                $('#images').empty();
+                for (let i = 0; i < input.files.length; i++) {
+                let reader = new FileReader();
 
+                reader.onload = function (e) {
+                    $('#images').append(`<img class="mr-2 mb-2" name="images[]" src="` + e.target.result + `" height="200">`);
+                };
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+        }
+    </script>
 @endpush
