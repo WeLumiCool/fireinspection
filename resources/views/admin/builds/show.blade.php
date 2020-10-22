@@ -26,7 +26,7 @@
         </div>
         <div class="row">
             <div class="col-12 text-center">
-                <a href="{{ route('admin.checks.create', $build->id) }}" class="btn btn-success mt-3 mb-5"
+                <a href="{{ route('admin.checks.create', $build->id) }}" class="btn btn-success my-1"
                    style="padding: 15px;">
                     Добавить проверку
                 </a>
@@ -148,7 +148,7 @@
                                                     </p>
                                                 @endif
                                             </div>
-                                            @if(count(json_decode($check->psp_count)))
+                                            @if(!is_null($check->psp_count))
                                                 <div class="col-12 text-left">
                                                     <p class="h5 font-weight-bold"> Первичные средства
                                                         пожаротущения:</p>
@@ -161,23 +161,25 @@
                                                     @endforeach
                                                 </div>
                                             @endif
-                                            <div class="col-12 my-5">
-                                                <p class="h5 text-left font-weight-bold">
-                                                    images
-                                                </p>
-                                                <div class="row">
-                                                    @foreach(json_decode($check->images) as $image)
-                                                        <div class="col-3">
-                                                            <a class="grouped_elements" rel="group1"
-                                                               href="{{ asset('storage/' .  $image) }}"
-                                                               data-fancybox="media-img-{{ $check->id }}">
-                                                                <img src="{{ asset('storage/' .  $image) }}"
-                                                                     class="img-fluid" alt=""/>
-                                                            </a>
-                                                        </div>
-                                                    @endforeach
+                                            @if(!is_null($check->images))
+                                                <div class="col-12 my-5">
+                                                    <p class="h5 text-left font-weight-bold">
+                                                        images
+                                                    </p>
+                                                    <div class="row">
+                                                        @foreach(json_decode($check->images) as $image)
+                                                            <div class="col-3">
+                                                                <a class="grouped_elements" rel="group1"
+                                                                   href="{{ asset('storage/' .  $image) }}"
+                                                                   data-fancybox="media-img-{{ $check->id }}">
+                                                                    <img src="{{ asset('storage/' .  $image) }}"
+                                                                         class="img-fluid" alt=""/>
+                                                                </a>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            @endif
                                             @if($check->violations->count())
                                                 <div class="col-12 text-left">
                                                     <p class="h6 font-weight-bold">Примечание:</p>

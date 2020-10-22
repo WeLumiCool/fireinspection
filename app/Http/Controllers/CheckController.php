@@ -10,6 +10,7 @@ use App\TypeViolation;
 use App\Violation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\View\View;
 
 class CheckController extends Controller
 {
@@ -108,11 +109,18 @@ class CheckController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Check $check
-     * @return void
+     * @return View
      */
     public function edit(Check $check)
     {
-        //
+        $typePsps = TypePsp::all();
+        $typeViolations = TypeViolation::all();
+        $typeChecks = TypeCheck::all();
+        return view('admin.checks.edit', compact(
+            'check',
+            'typePsps',
+            'typeViolations',
+            'typeChecks'));
     }
 
     /**
@@ -131,10 +139,15 @@ class CheckController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Check $check
-     * @return void
+     * @return Route
+     * @throws \Exception
      */
     public function destroy(Check $check)
     {
-        dd($check);
+        foreach ($check->violations as $violation) {
+            $violation->delete();
+        }
+        $check->delete();
+        return redirect()->route('admin.builds.show', $check->build_id);
     }
 }
