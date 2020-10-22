@@ -225,7 +225,7 @@
         $('#add_psp').click(function () {
             let html =
                 `<div class="row card-body-admin my-2 mx-1 bg-form">
-        <div class="col-lg-4 justify-content-center d-flex align-items-center">
+        <div class="col-lg-4 d-flex align-items-center">
             <select class="form-control-sm" name="type_psps[]" id="type_psp_select">\`
                 @foreach($typePsps as $typePsp)
                 + \`
@@ -254,7 +254,7 @@
             let html =
                 `
     <div class="row card-body-admin my-2 mx-1 bg-form"  style="padding:0.7px 0">
-        <div class="col-lg-4 justify-content-center d-flex align-items-center">
+        <div class="col-lg-5 d-flex align-items-center">
                 <select class="form-control-sm " name="type_violations[]" id="type_psp_select">`
                 @foreach($typeViolations as $typeViolation)
                 + `
@@ -262,9 +262,9 @@
                 @endforeach
                 + `</select>
         </div>
-        <div class="col-lg-7">
+        <div class="col-lg-6">
             <div style="padding-top: 6px">
-                <textarea class="" name="descs[]" cols="40" rows="1" style="padding: 2.25px 0;"></textarea>
+                <textarea class="" name="descs[]" cols=25" rows="1" style="padding: 2.25px 0;"></textarea>
             </div>
         </div>
         <div class="col-lg-1 justify-content-center d-flex">
