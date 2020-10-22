@@ -19,7 +19,7 @@
                     </a>
                 </li>
                 <li class="nav-item pt-2 text-center">
-                    <a href="" class="btn btn-admin font-small text-decoration-none">Админ панель</a>
+                    <a href="{{ route('admin.admin') }}" class="btn btn-admin font-small text-decoration-none">Админ панель</a>
                 </li>
 
                 <li class="nav-item pt-2 text-center">
