@@ -1,7 +1,14 @@
 @extends('admin.layouts.dashboard')
 @section('dashboard_content')
     <div class="container bg-form card-body-admin mt-3 pt-3">
-        <div class="row bg-white px-5 pb-4 mb-4 shadow" style="border-radius: 10px">
+        <div class="row justify-content-end">
+            <div class="col-3">
+                <a class="btn btn-info text-white" href="#">
+                    Посмотреть историю
+                </a>
+            </div>
+        </div>
+        <div class="row px-5 pb-4 mb-4" style="border-radius: 10px">
             <div class="col-5 py-4">
                 <p>
                     <span class="h4 pr-2">Имя объекта:</span>{{ $build->name }}
@@ -77,9 +84,11 @@
                                  data-parent="#accordionStages">
                                 <div class="card-body p-0  ">
                                     <div class="table-ui  mb-3  mb-4">
-                                        <div class="row  pl-3">
-                                            <div class="col-lg-3 col-12 text-lg-left py-2 text-center">
-                                                <p class="h6 font-weight-bold ">АУПС:</p>
+                                        <div class="row pl-3">
+                                            <div class="col-12 col-lg-2">
+                                                <h6 class=font-weight-bolder>
+                                                    АУПС
+                                                </h6>
                                                 @if($check->has_aups)
                                                     <p><i class="fa fa-check-circle text-success"></i></p>
                                                 @else
@@ -88,8 +97,10 @@
                                                     </p>
                                                 @endif
                                             </div>
-                                            <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">АУПТ:</p>
+                                            <div class="col-12 col-lg-2">
+                                                <h6 class=font-weight-bolder>
+                                                    АУПТ
+                                                </h6>
                                                 @if($check->has_aupt)
                                                     <p><i class="fa fa-check-circle text-success"></i></p>
                                                 @else
@@ -98,8 +109,10 @@
                                                     </p>
                                                 @endif
                                             </div>
-                                            <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">Кран:</p>
+                                            <div class="col-12 col-lg-4">
+                                                <h6 class=font-weight-bolder>
+                                                    Внутренние противопожарные краны (наличие)
+                                                </h6>
                                                 @if($check->has_cranes)
                                                     <p><i class="fa fa-check-circle text-success"></i></p>
                                                 @else
@@ -108,8 +121,10 @@
                                                     </p>
                                                 @endif
                                             </div>
-                                            <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">План эвакуации:</p>
+                                            <div class="col-12 col-lg-4">
+                                                <h6 class=font-weight-bolder>
+                                                    Планы эвакуации (наличие)
+                                                </h6>
                                                 @if($check->has_evacuation)
                                                     <p><i class="fa fa-check-circle text-success"></i></p>
                                                 @else
@@ -118,8 +133,10 @@
                                                     </p>
                                                 @endif
                                             </div>
-                                            <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">Запасы пенооброзование:</p>
+                                            <div class="col-12 col-lg-4">
+                                                <h6 class=font-weight-bolder>
+                                                    Запасы пенообразования
+                                                </h6>
                                                 @if($check->has_foam)
                                                     <p><i class="fa fa-check-circle text-success"></i></p>
                                                 @else
@@ -128,8 +145,10 @@
                                                     </p>
                                                 @endif
                                             </div>
-                                            <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">Гидрант:</p>
+                                            <div class="col-12 col-lg-2">
+                                                <h6 class=font-weight-bolder>
+                                                    Гидрант
+                                                </h6>
                                                 @if($check->has_hydrant)
                                                     <p><i class="fa fa-check-circle text-success"></i></p>
                                                 @else
@@ -138,8 +157,10 @@
                                                     </p>
                                                 @endif
                                             </div>
-                                            <div class="col-lg-6 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">Водоем:</p>
+                                            <div class="col-12 col-lg-2">
+                                                <h6 class=font-weight-bolder>
+                                                    Водоем
+                                                </h6>
                                                 @if($check->has_reservoir)
                                                     <p><i class="fa fa-check-circle text-success"></i></p>
                                                 @else
@@ -164,7 +185,7 @@
                                             @if(!is_null($check->images))
                                                 <div class="col-12 my-2">
                                                     <p class="h5 text-left font-weight-bold">
-                                                        images
+                                                        Изображения
                                                     </p>
                                                     <div class="row">
                                                         @foreach(json_decode($check->images) as $image)
@@ -181,11 +202,13 @@
                                                 </div>
                                             @endif
                                             @if($check->violations->count())
-                                                <div class="col-12 text-left">
-                                                    <p class="h6 font-weight-bold">Примечание:</p>
+                                                <div class="col-12 col-lg-10 text-left">
+                                                    <h6 class=font-weight-bolder>
+                                                        Примичание
+                                                    </h6>
                                                     @foreach($check->violations as $violation)
-                                                        <p class="text-muted m-0">
-                                                            <span class="text-dark font-weight-bold">{{ $violation->type->name }}
+                                                        <p class="alert alert-danger">
+                                                            <span>{{ $violation->type->name }}
                                                                 :</span>
                                                             {{ $violation->note }}
                                                         </p>

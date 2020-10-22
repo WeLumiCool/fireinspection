@@ -229,3 +229,49 @@ a.waves-effect, a.waves-light {
     border:  1px solid #0069d9 !important;
     background-color: #0069d9 !important;
 }
+.accordion.md-accordion.accordion-blocks .card {
+    margin-bottom: 0.4rem;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+/*.md-accordion .card:first-of-type, .md-accordion .card:not(:first-of-type):not(:last-of-type) {*/
+/*    border-bottom: 1px solid #e0e0e0;*/
+/*}*/
+.md-accordion .card .card-header {
+    padding: 1rem 1.5rem;
+    background: transparent;
+    border-bottom: 0;
+}
+.accordion>.card>.card-header {
+    border-radius: 0;
+    margin-bottom: -1px;
+}
+.md-accordion .card .fa-angle-down {
+    float: right;
+    margin-top: -16px;
+}
+.md-accordion .card .card-header button:not(.collapsed) .rotate-icon {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.accordion .card:first-of-type {
+    border-bottom: 0;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.accordion .card{
+    border-bottom: 0;
+    border-top-right-radius: 5px!important;
+    border-top-left-radius: 5px!important;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.btn-green-stage {
+    outline: none;
+    border: 0;
+    padding: 10px 15px;
+    color: white!important;
+    background: #3AA93F;
+    border-radius: 10px;
+}
