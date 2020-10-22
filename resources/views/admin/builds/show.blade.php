@@ -102,10 +102,10 @@
                                                     АУПТ
                                                 </h6>
                                                 @if($check->has_aupt)
-                                                    <p><i class="fa fa-check-circle text-success"></i></p>
+                                                   <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
                                                 @else
                                                     <p>
-                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                        <i class="fa fa-times-circle text-danger fa-2x"></i>
                                                     </p>
                                                 @endif
                                             </div>
@@ -114,10 +114,10 @@
                                                     Внутренние противопожарные краны (наличие)
                                                 </h6>
                                                 @if($check->has_cranes)
-                                                    <p><i class="fa fa-check-circle text-success"></i></p>
+                                                   <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
                                                 @else
                                                     <p>
-                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                        <i class="fa fa-times-circle text-danger fa-2x"></i>
                                                     </p>
                                                 @endif
                                             </div>
@@ -126,10 +126,10 @@
                                                     Планы эвакуации (наличие)
                                                 </h6>
                                                 @if($check->has_evacuation)
-                                                    <p><i class="fa fa-check-circle text-success"></i></p>
+                                                   <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
                                                 @else
                                                     <p>
-                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                        <i class="fa fa-times-circle text-danger fa-2x"></i>
                                                     </p>
                                                 @endif
                                             </div>
@@ -138,10 +138,10 @@
                                                     Запасы пенообразования
                                                 </h6>
                                                 @if($check->has_foam)
-                                                    <p><i class="fa fa-check-circle text-success"></i></p>
+                                                   <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
                                                 @else
                                                     <p>
-                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                        <i class="fa fa-times-circle text-danger fa-2x"></i>
                                                     </p>
                                                 @endif
                                             </div>
@@ -150,10 +150,10 @@
                                                     Гидрант
                                                 </h6>
                                                 @if($check->has_hydrant)
-                                                    <p><i class="fa fa-check-circle text-success"></i></p>
+                                                   <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
                                                 @else
                                                     <p>
-                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                        <i class="fa fa-times-circle text-danger fa-2x"></i>
                                                     </p>
                                                 @endif
                                             </div>
@@ -162,15 +162,15 @@
                                                     Водоем
                                                 </h6>
                                                 @if($check->has_reservoir)
-                                                    <p><i class="fa fa-check-circle text-success"></i></p>
+                                                   <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
                                                 @else
                                                     <p>
-                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                        <i class="fa fa-times-circle text-danger fa-2x"></i>
                                                     </p>
                                                 @endif
                                             </div>
                                             @if(!is_null($check->psp_count))
-                                                <div class="col-12 text-left">
+                                                <div class="col-12 text-left mb-3">
                                                     <p class="h5 font-weight-bold"> Первичные средства
                                                         пожаротущения:</p>
                                                     @foreach(json_decode($check->psp_count) as $psp)
@@ -185,7 +185,7 @@
                                             @if(!is_null($check->images))
                                                 <div class="col-12 my-2">
                                                     <p class="h5 text-left font-weight-bold">
-                                                        Изображения
+                                                        Изображение
                                                     </p>
                                                     <div class="row">
                                                         @foreach(json_decode($check->images) as $image)
@@ -202,10 +202,8 @@
                                                 </div>
                                             @endif
                                             @if($check->violations->count())
-                                                <div class="col-12 col-lg-10 text-left">
-                                                    <h6 class=font-weight-bolder>
-                                                        Примичание
-                                                    </h6>
+                                                <div class="col-12 text-left">
+                                                    <p class="h5 font-weight-bold">Примечание:</p>
                                                     @foreach($check->violations as $violation)
                                                         <p class="alert alert-danger">
                                                             <span>{{ $violation->type->name }}

@@ -103,66 +103,98 @@
                         <label class="font-weight-bold h5" for="image_input">Изображении</label>
                         <input id="image_input" name="images[]" type="file" accept="image/*" onchange="readURL(this);"
                                multiple>
-                        @if(!is_null($check->images))
-                            <div id="images">
+                        <div id="images">
+                            @if(!is_null($check->images))
                                 @foreach(json_decode($check->images) as $image)
                                     <img src="{{ asset('storage/'. $image) }}" alt="{{ $image }}" height="200">
                                 @endforeach
+                            @endif
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="font-weight-bold h6" for="type_psp_select">Первичные средства
+                                    пожаротушения:</label>
+                                <div id="psps_div">
+                                    @if(!is_null($check->psp_count))
+                                        @foreach(json_decode($check->psp_count) as $psp)
+                                            <div class="row card-body-admin my-2 mx-1 bg-form">
+                                                <div class="col-lg-4 d-flex align-items-center">
+                                                    <select class="form-control-sm" name="type_psps[]"
+                                                            id="type_psp_select">
+                                                        @foreach($typePsps as $typePsp)
+                                                            <option value="{{ $typePsp->name }}" {{ $typePsp->name==$psp->type?'selected':'' }}>{{ $typePsp->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    <div class="py-2">
+                                                        <input class="" name="counts[]" type="number" min="1" required
+                                                               style="padding: 1.25px 0;" value="{{ $psp->count }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-1 justify-content-center d-flex">
+                                                    <button class="btn delete-psp" type="button"
+                                                            style="font-size:18px;color: red">
+                                                        <i class="far fa-trash-alt"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                    {{--place for psps--}}
+
+                                </div>
+                                <button id="add_psp" class="btn btn-success mt-2" type="button">
+                                    <i class="fas fa-plus "><span class="px-4">Добавить ПСП</span></i>
+                                </button>
                             </div>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <label for="type_psp_select">Тип первичной пажаротушение:</label>
-                        <div id="psps_div">
-                            @if(!is_null($check->psp_count))
-                                @foreach(json_decode($check->psp_count) as $psp)
-                                    <div>
-                                        <select class="form-control-sm" name="type_psps[]" id="type_psp_select">
-                                            @foreach($typePsps as $typePsp)
-                                                <option value="{{ $typePsp->name }}" {{ $typePsp->name==$psp->type?'selected':'' }}>{{ $typePsp->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        <input name="counts[]" type="number" min="1" value="{{ $psp->count }}" required>
-                                        <button class="btn delete-psp" type="button" style="color: red">
-                                            <i class="far fa-trash-alt"></i>
-                                        </button>
-                                    </div>
-                                @endforeach
-                            @endif
-                            {{--place for psps--}}
                         </div>
-                        <button id="add_psp" class="btn btn-success" type="button">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
-                    <div class="form-group">
-                        <label for="type_psp_select">Нарушения:</label>
-                        <div id="violations_div">
-                            @if($check->violations->count())
-                                @foreach($check->violations as $violation)
-                                    <div class="border">
-                                        <select name="type_violations[]" id="type_psp_select">
-                                            @foreach($typeViolations as $typeViolation)
-                                                <option value="{{ $typeViolation->id }}" {{ $typeViolation->id==$violation->id?'select':'' }}>{{ $typeViolation->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        <textarea name="descs[]" cols="40" rows="1">{{ $violation->note }}</textarea>
-                                        <button class="btn delete-violation" type="button" style="color: red">
-                                            <i class="far fa-trash-alt"></i>
-                                        </button>
-                                    </div>
-                                @endforeach
-                            @endif
-                            {{--place for violations--}}
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="font-weight-bold h6" for="type_psp_select">Нарушения:</label>
+                                <div id="violations_div">
+                                    @if($check->violations->count())
+                                        @foreach($check->violations as $violation)
+                                            <div class="row card-body-admin my-2 mx-1 bg-form" style="padding:0.7px 0">
+                                                <div class="col-lg-5 d-flex align-items-center">
+                                                    <select class="form-control-sm " name="type_violations[]"
+                                                            id="type_psp_select">
+                                                        @foreach($typeViolations as $typeViolation)
+                                                            <option value="{{ $typeViolation->id }}" {{ $typeViolation->id==$violation->id?'select':'' }}>{{ $typeViolation->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div style="padding-top: 6px">
+                                                <textarea class="" name="descs[]" cols=25" rows="1"
+                                                          style="padding: 2.25px 0;">{{ $violation->note }}</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-1 justify-content-center d-flex">
+                                                    <button class="btn delete-violation" type="button"
+                                                            style="font-size:18px;color: red">
+                                                        <i class="far fa-trash-alt"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                    {{--place for violations--}}
+                                </div>
+                                <button id="add_violation" class="btn btn-success mt-2" type="button">
+                                    <i class="fas fa-plus"><span class="px-4">Добавить Нарушение</span></i>
+                                </button>
+                            </div>
                         </div>
-                        <button id="add_violation" class="btn btn-success" type="button">
-                            <i class="fas fa-plus"></i>
-                        </button>
                     </div>
+
+
                     <input type="hidden" name="build_id" value="{{ $check->build_id }}">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                    <button type="submit" title="{{ __('Добавить') }}"
-                            class="btn n btn-success">{{ __('Добавить') }}</button>
+                    <button type="submit" title="{{ __('Изменить') }}"
+                            class="btn n btn-success">{{ __('Изменить') }}</button>
                 </form>
             </div>
         </div>
@@ -252,17 +284,26 @@
     <script>
         $('#add_psp').click(function () {
             let html =
-                `<div>
+                `<div class="row card-body-admin my-2 mx-1 bg-form">
+        <div class="col-lg-4 d-flex align-items-center">
             <select class="form-control-sm" name="type_psps[]" id="type_psp_select">`
                     @foreach($typePsps as $typePsp)
-                + `<option value="{{ $typePsp->name }}">{{ $typePsp->name }}</option>`
+                + `
+                <option value="{{ $typePsp->name }}">{{ $typePsp->name }}</option>`
                     @endforeach
                 + `</select>
-                <input name="counts[]" type="number" min="1" value="1" required>
-                <button class="btn delete-psp" type="button" style="color: red">
-                    <i class="far fa-trash-alt"></i>
-                </button>
-                </div>`;
+        </div>
+        <div class="col-lg-7">
+            <div class="py-2">
+                <input class="" name="counts[]" type="number" min="1" value="1" required style="padding: 1.25px 0;">
+            </div>
+        </div>
+        <div class="col-lg-1 justify-content-center d-flex">
+            <button class="btn delete-psp" type="button" style="font-size:18px;color: red">
+                <i class="far fa-trash-alt"></i>
+            </button>
+        </div>
+    </div>`;
             $('#psps_div').append(html);
         });
         $(document).on('click', '.delete-psp', function () {
@@ -294,11 +335,11 @@
             if (input.files && input.files[0]) {
                 $('#images').empty();
                 for (let i = 0; i < input.files.length; i++) {
-                let reader = new FileReader();
+                    let reader = new FileReader();
 
-                reader.onload = function (e) {
-                    $('#images').append(`<img class="mr-2 mb-2" name="images[]" src="` + e.target.result + `" height="200">`);
-                };
+                    reader.onload = function (e) {
+                        $('#images').append(`<img class="mr-2 mb-2" name="images[]" src="` + e.target.result + `" height="200">`);
+                    };
                     reader.readAsDataURL(input.files[i]);
                 }
             }

@@ -226,12 +226,12 @@
             let html =
                 `<div class="row card-body-admin my-2 mx-1 bg-form">
         <div class="col-lg-4 d-flex align-items-center">
-            <select class="form-control-sm" name="type_psps[]" id="type_psp_select">\`
+            <select class="form-control-sm" name="type_psps[]" id="type_psp_select">`
                 @foreach($typePsps as $typePsp)
-                + \`
-                <option value="{{ $typePsp->name }}">{{ $typePsp->name }}</option>\`
+                + `
+                <option value="{{ $typePsp->name }}">{{ $typePsp->name }}</option>`
                 @endforeach
-                + \`</select>
+                + `</select>
         </div>
         <div class="col-lg-7">
             <div class="py-2">
