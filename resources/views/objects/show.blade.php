@@ -143,7 +143,7 @@
                                         @for($i = 0; $i < 6; $i++)
                                             <div class="col-3">
                                                 <a class="grouped_elements" rel="group2" href="image_big_3.jpg">
-                                                    <img src="{{ asset }}" alt=""/>
+                                                    <img src="" alt=""/>
                                                 </a>
                                             </div>
                                         @endfor
