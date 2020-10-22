@@ -58,7 +58,8 @@ class BuildController extends Controller
     }
 
 
-    public function insp_show(Build $build) {
+    public function insp_show($id) {
+        $build = Build::find($id);
         return view('objects.show', compact('build'));
     }
     /**
