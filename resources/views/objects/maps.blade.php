@@ -1,14 +1,10 @@
 @extends('layouts.app')
 @section('content')
     <div class="section pt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 pb-4">
+                <div class="main">
                     <div id="map"></div>
 
                 </div>
-            </div>
-        </div>
     </div>
 
 @endsection
@@ -16,10 +12,8 @@
 @push('styles')
     <style>
         #map {
-            width: 1000px;
-            height: 500px;
-            padding: 10px;
-            margin-top: 50px;
+            min-height: 70vh;
+            /*margin-top: 50px;*/
         }
 
         @media (max-width: 1075px) {
