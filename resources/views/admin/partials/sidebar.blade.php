@@ -1,8 +1,8 @@
 <div class="sidebar-fixed position-fixed">
     <div class="list-group list-group-flush ">
-        {{--<a href="{{ route('main') }}" class="logo-wrapper waves-effect mb-3" style="text-align: center;padding-top: 10px;">--}}
-            {{--<img src="{{ asset('image/admin_logo.svg') }}" class="img-fluid" alt="logo" >--}}
-        {{--</a>--}}
+        <a href="{{ route('welcome') }}" class="logo-wrapper waves-effect mb-3" style="text-align: center;padding-top: 10px;">
+            <img src="{{ asset('image/admin_logo.svg') }}" class="img-fluid" alt="logo" >
+        </a>
 
         <a href="{{ route('admin.builds.index') }}"
            class="list-group-item list-group-item-action waves-effect {{ request()->is('admin/builds*') ? 'active' : '' }}">

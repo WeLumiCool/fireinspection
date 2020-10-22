@@ -32,7 +32,7 @@
                 </a>
             </div>
         </div>
-        <div class="row mt-4 ">
+        <div class="row mt-4 mb-2 ">
             <div class="col-12 text-center ">
                 <div class="accordion md-accordion accordion-blocks border-0" id="accordionStages" role="tablist"
                      aria-multiselectable="true">

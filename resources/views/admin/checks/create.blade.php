@@ -10,7 +10,7 @@
                         <p class="font-weight-bold h2">Добавление проверки</p>
                     </div>
                     <div class="form-group">
-                        <label class="font-weight-bold h5" for="type_check-select">Тип проверки:</label>
+                        <label class="font-weight-bold h6" for="type_check-select">Тип проверки:</label>
                         <select class="form-control" name="type_id" id="type_check-select">
                             @foreach($typeChecks as $typeCheck)
                                 <option value="{{ $typeCheck->id }}">{{ $typeCheck->name }}</option>
@@ -51,7 +51,8 @@
                         <div class="col-lg-4 col-12">
                             <div class="form-group d-flex">
                                 <div class="button r mr-3" id="button-1">
-                                    <input id="has_evacuation_check" type="checkbox" class="checkbox" name="has_evacuation">
+                                    <input id="has_evacuation_check" type="checkbox" class="checkbox"
+                                           name="has_evacuation">
                                     <div class="knobs"></div>
                                     <div class="layer"></div>
                                 </div>
@@ -72,7 +73,8 @@
                         <div class="col-lg-4 col-12">
                             <div class="form-group d-flex">
                                 <div class="button r mr-3" id="button-1">
-                                    <input id="has_reservoir_check" type="checkbox" class="checkbox" name="has_reservoir">
+                                    <input id="has_reservoir_check" type="checkbox" class="checkbox"
+                                           name="has_reservoir">
                                     <div class="knobs"></div>
                                     <div class="layer"></div>
                                 </div>
@@ -91,36 +93,52 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="font-weight-bold h5" for="image_input">Изображении</label>
+                    <div class="form-group py-2">
+                        <label class="font-weight-bold h6" for="image_input">Изображении</label>
                         <input id="image_input" name="images[]" type="file" accept="image/*" multiple>
                     </div>
-                    <div class="form-group">
-                        <label for="type_psp_select">Тип первичной пажаротушение:</label>
-                        <div id="psps_div">
-                            {{--place for psps--}}
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="font-weight-bold h6" for="type_psp_select">Первичные средства
+                                    пожаротушения:</label>
+                                <div id="psps_div">
+                                    {{--place for psps--}}
+
+                                </div>
+                                <button id="add_psp" class="btn btn-success mt-2" type="button">
+                                    <i class="fas fa-plus "><span class="px-4">Добавить ПСП</span></i>
+                                </button>
+                            </div>
                         </div>
-                        <button id="add_psp" class="btn btn-success" type="button">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
-                    <div class="form-group">
-                        <label for="type_psp_select">Нарушения:</label>
-                        <div id="violations_div">
-                            {{--place for violations--}}
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="font-weight-bold h6" for="type_psp_select">Нарушения:</label>
+                                <div id="violations_div">
+                                    {{--place for violations--}}
+                                </div>
+                                <button id="add_violation" class="btn btn-success mt-2" type="button">
+                                    <i class="fas fa-plus"><span class="px-4">Добавить Нарушение</span></i>
+                                </button>
+                            </div>
                         </div>
-                        <button id="add_violation" class="btn btn-success" type="button">
-                            <i class="fas fa-plus"></i>
-                        </button>
                     </div>
                     <input type="hidden" name="build_id" value="{{ $id }}">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                    <button type="submit" title="{{ __('Добавить') }}"
-                            class="btn n btn-success">{{ __('Добавить') }}</button>
+                    <div class="row pt-3">
+                        <div class="col-12 text-center">
+                            <button type="submit" title="{{ __('Добавить проверку') }}"
+                                    class="btn n btn-success px-3 py-2">{{ __('Добавить проверку') }}</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
+
+
+
+
 @endsection
 @push('styles')
     <style>
@@ -206,40 +224,59 @@
     <script>
         $('#add_psp').click(function () {
             let html =
-                `<div>
-            <select class="form-control-sm" name="type_psps[]" id="type_psp_select">`
-                    @foreach($typePsps as $typePsp)
-                + `<option value="{{ $typePsp->name }}">{{ $typePsp->name }}</option>`
-                    @endforeach
-                + `</select>
-                <input name="counts[]" type="number" min="1" value="1" required>
-                <button class="btn delete-psp" type="button" style="color: red">
-                    <i class="far fa-trash-alt"></i>
-                </button>
-                </div>`;
+                `<div class="row card-body-admin my-2 mx-1 bg-form">
+        <div class="col-lg-4 justify-content-center d-flex align-items-center">
+            <select class="form-control-sm" name="type_psps[]" id="type_psp_select">\`
+                @foreach($typePsps as $typePsp)
+                + \`
+                <option value="{{ $typePsp->name }}">{{ $typePsp->name }}</option>\`
+                @endforeach
+                + \`</select>
+        </div>
+        <div class="col-lg-7">
+            <div class="py-2">
+                <input class="" name="counts[]" type="number" min="1" value="1" required style="padding: 1.25px 0;">
+            </div>
+        </div>
+        <div class="col-lg-1 justify-content-center d-flex">
+            <button class="btn delete-psp" type="button" style="font-size:18px;color: red">
+                <i class="far fa-trash-alt"></i>
+            </button>
+        </div>
+    </div>`;
             $('#psps_div').append(html);
         });
         $(document).on('click', '.delete-psp', function () {
-            $(this).parent().remove();
+            $(this).parent().parent().remove();
         });
 
         $('#add_violation').click(function () {
             let html =
-                `<div class="border">
-                         <select class="" name="type_violations[]" id="type_psp_select">`
-                    @foreach($typeViolations as $typeViolation)
-                + `<option value="{{ $typeViolation->id }}">{{ $typeViolation->name }}</option>`
-                    @endforeach
+                `
+    <div class="row card-body-admin my-2 mx-1 bg-form"  style="padding:0.7px 0">
+        <div class="col-lg-4 justify-content-center d-flex align-items-center">
+                <select class="form-control-sm " name="type_violations[]" id="type_psp_select">`
+                @foreach($typeViolations as $typeViolation)
+                + `
+                        <option value="{{ $typeViolation->id }}">{{ $typeViolation->name }}</option>`
+                @endforeach
                 + `</select>
-                <textarea name="descs[]" cols="40" rows="1"></textarea>
-                <button class="btn delete-violation" type="button" style="color: red">
-                    <i class="far fa-trash-alt"></i>
-                </button>
-            </div>`;
+        </div>
+        <div class="col-lg-7">
+            <div style="padding-top: 6px">
+                <textarea class="" name="descs[]" cols="40" rows="1" style="padding: 2.25px 0;"></textarea>
+            </div>
+        </div>
+        <div class="col-lg-1 justify-content-center d-flex">
+            <button class="btn delete-violation" type="button" style="font-size:18px;color: red">
+                <i class="far fa-trash-alt"></i>
+            </button>
+        </div>
+    </div>`;
             $('#violations_div').append(html);
         });
         $(document).on('click', '.delete-violation', function () {
-            $(this).parent().remove();
+            $(this).parent().parent().remove();
         })
     </script>
 
