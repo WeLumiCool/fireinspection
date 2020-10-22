@@ -7,21 +7,22 @@
                 <form action="{{ route('admin.checks.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row justify-content-center">
-                        <p class="font-weight-bold h2">Добавление проверки</p>
+                        <p class="font-weight-bold h2">Изменение проверки</p>
                     </div>
                     <div class="form-group">
                         <label class="font-weight-bold h5" for="type_check-select">Тип проверки:</label>
                         <select class="form-control" name="type_id" id="type_check-select">
                             @foreach($typeChecks as $typeCheck)
-                                <option value="{{ $typeCheck->id }}">{{ $typeCheck->name }}</option>
+                                <option value="{{ $typeCheck->id }}" {{ $typeCheck->id==$check->type_id?'selected':''}}>{{ $typeCheck->name }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="row ">
+                    <div class="row">
                         <div class="col-lg-4 col-12 ">
                             <div class="form-group d-flex">
                                 <div class="button r mr-3" id="button-1">
-                                    <input id="aups_check" type="checkbox" class="checkbox" name="has_aups">
+                                    <input id="aups_check" type="checkbox" class="checkbox"
+                                           name="has_aups" {{ $check->has_aups?'checked':'' }}>
                                     <div class="knobs"></div>
                                     <div class="layer"></div>
                                 </div>
@@ -31,7 +32,8 @@
                         <div class="col-lg-4 col-12 ">
                             <div class="form-group d-flex">
                                 <div class="button r mr-3" id="button-1">
-                                    <input id="aupt_check" type="checkbox" class="checkbox" name="has_aupt">
+                                    <input id="aupt_check" type="checkbox" class="checkbox"
+                                           name="has_aupt" {{ $check->has_aupt?'checked':'' }}>
                                     <div class="knobs"></div>
                                     <div class="layer"></div>
                                 </div>
@@ -41,7 +43,8 @@
                         <div class="col-lg-4 col-12">
                             <div class="form-group d-flex">
                                 <div class="button r mr-3" id="button-1">
-                                    <input id="has_cranes_check" type="checkbox" class="checkbox" name="has_cranes">
+                                    <input id="has_cranes_check" type="checkbox" class="checkbox"
+                                           name="has_cranes" {{ $check->has_cranes?'checked':'' }}>
                                     <div class="knobs"></div>
                                     <div class="layer"></div>
                                 </div>
@@ -51,7 +54,8 @@
                         <div class="col-lg-4 col-12">
                             <div class="form-group d-flex">
                                 <div class="button r mr-3" id="button-1">
-                                    <input id="has_evacuation_check" type="checkbox" class="checkbox" name="has_evacuation">
+                                    <input id="has_evacuation_check" type="checkbox" class="checkbox"
+                                           name="has_evacuation" {{ $check->has_evacuation?'checked':'' }}>
                                     <div class="knobs"></div>
                                     <div class="layer"></div>
                                 </div>
@@ -62,7 +66,8 @@
                         <div class="col-lg-4 col-12">
                             <div class="form-group d-flex">
                                 <div class="button r mr-3" id="button-1">
-                                    <input id="has_hydrant_check" type="checkbox" class="checkbox" name="has_hydrant">
+                                    <input id="has_hydrant_check" type="checkbox" class="checkbox"
+                                           name="has_hydrant" {{ $check->has_hydrant?'checked':'' }}>
                                     <div class="knobs"></div>
                                     <div class="layer"></div>
                                 </div>
@@ -72,7 +77,8 @@
                         <div class="col-lg-4 col-12">
                             <div class="form-group d-flex">
                                 <div class="button r mr-3" id="button-1">
-                                    <input id="has_reservoir_check" type="checkbox" class="checkbox" name="has_reservoir">
+                                    <input id="has_reservoir_check" type="checkbox" class="checkbox"
+                                           name="has_reservoir" {{ $check->has_reservoir?'checked':'' }}>
                                     <div class="knobs"></div>
                                     <div class="layer"></div>
                                 </div>
@@ -82,7 +88,8 @@
                         <div class="col-lg-5 col-12">
                             <div class="form-group d-flex">
                                 <div class="button r mr-3" id="button-1">
-                                    <input id="has_foam_check" type="checkbox" class="checkbox" name="has_foam">
+                                    <input id="has_foam_check" type="checkbox" class="checkbox"
+                                           name="has_foam" {{ $check->has_foam?'checked':'' }}>
                                     <div class="knobs"></div>
                                     <div class="layer"></div>
                                 </div>
@@ -113,7 +120,7 @@
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
-                    <input type="hidden" name="build_id" value="{{ $id }}">
+                    <input type="hidden" name="build_id" value="{{ $check->build_id }}">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <button type="submit" title="{{ __('Добавить') }}"
                             class="btn n btn-success">{{ __('Добавить') }}</button>
