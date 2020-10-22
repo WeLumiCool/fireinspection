@@ -10,6 +10,7 @@ class Build extends Model
         [
             'name',
             'address',
+            'type_id',
             'latitude',
             'longitude',
             'district',
@@ -23,5 +24,10 @@ class Build extends Model
     public function type()
     {
         return $this->belongsTo(TypeBuild::class, 'type_id');
+    }
+
+    public function histories()
+    {
+        return $this->hasMany(History::class);
     }
 }

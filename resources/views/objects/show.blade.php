@@ -41,7 +41,6 @@
                         <span class="h2-lg h4">Проверка</span>
                     </div>
                     <div class="col-6 col-lg-2 text-right text-lg-left">
-
                         @if($agent->isMobile())
                             <a href="{{ route('create') }}" class="btn">
                                 <i class="fas fa-plus-circle text-success" style="font-size: 20px"></i>
