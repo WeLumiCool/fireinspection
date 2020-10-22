@@ -60,7 +60,7 @@
                                 <i class="fas fa-plus-circle text-success" style="font-size: 20px"></i>
                             </a>
                         @elseif($agent->isDesktop())
-                            <a href="{{ route('admin.checks.create', $build->id) }}" class="btn-green-stage d-flex" style="padding: 10px 6px;">
+                            <a href="{{ route('inspector.create', $build->id) }}" class="btn-green-stage d-flex" style="padding: 10px 6px;">
                                 Добавить проверку
                             </a>
                         @endif
@@ -191,7 +191,7 @@
                                                                    href="{{ asset('storage/' .  $image) }}"
                                                                    data-fancybox="media-img-{{ $check->id }}">
                                                                     <img src="{{ asset('storage/' .  $image) }}"
-                                                                         class="" alt="" height="200"/>
+                                                                         class="" alt="" width="200"/>
                                                                 </a>
                                                             </div>
                                                         @endforeach
