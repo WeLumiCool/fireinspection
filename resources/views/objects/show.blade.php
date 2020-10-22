@@ -47,8 +47,8 @@
                                 <i class="fas fa-plus-circle text-success" style="font-size: 20px"></i>
                             </a>
                         @elseif($agent->isDesktop())
-                            <a href="{{ route('create') }}" class="btn btn-success py-3 ">
-                                Добавить проверку
+                            <a class="btn-green-stage " style="padding: 11px 19px;margin-top: 15px;">
+                                Добавить этап
                             </a>
                         @endif
                     </div>
