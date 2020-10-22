@@ -57,6 +57,10 @@ class BuildController extends Controller
         return view('admin.builds.show', compact('build'));
     }
 
+
+    public function insp_show(Build $build) {
+        return view('objects.show', compact('build'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -110,6 +114,13 @@ class BuildController extends Controller
                 $type = TypeBuild::find($build->type_id);
                 return $type['name'];
             })
+            ->make(true);
+    }
+
+    public function welcomedatatableData()
+    {
+        return DataTables::of(Build::query())
+
             ->make(true);
     }
 }

@@ -18,7 +18,10 @@ Route::get('/', function () {
 })->name('welcome');
 Route::get('/show', function () {
     return view('objects.show');
+
 })->name('show');
+//Route::get('/show/{build}', 'BuildController@insp_show')->name('build.show');
+
 
 Route::prefix('admin')->name('admin.')/*->middleware('admin')*/
 ->group(function () {
@@ -59,6 +62,10 @@ Route::get('/create', function () {
 Route::get('/maps', function () {
     return view('objects.maps');
 })->name('maps');
+
+Route::get('/builds2/datatable', 'BuildController@welcomedatatableData')->name('build2.datatable.data');
+
+
 //Route::middleware('auth')->group(function () {
 //    Route::get('/', function () {
 //        return view('welcome', ['types' => \App\Type::all()]);

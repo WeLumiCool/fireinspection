@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Check;
 use App\Services\ImageUploader;
+use App\Services\SetHistory;
 use App\TypeCheck;
 use App\TypePsp;
 use App\TypeViolation;
@@ -79,6 +80,7 @@ class CheckController extends Controller
             }
             $check->psp_count = json_encode($pspArray);
         }
+        SetHistory::save('Добавил', $check->build->id, $check->id);
         $check->save();
 
         //save violations by check
@@ -91,6 +93,7 @@ class CheckController extends Controller
                 $violation->save();
             }
         }
+
         return redirect()->route('admin.builds.show', $check->build_id);
     }
 
@@ -162,6 +165,7 @@ class CheckController extends Controller
         } else {
             $check->psp_count = null;
         }
+        SetHistory::save('Обновил', $check->build->id, $check->id);
         $check->save();
 
         //save violations by check
