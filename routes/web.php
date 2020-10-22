@@ -20,7 +20,6 @@ Route::get('/show', function () {
     return view('objects.show');
 
 })->name('show');
-//Route::get('/show/{build}', 'BuildController@insp_show')->name('build.show');
 
 
 Route::prefix('admin')->name('admin.')/*->middleware('admin')*/
@@ -64,6 +63,7 @@ Route::get('/maps', function () {
 })->name('maps');
 
 Route::get('/builds2/datatable', 'BuildController@welcomedatatableData')->name('build2.datatable.data');
+Route::get('/show/{build}', 'BuildController@insp_show')->name('build.show');
 
 
 //Route::middleware('auth')->group(function () {
