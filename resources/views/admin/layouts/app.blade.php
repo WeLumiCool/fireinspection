@@ -27,29 +27,29 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class=" ml-auto navbar-nav nav-flex-icons">
-                        @if(Auth::user()->role->name=='Начальник')
-                            <li class="nav-item">
-                                <button onclick="share_permission(this);"
-                                        class="nav-link btn btn-primary text-light">
-                                    {{ $zam->is_admin?'Убрать доступ':'Дать доступ' }}
-                                </button>
-                            </li>
-                        @endif
-                        @if(Auth::check())
-                            <li class="nav-item">
-                                <a class="nav-link waves-effect"
-                                   target="_blank" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault(); document.getElementById('logout-form-auth').submit();"
-                                ><i class="fas fa-sign-out-alt "></i>
-                                    {{ __('Выйти') }}
-                                </a>
+{{--                        @if(Auth::user()->role->name=='Начальник')--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <button onclick="share_permission(this);"--}}
+{{--                                        class="nav-link btn btn-primary text-light">--}}
+{{--                                    {{ $zam->is_admin?'Убрать доступ':'Дать доступ' }}--}}
+{{--                                </button>--}}
+{{--                            </li>--}}
+{{--                        @endif--}}
+{{--                        @if(Auth::check())--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a class="nav-link waves-effect"--}}
+{{--                                   target="_blank" href="{{ route('logout') }}"--}}
+{{--                                   onclick="event.preventDefault(); document.getElementById('logout-form-auth').submit();"--}}
+{{--                                ><i class="fas fa-sign-out-alt "></i>--}}
+{{--                                    {{ __('Выйти') }}--}}
+{{--                                </a>--}}
 
-                                <form id="logout-form-auth" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
-                        @endif
+{{--                                <form id="logout-form-auth" action="{{ route('logout') }}" method="POST"--}}
+{{--                                      style="display: none;">--}}
+{{--                                    {{ csrf_field() }}--}}
+{{--                                </form>--}}
+{{--                            </li>--}}
+{{--                        @endif--}}
                     </ul>
                 </div>
             </div>
