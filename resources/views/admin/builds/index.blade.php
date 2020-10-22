@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <table class="table table-striped table-hover" id="builds-table">
-                    <thead class="bg-primary text-light">
+                    <thead class="bg-red-table text-dark">
                     <tr>
                         <th scope="col">Наименование</th>
                         <th scope="col">Адрес</th>

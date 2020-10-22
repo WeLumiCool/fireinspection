@@ -229,3 +229,10 @@ a.waves-effect, a.waves-light {
     border:  1px solid #0069d9 !important;
     background-color: #0069d9 !important;
 }
+.list-group-item.active {
+    background-color: #B63A22!important;
+    border-color: #B63A22!important;
+}
+.bg-red-table{
+    background: #F4CCC5!important;
+}
