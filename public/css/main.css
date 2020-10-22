@@ -97,4 +97,11 @@
 }
 .mark{
     color: blue!important;
+.btn-green-stage {
+    outline: none;
+    border: 0;
+    padding: 10px 15px;
+    color: white!important;
+    background: #3AA93F;
+    border-radius: 10px;
 }
