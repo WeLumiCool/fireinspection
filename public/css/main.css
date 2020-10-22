@@ -106,3 +106,7 @@
     background: #3AA93F;
     border-radius: 10px;
 }
+
+a {
+    text-decoration: none;
+}

@@ -271,4 +271,8 @@ a.waves-effect, a.waves-light {
     color: white!important;
     background: #3AA93F;
     border-radius: 10px;
+
+}
+a {
+    text-decoration: none;
 }
