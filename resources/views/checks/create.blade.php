@@ -1,10 +1,10 @@
-@extends('admin.layouts.dashboard')
+@extends('layouts.app')
 
-@section('dashboard_content')
+@section('content')
     <div class="p-3 bg-form card-body-admin">
         <div class="row">
             <div class="col-12 col-sm-10 col-lg-12 col-md-10">
-                <form action="{{ route('admin.checks.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('inspector.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row justify-content-center">
                         <p class="font-weight-bold h2">Добавление проверки</p>

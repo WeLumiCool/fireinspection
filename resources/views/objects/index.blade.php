@@ -34,7 +34,6 @@
                             <th scope="col">Наименование</th>
                             <th scope="col">Адрес</th>
                             <th scope="col">Район</th>
-                            <th scope="col">Примечание</th>
                         </tr>
 
                         </thead>
@@ -57,21 +56,19 @@
 
 @push('scripts')
     <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-    {{--    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>--}}
+            <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script>
-        $(document).ready(function () {
+
             let table;
             if (window.innerWidth < 768) {
                 table = $('#builds-table').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: '',
+                    ajax: '{!! route('build2.datatable.data') !!}',
                     columns: [
                         {data: 'name', name: 'name'},
                         {data: 'address', name: 'address'},
-                        {data: 'type_id', name: 'type_id'},
-                        {data: 'area', name: 'area'},
-                        {data: 'legality', name: 'legality'},
+                        {data: 'district', name: 'district'},
                     ],
                     columnDefs: [
                         {
@@ -96,13 +93,11 @@
                 table = $('#builds-table').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: '',
+                    ajax: '{!! route('build2.datatable.data') !!}',
                     columns: [
                         {data: 'name', name: 'name'},
                         {data: 'address', name: 'address'},
-                        {data: 'type_id', name: 'type_id'},
-                        {data: 'area', name: 'area'},
-                        {data: 'legality', name: 'legality'},
+                        {data: 'district', name: 'district'},
                     ],
                     "language": {
                         "url": "//cdn.datatables.net/plug-ins/1.10.18/i18n/Russian.json"
@@ -121,9 +116,31 @@
                 let data = table.row(this).data();
                 window.location.href = window.location.origin + '/show/' + data.id;
             });
-        });
     </script>
-    <script>
+{{--    <script>--}}
 
-    </script>
+{{--            $('#builds-table').DataTable({--}}
+{{--                processing: true,--}}
+{{--                serverSide: true,--}}
+{{--                ajax: '{!! route('build2.datatable.data') !!}',--}}
+{{--                columns: [--}}
+{{--                    {data: 'name', name: 'name'},--}}
+{{--                    {data: 'address', name: 'address'},--}}
+{{--                    {data: 'district', name: 'district'},--}}
+{{--                ],--}}
+{{--                "language": {--}}
+{{--                    "url": "//cdn.datatables.net/plug-ins/1.10.18/i18n/Russian.json"--}}
+{{--                },--}}
+{{--            });--}}
+{{--            // $('.filter-select').change(function () {--}}
+{{--            //     console.log($(this).data('column'));--}}
+{{--            //     table.column($(this).data('column'))--}}
+{{--            //         .search($(this).val())--}}
+{{--            //         .draw();--}}
+{{--            // })--}}
+{{--            $('#builds-table tbody').on('click', 'tr', function () {--}}
+{{--                let data = table.row(this).data();--}}
+{{--                window.location.href = window.location.origin + '/show/' + data.id;--}}
+{{--            });--}}
+{{--    </script>--}}
 @endpush

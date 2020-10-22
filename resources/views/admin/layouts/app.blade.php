@@ -30,7 +30,7 @@
                         @if(Auth::user()->role->name=='Начальник')
                             <li class="nav-item">
                                 <button onclick="share_permission(this);"
-                                        class="nav-link btn btn-primary text-light">
+                                        class="nav-link btn text-light" style="background: #B63A22">
                                     {{ $zam->is_admin?'Убрать доступ':'Дать доступ' }}
                                 </button>
                             </li>

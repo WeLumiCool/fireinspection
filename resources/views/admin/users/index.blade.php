@@ -11,7 +11,7 @@
                 </div>
 
                 <table class="table table-striped  table-hover" id="users-table">
-                    <thead class="bg-primary text-light">
+                    <thead class="bg-red-table text-dark">
                     <tr>
                         <th scope="col">id</th>
                         <th scope="col">ФИО</th>

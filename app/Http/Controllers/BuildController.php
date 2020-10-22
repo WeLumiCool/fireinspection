@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Build;
+use App\Services\SetHistory;
+use App\Type;
 use App\TypeBuild;
+use Hamcrest\Core\Set;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -26,7 +29,7 @@ class BuildController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.builds.create', ['types' => TypeBuild::all()]);
     }
 
     /**
@@ -37,7 +40,10 @@ class BuildController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $build = Build::create($request->all());
+        SetHistory::save('Добавил', $build->id, null);
+
+        return redirect()->route('admin.builds.index');
     }
 
     /**
@@ -51,6 +57,11 @@ class BuildController extends Controller
         return view('admin.builds.show', compact('build'));
     }
 
+
+    public function insp_show($id) {
+        $build = Build::find($id);
+        return view('objects.show', compact('build'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -59,7 +70,7 @@ class BuildController extends Controller
      */
     public function edit(Build $build)
     {
-        //
+        return view('admin.builds.edit', ['build' => $build, 'types' => TypeBuild::all()]);
     }
 
     /**
@@ -71,7 +82,10 @@ class BuildController extends Controller
      */
     public function update(Request $request, Build $build)
     {
-        //
+        $build->update($request->all());
+        SetHistory::save('Обновил', $build->id, null);
+        $build->save();
+        return redirect()->route('admin.builds.index');
     }
 
     /**
@@ -82,7 +96,8 @@ class BuildController extends Controller
      */
     public function destroy(Build $build)
     {
-        //
+        $build->delete();
+        return redirect()->route('admin.builds.index');
     }
 
     /**
@@ -100,6 +115,13 @@ class BuildController extends Controller
                 $type = TypeBuild::find($build->type_id);
                 return $type['name'];
             })
+            ->make(true);
+    }
+
+    public function welcomedatatableData()
+    {
+        return DataTables::of(Build::query())
+
             ->make(true);
     }
 }
