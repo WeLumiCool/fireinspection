@@ -18,8 +18,10 @@ Route::get('/', function () {
 })->name('welcome');
 Route::get('/show', function () {
     return view('objects.show');
-
 })->name('show');
+Route::get('/history', function () {
+    return view('admin.histories.index');
+})->name('history');
 
 
 Route::prefix('admin')->name('admin.')/*->middleware('admin')*/
