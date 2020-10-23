@@ -13,15 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
-Route::get('/show', function () {
-    return view('objects.show');
-})->name('show');
-Route::get('/history', function () {
-    return view('admin.histories.index');
-})->name('history');
 
 
 Route::prefix('admin')->name('admin.')/*->middleware('admin')*/
@@ -54,22 +45,30 @@ Route::prefix('admin')->name('admin.')/*->middleware('admin')*/
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/create', function () {
-    return view('objects.create');
-})->name('create');
-
-Route::get('/maps', 'BuildController@map')->name('maps');
-
-Route::get('/check/create/{id}', 'CheckController@inspector_create')->name('inspector.create');
-Route::post('/check', 'CheckController@inspector_store')->name('inspector.store');
-
-Route::get('/builds2/datatable', 'BuildController@welcomedatatableData')->name('build2.datatable.data');
-Route::get('/show/{build}', 'BuildController@insp_show')->name('build.show');
 
 
-//Route::middleware('auth')->group(function () {
-//    Route::get('/', function () {
-//        return view('welcome', ['types' => \App\Type::all()]);
-//    })->name('main');
-//});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return view('welcome');
+    })->name('welcome');
+    Route::get('/show', function () {
+        return view('objects.show');
+    })->name('show');
+    Route::get('/history', function () {
+        return view('admin.histories.index');
+    })->name('history');
+
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/create', function () {
+        return view('objects.create');
+    })->name('create');
+
+    Route::get('/maps', 'BuildController@map')->name('maps');
+
+    Route::get('/check/create/{id}', 'CheckController@inspector_create')->name('inspector.create');
+    Route::post('/check', 'CheckController@inspector_store')->name('inspector.store');
+
+    Route::get('/builds2/datatable', 'BuildController@welcomedatatableData')->name('build2.datatable.data');
+    Route::get('/show/{build}', 'BuildController@insp_show')->name('build.show');
+});

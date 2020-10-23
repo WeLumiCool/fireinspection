@@ -18,18 +18,24 @@
                     <a href="{{ route('maps') }}" class="btn btn-map font-small text-decoration-none">Карта объектов
                     </a>
                 </li>
-                <li class="nav-item pt-2 text-center">
-                    <a href="{{ route('admin.admin') }}" class="btn btn-admin font-small text-decoration-none">Админ панель</a>
-                </li>
-
-                <li class="nav-item pt-2 text-center">
-                    <a
-                        class="text-white btn  btn-exit  font-small">Выйти
-                    </a>
-                    <form id="logout-form-auth" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                    </form>
-                </li>
+                @if(Auth::user())
+                    @if(Auth::user()->role->is_admin)
+                        <li class="nav-item pt-2 text-center">
+                            <a href="{{ route('admin.admin') }}" class="btn btn-admin font-small text-decoration-none">Админ
+                                панель</a>
+                        </li>
+                    @endif
+                @endif
+                @if(Auth::user())
+                    <li class="nav-item pt-2 text-center">
+                        <a  onclick="document.getElementById('logout-form-auth').submit();"
+                            class="text-white btn btn-exit  font-small">Выйти
+                        </a>
+                        <form id="logout-form-auth" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>
