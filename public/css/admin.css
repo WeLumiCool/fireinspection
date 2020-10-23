@@ -314,9 +314,10 @@ a.waves-effect, a.waves-light {
     margin-top: -16px;
 }
 
-.md-accordion .card .card-header button:not(.collapsed) .rotate-icon {
+.md-accordion .card .card-header a:not(.collapsed) .rotate-icon {
     -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
+    transition-delay: 50ms;
 }
 
 .accordion .card:first-of-type {
