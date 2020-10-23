@@ -355,3 +355,6 @@ a {
 .bg-red-table {
     background: #F4CCC5 !important;
 }
+table.dataTable thead .sorting_asc, table.dataTable thead .sorting, table.dataTable thead .sorting_desc  {
+    background-image: none;
+}

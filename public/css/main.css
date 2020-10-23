@@ -109,7 +109,9 @@ body {
     background: #3AA93F;
     border-radius: 10px;
 }
-
+table.dataTable thead .sorting_asc, table.dataTable thead .sorting, table.dataTable thead .sorting_desc  {
+    background-image: none;
+}
 a {
     text-decoration: none;
 }
