@@ -51,15 +51,15 @@
     border-bottom: 0;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;">
-                            <div class="card-header d-flex justify-content-between border-0" style="background: white"
+                            <div class="card-header d-flex justify-content-between align-items-center border-0" style="background: white"
                                  role="tab" id="Stage-{{ $check->id }}">
-                                <a class="text-left" data-toggle="collapse" data-parent="#accordionStages"
+                                <a class="text-left w-100" data-toggle="collapse" data-parent="#accordionStages"
                                    href="#build-{{ $check->build_id }}Stage-{{ $check->id }}"
                                    aria-expanded="true"
                                    aria-controls="build-{{ $check->build_id }}Stage-{{ $check->id }}">
                                     <h6 class="mt-1 mb-0">
                                         <span>Дата проверка: <span>{{ $check->created_at }}</span></span>
-                                        <i class="fas fa-angle-down rotate-icon" style="margin-top: 2px;"></i>
+                                        <i class="fas fa-angle-down mr-3 rotate-icon" style="margin-top: 2px;"></i>
                                     </h6>
                                 </a>
                                 <div class="d-flex">
