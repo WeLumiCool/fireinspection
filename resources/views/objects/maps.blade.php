@@ -1,7 +1,55 @@
 @extends('layouts.app')
 @section('content')
-    <div class="section pt-5">
-        <div class="container">
+
+    <div class="section">
+        <div class="container bg-form">
+            <div class="row justify-content-center">
+                <div class="col-lg-2 mx-auto p-4 col-sm-12">
+                    <div class="form-check">
+                        <input class="form-check-input district-check" type="radio" name="exampleRadios" id="district1"
+                               data-district="Свердловский" value="option1">
+                        <label class="form-check-label" for="district1">
+                            Свердловский
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-2 mx-auto p-4 col-sm-12">
+                    <div class="form-check">
+                        <input class="form-check-input district-check" type="radio" name="exampleRadios" id="district2"
+                               data-district="Ленинский" value="option2">
+                        <label class="form-check-label" for="district2">
+                            Ленинский
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-2 mx-auto p-4 col-sm-12">
+                    <div class="form-check">
+                        <input class="form-check-input district-check" type="radio" name="exampleRadios" id="district3"
+                               data-district="Октябрьский" value="option1">
+                        <label class="form-check-label" for="district3">
+                            Октябрьский
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-2 mx-auto p-4 col-sm-12">
+                    <div class="form-check">
+                        <input class="form-check-input district-check" type="radio" name="exampleRadios" id="district4"
+                               data-district="Первомайский" value="option2">
+                        <label class="form-check-label" for="district4">
+                            Первомайский
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-2 mx-auto p-4 col-sm-12">
+                    <div class="form-check">
+                        <input class="form-check-input district-check" type="radio" name="exampleRadios" id="all"
+                               data-district="Все" value="option2">
+                        <label class="form-check-label" for="all">
+                            Все
+                        </label>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-12 pb-4">
                     <div id="map"></div>
@@ -10,45 +58,44 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @push('styles')
     <style>
         #map {
-            width: 1000px;
+            width: 100%;
             height: 500px;
             padding: 10px;
             margin-top: 50px;
         }
 
-        @media (max-width: 1075px) {
-            #map {
-                width: 600px;
-                height: 500px;
-            }
-        }
+        /*@media (max-width: 1075px) {*/
+        /*    #map {*/
+        /*        width: 600px;*/
+        /*        height: 500px;*/
+        /*    }*/
+        /*}*/
 
-        @media (max-width: 694px) {
-            #map {
-                width: 400px;
-                height: 500px;
-            }
-        }
+        /*@media (max-width: 694px) {*/
+        /*    #map {*/
+        /*        width: 400px;*/
+        /*        height: 500px;*/
+        /*    }*/
+        /*}*/
 
-        @media (max-width: 428px) {
-            #map {
-                width: 320px;
-                height: 500px;
-            }
-        }
+        /*@media (max-width: 428px) {*/
+        /*    #map {*/
+        /*        width: 320px;*/
+        /*        height: 500px;*/
+        /*    }*/
+        /*}*/
 
-        @media (max-width: 320px) {
-            #map {
-                width: 300px;
-                height: 400px;
-            }
-        }
+        /*@media (max-width: 320px) {*/
+        /*    #map {*/
+        /*        width: 300px;*/
+        /*        height: 400px;*/
+        /*    }*/
+        /*}*/
     </style>
 @endpush
 
@@ -91,13 +138,11 @@
                         return {
                             preset: 'islands#redDotIcon',
                         }
-                    }
-                    else if (category === "Строящийся") {
+                    } else if (category === "Строящийся") {
                         return {
                             preset: 'islands#darkGreenDotIcon',
                         }
-                    }
-                    else if (category === "Завершенный") {
+                    } else if (category === "Завершенный") {
                         return {
                             preset: 'islands#nightDotIcon',
                         }
@@ -109,18 +154,18 @@
             category = [];
             id = [];
 
-{{--            @foreach($builds as $build)--}}
-{{--            points.push([{{ $build->latitude }}, {{ $build->longitude }}]);--}}
-{{--            owner.push("{{ $build->name }}");--}}
-{{--            address.push("{{ $build->address }}");--}}
-{{--            category.push("{{ $build->category }}")--}}
-{{--            id.push("{{ $build->id }}")--}}
-{{--            @endforeach--}}
-{{--                geoObjects = [];--}}
-{{--            for (var i = 0, len = points.length; i < len; i++) {--}}
+            {{--            @foreach($builds as $build)--}}
+            {{--            points.push([{{ $build->latitude }}, {{ $build->longitude }}]);--}}
+            {{--            owner.push("{{ $build->name }}");--}}
+            {{--            address.push("{{ $build->address }}");--}}
+            {{--            category.push("{{ $build->category }}")--}}
+            {{--            id.push("{{ $build->id }}")--}}
+            {{--            @endforeach--}}
+            {{--                geoObjects = [];--}}
+            {{--            for (var i = 0, len = points.length; i < len; i++) {--}}
 
-{{--                geoObjects[i] = new ymaps.Placemark(points[i], getPointData(i, owner[i], address[i], id[i]), getPointOptions(category[i]));--}}
-{{--            }--}}
+            {{--                geoObjects[i] = new ymaps.Placemark(points[i], getPointData(i, owner[i], address[i], id[i]), getPointOptions(category[i]));--}}
+            {{--            }--}}
 
             clusterer.add(geoObjects)
             myMap.geoObjects.add(clusterer);
