@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Build;
+use App\Check;
 use App\Services\SetHistory;
 use App\Type;
 use App\TypeBuild;
+use App\Violation;
 use Hamcrest\Core\Set;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -123,5 +125,9 @@ class BuildController extends Controller
         return DataTables::of(Build::query())
 
             ->make(true);
+    }
+    public function map()
+    {
+        return view('objects.maps', ['builds' => Build::all(), 'checks' => Check::all()]);
     }
 }

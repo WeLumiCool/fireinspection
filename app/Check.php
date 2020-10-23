@@ -18,6 +18,7 @@ class Check extends Model
             'user_id',
             'build_id',
             'type_id',
+            'legality'
         ];
 
     public function build()

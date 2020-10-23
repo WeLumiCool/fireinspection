@@ -59,12 +59,10 @@ Route::get('/create', function () {
     return view('objects.create');
 })->name('create');
 
-Route::get('/maps', function () {
-    return view('objects.maps');
-})->name('maps');
+Route::get('/maps', 'BuildController@map')->name('maps');
 
 Route::get('/check/create/{id}', 'CheckController@inspector_create')->name('inspector.create');
-Route::post('/checks', 'CheckController@inspector_store')->name('inspector.store');
+Route::post('/check', 'CheckController@inspector_store')->name('inspector.store');
 
 Route::get('/builds2/datatable', 'BuildController@welcomedatatableData')->name('build2.datatable.data');
 Route::get('/show/{build}', 'BuildController@insp_show')->name('build.show');
