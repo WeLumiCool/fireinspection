@@ -105,6 +105,7 @@
     <script src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
 
     <script>
+
         ymaps.ready(function () {
             var myMap = new ymaps.Map('map', {
                     center: [42.865388923088396, 74.60104350048829],
@@ -114,7 +115,10 @@
                 }),
                 clusterer = new ymaps.Clusterer({
                     preset: 'islands#redIcon',
+                    clusterIconLayout: "default#pieChart"
+
                 }),
+
                 getPointData = function (index, name, address, id) {
                     return {
                         balloonContentHeader: name,
@@ -131,20 +135,21 @@
                         ].join('')
                     };
                 },
-                getPointOptions = function (category) {
 
-                    if (category === "Незаконный") {
+                getPointOptions = function (legality) {
+
+                    if (legality === "1") {
 
                         return {
                             preset: 'islands#redDotIcon',
                         }
-                    } else if (category === "Строящийся") {
+                    } else if (legality === "0") {
                         return {
                             preset: 'islands#darkGreenDotIcon',
                         }
-                    } else if (category === "Завершенный") {
+                    }else if (legality === "2") {
                         return {
-                            preset: 'islands#nightDotIcon',
+                            preset: 'islands#violetDotIcon',
                         }
                     }
                 },
@@ -153,23 +158,34 @@
             address = [];
             category = [];
             id = [];
+            legality = [];
 
-            {{--            @foreach($builds as $build)--}}
-            {{--            points.push([{{ $build->latitude }}, {{ $build->longitude }}]);--}}
-            {{--            owner.push("{{ $build->name }}");--}}
-            {{--            address.push("{{ $build->address }}");--}}
-            {{--            category.push("{{ $build->category }}")--}}
-            {{--            id.push("{{ $build->id }}")--}}
-            {{--            @endforeach--}}
-            {{--                geoObjects = [];--}}
-            {{--            for (var i = 0, len = points.length; i < len; i++) {--}}
+            @foreach($builds as $build)
 
-            {{--                geoObjects[i] = new ymaps.Placemark(points[i], getPointData(i, owner[i], address[i], id[i]), getPointOptions(category[i]));--}}
-            {{--            }--}}
+                points.push([{{ $build->latitude }}, {{ $build->longitude }}]);
+                owner.push("{{ $build->name }}");
+                address.push("{{ $build->address }}");
+                category.push("{{ $build->type->name }}");
+                id.push("{{ $build->id }}");
+            @if($build->checks->first())
+                legality.push("{{ $build->checks->first()->legality }}");
+            @else
+                legality.push('2');
+                @endif
+            @endforeach
+
+                geoObjects = [];
+            for (var i = 0, len = points.length; i < len; i++) {
+
+                geoObjects[i] = new ymaps.Placemark(points[i], getPointData(i, owner[i], address[i], id[i]), getPointOptions(legality[i]));
+            }
 
             clusterer.add(geoObjects)
             myMap.geoObjects.add(clusterer);
         });
+
+
+
 
     </script>
 @endpush

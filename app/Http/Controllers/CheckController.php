@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Build;
 use App\Check;
 use App\Services\ImageUploader;
 use App\Services\SetHistory;
@@ -36,7 +37,7 @@ class CheckController extends Controller
         $typePsps = TypePsp::all();
         $typeViolations = TypeViolation::all();
         $typeChecks = TypeCheck::all();
-        return view('checks.create',
+        return view('admin.checks.create',
             compact(
                 'id',
                 'typePsps',
@@ -102,7 +103,7 @@ class CheckController extends Controller
             $check->psp_count = json_encode($pspArray);
         }
         SetHistory::save('Добавил', $check->build->id, $check->id);
-        $check->save();
+
 
         //save violations by check
         if ($request->has('type_violations')) {
@@ -113,8 +114,31 @@ class CheckController extends Controller
                 $violation->check_id = $check->id;
                 $violation->save();
             }
+            $check->legality = '1';
         }
-
+        if (!$request->has('has_aups'))
+        {
+            $check->legality = "1";
+        }
+        if (!$request->has('has_aupt')){
+            $check->legality = "1";
+        }
+        if (!$request->has('has_hydrant')){
+            $check->legality = "1";
+        }
+        if (!$request->has('has_reservoir')){
+            $check->legality = "1";
+        }
+        if (!$request->has('has_cranes')){
+            $check->legality = "1";
+        }
+        if (!$request->has('has_evacuation')){
+            $check->legality = "1";
+        }
+        if (!$request->has('has_foam')){
+            $check->legality = "1";
+        }
+        $check->save();
         return redirect()->route('admin.builds.show', $check->build_id);
     }
     /**
@@ -208,6 +232,7 @@ class CheckController extends Controller
      */
     public function update(Request $request, Check $check)
     {
+
         $check->update($request->only('type_id', 'user_id', 'build_id'));
         $check->has_aups = $request->has('has_aups');
         $check->has_aupt = $request->has('has_aupt');
@@ -239,7 +264,6 @@ class CheckController extends Controller
             $check->psp_count = null;
         }
         SetHistory::save('Обновил', $check->build->id, $check->id);
-        $check->save();
 
         //save violations by check
         foreach ($check->violations as $violation) {
@@ -254,6 +278,29 @@ class CheckController extends Controller
                 $violation->save();
             }
         }
+        if ($request->has('has_aups'))
+        {
+            $check->legality = "0";
+        }
+        if ($request->has('has_aupt')){
+            $check->legality = "0";
+        }
+        if ($request->has('has_hydrant')){
+            $check->legality = "0";
+        }
+        if ($request->has('has_reservoir')){
+            $check->legality = "0";
+        }
+        if ($request->has('has_cranes')){
+            $check->legality = "0";
+        }
+        if ($request->has('has_evacuation')){
+            $check->legality = "0";
+        }
+        if ($request->has('has_foam')){
+            $check->legality = "0";
+        }
+        $check->save();
         return redirect()->route('admin.builds.show', $check->build_id);
     }
 
