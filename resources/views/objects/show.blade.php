@@ -12,28 +12,28 @@
             <div class="col-12 col-lg-5 py-4 ">
                 <div class="row">
                     <div class="col-6 mb-4">
-                        <span class="h3 pr-2">Имя объекта:</span>
+                        <span class="h5 font-weight-bold pr-2">Имя объекта:</span>
                     </div>
                     <div class="col-6">
                         <span> {{ $build->name }}</span>
                     </div>
 
                     <div class="col-6 mb-4">
-                        <span class="h3 pr-2">Адресс:</span>
+                        <span class="h5 font-weight-bold pr-2">Адресс:</span>
                     </div>
                     <div class="col-6">
                         <span> {{ $build->address }}</span>
                     </div>
 
                     <div class="col-6 mb-4">
-                        <span class="h3 pr-2">Район:</span>
+                        <span class="h5 font-weight-bold pr-2">Район:</span>
                     </div>
                     <div class="col-6">
                         <span> {{ $build->district }}</span>
                     </div>
 
                     <div class="col-6 mb-4">
-                        <span class="h3 pr-2">Тип объекта:</span>
+                        <span class="h5 font-weight-bold pr-2">Тип объекта:</span>
                     </div>
                     <div class="col-6">
                         <span> {{ $build->type->name }}</span>
@@ -96,7 +96,7 @@
                                  data-parent="#accordionStages">
                                 <div class="card-body p-0">
                                     <div class="table-ui  mb-3">
-                                        <div class="row pl-3">
+                                        <div class="row px-3">
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center">
                                                 <p class="h6 font-weight-bold ">АУПС:</p>
                                                 @if($check->has_aups)
@@ -168,15 +168,33 @@
                                                 @endif
                                             </div>
                                             @if(!is_null($check->psp_count))
-                                                <div class="col-12 text-left mb-3">
-                                                    <p class="h5 font-weight-bold"> Первичные средства
-                                                        пожаротущения:</p>
-                                                    @foreach(json_decode($check->psp_count) as $psp)
-                                                        <p class="text-muted m-0">
-                                                            <span class="text-dark font-weight-bold">{{ $psp->type }}:</span>
-                                                            {{ $psp->count }}
+                                                <div class="col-12 d-flex text-left mb-3">
+                                                    <div class="col-6 col-lg-3">
+                                                        <p class="h6 font-weight-bold"> Первичные средства
+                                                            пожаротущения:</p>
+                                                    </div>
+                                                    <div class="col-6 col-lg-3">
+                                                        <p class="h6 font-weight-bold">
+                                                            Колличество
                                                         </p>
-                                                    @endforeach
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-12 d-flex text-left mb-3">
+                                                    <div class="col-6 col-lg-3">
+                                                        @foreach(json_decode($check->psp_count) as $psp)
+                                                            <p class="text-muted m-0 border-bottom py-1">
+                                                                <span class="text-dark font-weight-bold">{{ $psp->type }}:</span>
+                                                            </p>
+                                                        @endforeach
+                                                    </div>
+                                                    <div class="col-6 col-lg-3">
+                                                        @foreach(json_decode($check->psp_count) as $psp)
+                                                            <p class="text-muted m-0 border-bottom py-1">
+                                                                {{ $psp->count }}
+                                                            </p>
+                                                        @endforeach
+                                                    </div>
                                                 </div>
                                             @endif
                                             @if(!is_null($check->images))
@@ -186,7 +204,7 @@
                                                     </p>
                                                     <div class="row">
                                                         @foreach(json_decode($check->images) as $image)
-                                                            <div class="col-2">
+                                                            <div class="col-12 col-md-4 col-lg-3 pb-3">
                                                                 <a class="grouped_elements" rel="group1"
                                                                    href="{{ asset('storage/' .  $image) }}"
                                                                    data-fancybox="media-img-{{ $check->id }}">
@@ -199,7 +217,7 @@
                                                 </div>
                                             @endif
                                             @if($check->violations->count())
-                                                <div class="col-12 text-left">
+                                                <div class="col-12 col-lg-6 text-left">
                                                     <p class="h5 font-weight-bold">Примечание:</p>
                                                     @foreach($check->violations as $violation)
                                                         <p class="alert alert-danger">

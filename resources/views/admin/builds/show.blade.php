@@ -9,21 +9,37 @@
             </div>
         </div>
         <div class="row px-5 pb-4 mb-4" style="border-radius: 10px">
-            <div class="col-5 py-4">
-                <p>
-                    <span class="h4 pr-2">Имя объекта:</span>{{ $build->name }}
-                </p>
+            <div class="col-12 col-lg-5 py-4 ">
+                <div class="row">
+                    <div class="col-6 mb-4">
+                        <h4 class="font-weight-bold pr-2">Имя объекта:</h4>
+                    </div>
+                    <div class="col-6">
+                        <span> {{ $build->name }}</span>
+                    </div>
 
-                <p>
-                    <span class="h4 pr-2">Адресс:</span>{{ $build->address }}
-                </p>
+                    <div class="col-6 mb-4">
+                        <h4 class="font-weight-bold pr-2">Адресс:</h4>
+                    </div>
+                    <div class="col-6">
+                        <span> {{ $build->address }}</span>
+                    </div>
 
-                <p>
-                    <span class="h4 pr-2">Район:</span>{{ $build->district }}
-                </p>
-                <p>
-                    <span class="h4 pr-2">Тип:</span>{{ $build->type->name }}
-                </p>
+                    <div class="col-6 mb-4">
+                        <h4 class="font-weight-bold pr-2">Район:</h4>
+                    </div>
+                    <div class="col-6">
+                        <span> {{ $build->district }}</span>
+                    </div>
+
+                    <div class="col-6 mb-4">
+                        <h4 class="font-weight-bold pr-2">Тип объекта:</h4>
+                    </div>
+                    <div class="col-6">
+                        <span> {{ $build->type->name }}</span>
+                    </div>
+
+                </div>
             </div>
             @if($build->latitude && $build->longitude)
                 <div class="col-7 mx-auto py-4">
@@ -51,15 +67,15 @@
     border-bottom: 0;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;">
-                            <div class="card-header d-flex justify-content-between border-0" style="background: white"
+                            <div class="card-header d-flex justify-content-between align-items-center border-0" style="background: white"
                                  role="tab" id="Stage-{{ $check->id }}">
-                                <a class="text-left" data-toggle="collapse" data-parent="#accordionStages"
+                                <a class="text-left w-100 collapsed" data-toggle="collapse" data-parent="#accordionStages"
                                    href="#build-{{ $check->build_id }}Stage-{{ $check->id }}"
                                    aria-expanded="true"
                                    aria-controls="build-{{ $check->build_id }}Stage-{{ $check->id }}">
                                     <h6 class="mt-1 mb-0">
                                         <span>Дата проверка: <span>{{ $check->created_at }}</span></span>
-                                        <i class="fas fa-angle-down rotate-icon" style="margin-top: 2px;"></i>
+                                        <i class="fas fa-angle-down mr-3 rotate-icon" style="margin-top: 2px;"></i>
                                     </h6>
                                 </a>
                                 <div class="d-flex">

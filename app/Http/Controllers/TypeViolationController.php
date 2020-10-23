@@ -37,7 +37,7 @@ class TypeViolationController extends Controller
     public function store(Request $request)
     {
         Typeviolation::create($request->all());
-        return redirect()->route('admin.types.index');
+        return redirect()->route('admin.typeViolations.index');
     }
 
     /**

@@ -314,9 +314,10 @@ a.waves-effect, a.waves-light {
     margin-top: -16px;
 }
 
-.md-accordion .card .card-header button:not(.collapsed) .rotate-icon {
+.md-accordion .card .card-header a:not(.collapsed) .rotate-icon {
     -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
+    transition-delay: 50ms;
 }
 
 .accordion .card:first-of-type {
@@ -340,6 +341,10 @@ a.waves-effect, a.waves-light {
     color: white !important;
     background: #3AA93F;
     border-radius: 10px;
+
+}
+a {
+    text-decoration: none;
 }
 
 .list-group-item.active {
@@ -349,4 +354,7 @@ a.waves-effect, a.waves-light {
 
 .bg-red-table {
     background: #F4CCC5 !important;
+}
+table.dataTable thead .sorting_asc, table.dataTable thead .sorting, table.dataTable thead .sorting_desc  {
+    background-image: none;
 }
