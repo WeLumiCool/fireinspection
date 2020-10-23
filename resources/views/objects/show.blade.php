@@ -12,28 +12,28 @@
             <div class="col-12 col-lg-5 py-4 ">
                 <div class="row">
                     <div class="col-6 mb-4">
-                        <span class="h3 pr-2">Имя объекта:</span>
+                        <span class="h5 font-weight-bold pr-2">Имя объекта:</span>
                     </div>
                     <div class="col-6">
                         <span> {{ $build->name }}</span>
                     </div>
 
                     <div class="col-6 mb-4">
-                        <span class="h3 pr-2">Адресс:</span>
+                        <span class="h5 font-weight-bold pr-2">Адресс:</span>
                     </div>
                     <div class="col-6">
                         <span> {{ $build->address }}</span>
                     </div>
 
                     <div class="col-6 mb-4">
-                        <span class="h3 pr-2">Район:</span>
+                        <span class="h5 font-weight-bold pr-2">Район:</span>
                     </div>
                     <div class="col-6">
                         <span> {{ $build->district }}</span>
                     </div>
 
                     <div class="col-6 mb-4">
-                        <span class="h3 pr-2">Тип объекта:</span>
+                        <span class="h5 font-weight-bold pr-2">Тип объекта:</span>
                     </div>
                     <div class="col-6">
                         <span> {{ $build->type->name }}</span>

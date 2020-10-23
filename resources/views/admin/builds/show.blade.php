@@ -11,18 +11,18 @@
         <div class="row px-5 pb-4 mb-4" style="border-radius: 10px">
             <div class="col-5 py-4">
                 <p>
-                    <span class="h4 pr-2">Имя объекта:</span>{{ $build->name }}
+                    <span class="h5 font-weight-bold pr-2">Имя объекта:</span>{{ $build->name }}
                 </p>
 
                 <p>
-                    <span class="h4 pr-2">Адресс:</span>{{ $build->address }}
+                    <span class="h5 font-weight-bold pr-2">Адресс:</span>{{ $build->address }}
                 </p>
 
                 <p>
-                    <span class="h4 pr-2">Район:</span>{{ $build->district }}
+                    <span class="h5 font-weight-bold pr-2">Район:</span>{{ $build->district }}
                 </p>
                 <p>
-                    <span class="h4 pr-2">Тип:</span>{{ $build->type->name }}
+                    <span class="h5 font-weight-bold pr-2">Тип:</span>{{ $build->type->name }}
                 </p>
             </div>
             @if($build->latitude && $build->longitude)
