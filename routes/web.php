@@ -61,6 +61,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/create', 'BuildController@insp_create')->name('create');
+    Route::post('isp_store/build', 'BuildController@isp_store')->name('isp.store.build');
 
     Route::get('/maps', 'BuildController@map')->name('maps');
 

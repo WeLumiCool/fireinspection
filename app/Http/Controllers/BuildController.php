@@ -38,6 +38,14 @@ class BuildController extends Controller
 
     }
 
+
+    public function isp_store(Request $request)
+    {
+        $build = Build::create($request->all());
+        SetHistory::save('Добавил', $build->id, null);
+
+        return redirect()->route('welcome');
+    }
     /**
      * Store a newly created resource in storage.
      *
