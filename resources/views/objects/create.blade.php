@@ -4,25 +4,29 @@
         <div class="container ">
             <div class="row">
                 <div class="col-12 bg-form card-body-admin p-lg-5">
-                    <form action="" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.builds.store') }}" method="POST">
                         @csrf
                         <div class="row justify-content-center">
-                            <p class="font-weight-bold h2">Добавление объекта</p>
+                            <p class="font-weight-bold h2">Добавления объекта</p>
                         </div>
                         <div class="form-group">
-                            <label for="name_field">Наименование:<span class="text-danger">*</span></label>
+                            <label for="name_field">Наименование объекта: <span class="text-danger">*</span></label>
                             <input id="name_field" type="text" class="form-control" name="name" required>
                         </div>
                         <div class="form-group">
-                            <label for="district">Район:<span class="text-danger">*</span></label>
-                            <input id="district" type="text" class="form-control" name="district" required>
+                            <label for="role-select">Район:</label>
+                            <select name="district" id="role-select" class="form-control">
+                                @foreach(['Первомайский', 'Свердловский', 'Ленинский', 'Октябрьский'] as $district)
+                                    <option value="{{ $district }}">{{ $district }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="type_of_object">Тип объекта:</label>
                             <select class="form-control" id="type_of_object" name="type_id">
-                                    <option value="1">sdfsdf</option>
-                                    <option value="2">234sdf</option>
-                                    <option value="3">fgtyh</option>
+                                @foreach($types as $type)
+                                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
@@ -43,10 +47,8 @@
                                 <div id="map" style="width: 100%; height: 400px;"></div>
                             </div>
                         </div>
-
                         <button type="submit" title="{{ __('Добавить') }}"
                                 class="btn n btn-success">{{ __('Добавить') }}</button>
-
                     </form>
                 </div>
             </div>
