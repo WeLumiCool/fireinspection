@@ -60,9 +60,7 @@ Route::middleware('auth')->group(function () {
     })->name('history');
 
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/create', function () {
-        return view('objects.create');
-    })->name('create');
+    Route::get('/create', 'BuildController@insp_create')->name('create');
 
     Route::get('/maps', 'BuildController@map')->name('maps');
 

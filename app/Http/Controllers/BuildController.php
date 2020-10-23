@@ -33,6 +33,10 @@ class BuildController extends Controller
     {
         return view('admin.builds.create', ['types' => TypeBuild::all()]);
     }
+    public function insp_create() {
+        return view('objects.create', ['types' => TypeBuild::all()]);
+
+    }
 
     /**
      * Store a newly created resource in storage.
