@@ -115,3 +115,13 @@ table.dataTable thead .sorting_asc, table.dataTable thead .sorting, table.dataTa
 a {
     text-decoration: none;
 }
+
+.page-item.active .page-link {
+    background-color: #B63A22!important;
+    border-color: #B63A22!important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+    border: none!important;
+    background-color: #fff!important;
+    background: linear-gradient(to bottom, #ffffff 0%, #ffffff 100%);
+}
