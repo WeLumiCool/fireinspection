@@ -14,7 +14,7 @@
 
         <a href="{{ route('admin.users.index') }}"
            class="list-group-item list-group-item-action waves-effect {{ request()->is('admin/user*') ? 'active' : '' }}">
-            <i class="fas fa-users mr-3"></i>{{ __('Пользовтели') }}</a>
+            <i class="fas fa-users mr-3"></i>{{ __('Пользователи') }}</a>
 
         <a href="{{ route('admin.typeViolations.index') }}"
            class="list-group-item list-group-item-action waves-effect {{ request()->is('admin/typeViolation*') ? 'active' : '' }}">
