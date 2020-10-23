@@ -4,7 +4,7 @@
         <div class="container ">
             <div class="row">
                 <div class="col-12 bg-form card-body-admin p-lg-5">
-                    <form action="{{ route('admin.builds.store') }}" method="POST">
+                    <form action="{{ route('isp.store.build') }}" method="POST">
                         @csrf
                         <div class="row justify-content-center">
                             <p class="font-weight-bold h2">Добавления объекта</p>

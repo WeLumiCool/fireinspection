@@ -7,12 +7,13 @@
     <title>{{ config('app.name', 'Админка') }}</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     @stack('styles')
-    <script src="https://api-maps.yandex.ru/2.1/?apikey={{ env('YANDEX_MAPS_API_KEY') }}&lang=ru_RU" type="text/javascript"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey={{ env('YANDEX_MAPS_API_KEY') }}&lang=ru_RU"
+            type="text/javascript"></script>
 </head>
 <body style="background: #eeeeee">
 <div id="app">
@@ -27,6 +28,12 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class=" ml-auto navbar-nav nav-flex-icons">
+                        @if(Auth::user()->role->name == 'Начальник' or Auth::user()->role->name == 'Заместитель')
+                            <form action="http://inspection/api/login" method="POST">
+                                <input type="hidden" name="auth_hash" value="{{ hash('sha256', Auth::user()->email) }}">
+                                <button class="nav-link btn text-light mr-3" style="background: #B63A22" type="submit">ГСН</button>
+                            </form>
+                        @endif
                         @if(Auth::user()->role->name=='Начальник')
                             <li class="nav-item">
                                 <button onclick="share_permission(this);"
@@ -57,7 +64,8 @@
     </header>
     @yield('content')
 </div>
-<script src="https://api-maps.yandex.ru/2.1/?apikey=a2435f91-837f-4a88-87c0-7ac7813eb317&lang=ru_RU" type="text/javascript"></script>
+<script src="https://api-maps.yandex.ru/2.1/?apikey=a2435f91-837f-4a88-87c0-7ac7813eb317&lang=ru_RU"
+        type="text/javascript"></script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="

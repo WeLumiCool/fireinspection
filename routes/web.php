@@ -61,6 +61,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/create', 'BuildController@insp_create')->name('create');
+    Route::post('isp_store/build', 'BuildController@isp_store')->name('isp.store.build');
 
     Route::get('/maps', 'BuildController@map')->name('maps');
 
@@ -69,4 +70,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/builds2/datatable', 'BuildController@welcomedatatableData')->name('build2.datatable.data');
     Route::get('/show/{build}', 'BuildController@insp_show')->name('build.show');
+    Route::get('change_system', 'UserController@change_system')->name('change_system');
 });
+
+
