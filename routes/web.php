@@ -67,9 +67,5 @@ Route::post('/checks', 'CheckController@inspector_store')->name('inspector.store
 Route::get('/builds2/datatable', 'BuildController@welcomedatatableData')->name('build2.datatable.data');
 Route::get('/show/{build}', 'BuildController@insp_show')->name('build.show');
 
+Route::get('change_system', 'UserController@change_system')->name('change_system');
 
-//Route::middleware('auth')->group(function () {
-//    Route::get('/', function () {
-//        return view('welcome', ['types' => \App\Type::all()]);
-//    })->name('main');
-//});

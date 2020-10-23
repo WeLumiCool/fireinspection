@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserStore;
-use App\Http\Requests\UserUpdate;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -30,7 +30,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create',['roles'=>Role::all()]);
+        return view('admin.users.create', ['roles' => Role::all()]);
     }
 
     /**
@@ -42,11 +42,11 @@ class UserController extends Controller
     public function store(UserStore $request)
     {
         User::insert([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'role_id'=>$request->role_id,
-          'password'=>Hash::make($request->password),
-            'created_at' =>  \Carbon\Carbon::now(),
+            'name' => $request->name,
+            'email' => $request->email,
+            'role_id' => $request->role_id,
+            'password' => Hash::make($request->password),
+            'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ]);
         return redirect()->route('admin.users.index');
@@ -73,7 +73,7 @@ class UserController extends Controller
     {
         return view('admin.users.edit', [
             'user' => $user,
-            'roles'=> Role::all(),
+            'roles' => Role::all(),
         ]);
     }
 
@@ -86,7 +86,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if($request->email!=$user->email){
+        if ($request->email != $user->email) {
             $request->validate([
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -100,8 +100,9 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Role $role
+     * @param User $user
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(User $user)
     {
@@ -127,6 +128,41 @@ class UserController extends Controller
         $zam = Role::where('name', 'Заместитель')->first();
         $zam->is_admin = !$zam->is_admin;
         $zam->save();
-        return response()->json('',204);
+        return response()->json('', 204);
     }
+
+    public function crossLogin(Request $request)
+    {
+        $rules = array(
+            'auth_hash' => 'required|max:64',
+        );
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->route('login')
+                ->withErrors($validator, 'validate');
+        }
+        $user = self::get_user($request->auth_hash);
+        if (is_null($user)) {
+            return redirect()->route('login')
+                ->withErrors(['error' => 'not found user'], 'not_user');
+
+        }
+
+        Auth::login($user);
+        return redirect()->route('welcome');
+
+    }
+
+    public static function get_user($hash_email)
+    {
+        $users = User::all();
+        foreach ($users as $user) {
+            if ($hash_email == hash('sha256', $user->email)) {
+                return $user;
+            }
+        }
+        return null;
+    }
+
 }
