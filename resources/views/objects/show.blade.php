@@ -217,7 +217,7 @@
                                                 </div>
                                             @endif
                                             @if($check->violations->count())
-                                                <div class="col-12 col-lg-6 text-left">
+                                                <div class="col-12 col-lg-11 text-left">
                                                     <p class="h5 font-weight-bold">Примечание:</p>
                                                     @foreach($check->violations as $violation)
                                                         <p class="alert alert-danger">
