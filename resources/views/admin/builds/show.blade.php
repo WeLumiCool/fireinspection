@@ -3,7 +3,7 @@
     <div class="container bg-form card-body-admin mt-3 pt-3">
         <div class="row justify-content-end">
             <div class="col-12 text-right">
-                <a class="btn btn-info text-white" href="#">
+                <a class="btn btn-info text-white" href="{{ route('admin.history.index', $build) }}">
                     Посмотреть историю
                 </a>
             </div>
@@ -74,7 +74,7 @@
                                    aria-expanded="true"
                                    aria-controls="build-{{ $check->build_id }}Stage-{{ $check->id }}">
                                     <h6 class="mt-1 mb-0">
-                                        <span>Дата проверка: <span>{{ $check->created_at }}</span></span>
+                                        <span>{{ $check->type->name }} проверка: <span>{{ $check->created_at }}</span></span>
                                         <i class="fas fa-angle-down mr-3 rotate-icon" style="margin-top: 2px;"></i>
                                     </h6>
                                 </a>

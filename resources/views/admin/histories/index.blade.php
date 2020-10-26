@@ -39,7 +39,10 @@
                     {data: 'object_id', name: 'object_id'},
                     {data: 'check_id', name: 'check_id'},
                     {data: 'created_at', name: 'created_at'},
-                ]
+                ],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.18/i18n/Russian.json"
+                },
             });
         });
     </script>

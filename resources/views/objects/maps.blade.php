@@ -3,57 +3,36 @@
 
     <div class="section">
         <div class="container bg-form">
-            <div class="row justify-content-center">
-                <div class="col-lg-2 mx-auto p-4 col-sm-12">
-                    <div class="form-check">
-                        <input class="form-check-input district-check" type="radio" name="exampleRadios" id="district1"
-                               data-district="Свердловский" value="option1">
-                        <label class="form-check-label" for="district1">
-                            Свердловский
-                        </label>
+            <div class="row">
+                <div class="col-lg-3 pt-2 col-sm-12">
+                    <div class="form-group">
+                        <label for="role-select">Район:</label>
+                        <select name="district" id="district" class="form-control filter_select">
+                            <option value="0">Все</option>
+                            @foreach(['Первомайский', 'Свердловский', 'Ленинский', 'Октябрьский'] as $district)
+                                <option value="{{ $district }}">{{ $district }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
-                <div class="col-lg-2 mx-auto p-4 col-sm-12">
-                    <div class="form-check">
-                        <input class="form-check-input district-check" type="radio" name="exampleRadios" id="district2"
-                               data-district="Ленинский" value="option2">
-                        <label class="form-check-label" for="district2">
-                            Ленинский
-                        </label>
+                <div class="col-lg-3 pt-2 col-sm-12">
+                    <div class="form-group">
+                        <label for="type_of_object">Тип объекта:</label>
+                        <select class="form-control filter_select" id="type" name="type_id">
+                            <option value="0">Все</option>
+                        @foreach($types as $type)
+                                <option value="{{ $type->id }}">{{ $type->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
-                <div class="col-lg-2 mx-auto p-4 col-sm-12">
-                    <div class="form-check">
-                        <input class="form-check-input district-check" type="radio" name="exampleRadios" id="district3"
-                               data-district="Октябрьский" value="option1">
-                        <label class="form-check-label" for="district3">
-                            Октябрьский
-                        </label>
-                    </div>
-                </div>
-                <div class="col-lg-2 mx-auto p-4 col-sm-12">
-                    <div class="form-check">
-                        <input class="form-check-input district-check" type="radio" name="exampleRadios" id="district4"
-                               data-district="Первомайский" value="option2">
-                        <label class="form-check-label" for="district4">
-                            Первомайский
-                        </label>
-                    </div>
-                </div>
-                <div class="col-lg-2 mx-auto p-4 col-sm-12">
-                    <div class="form-check">
-                        <input class="form-check-input district-check" type="radio" name="exampleRadios" id="all"
-                               data-district="Все" value="option2">
-                        <label class="form-check-label" for="all">
-                            Все
-                        </label>
-                    </div>
-                </div>
+
             </div>
             <div class="row">
-                <div class="col-12 pb-4">
-                    <div id="map"></div>
-
+                <div class="col-12">
+                    <div id="main">
+                        <div id="map"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -66,36 +45,8 @@
             width: 100%;
             height: 500px;
             padding: 10px;
-            margin-top: 50px;
         }
 
-        /*@media (max-width: 1075px) {*/
-        /*    #map {*/
-        /*        width: 600px;*/
-        /*        height: 500px;*/
-        /*    }*/
-        /*}*/
-
-        /*@media (max-width: 694px) {*/
-        /*    #map {*/
-        /*        width: 400px;*/
-        /*        height: 500px;*/
-        /*    }*/
-        /*}*/
-
-        /*@media (max-width: 428px) {*/
-        /*    #map {*/
-        /*        width: 320px;*/
-        /*        height: 500px;*/
-        /*    }*/
-        /*}*/
-
-        /*@media (max-width: 320px) {*/
-        /*    #map {*/
-        /*        width: 300px;*/
-        /*        height: 400px;*/
-        /*    }*/
-        /*}*/
     </style>
 @endpush
 
@@ -103,7 +54,34 @@
     <script src="https://api-maps.yandex.ru/2.1/?apikey=a2435f91-837f-4a88-87c0-7ac7813eb317&lang=ru_RU"
             type="text/javascript"></script>
     <script src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
-
+    <script>
+        $(document).on('change', '.filter_select', function () {
+            let type;
+            let district;
+            if ($(this).attr('id') === "district") {
+                district = $(this).children("option:selected").val();
+                let select = document.getElementById('type');
+                type = select.options[select.selectedIndex].value;
+            }
+            else    {
+                type = $(this).children("option:selected").val();
+                let select = document.getElementById('district');
+                district = select.options[select.selectedIndex].value;
+            }
+            $.ajax({
+                url: "{{ route('district.check') }}",
+                method: 'GET',
+                data: {
+                    district: district,
+                    type: type,
+                },
+                success: function (data) {
+                    // console.log(document.getElementById('main'));
+                    $('#main').html(data.view);
+                }
+            });
+        })
+    </script>
     <script>
 
         ymaps.ready(function () {
@@ -180,12 +158,8 @@
                 geoObjects[i] = new ymaps.Placemark(points[i], getPointData(i, owner[i], address[i], id[i]), getPointOptions(legality[i]));
             }
 
-            clusterer.add(geoObjects)
+            clusterer.add(geoObjects);
             myMap.geoObjects.add(clusterer);
         });
-
-
-
-
     </script>
 @endpush

@@ -27,12 +27,21 @@
                         <input id="address_field" type="text" class="form-control" name="address" value="{{ $build->address }}" required>
                     </div>
                     <div class="form-group">
+                        <label for="role-select">Район:</label>
+                        <select name="district" id="role-select" class="form-control">
+                            @foreach(['Первомайский', 'Свердловский', 'Ленинский', 'Октябрьский'] as $district)
+                                <option value="{{ $district }}" {{ $build->district == $district ? 'selected' : '' }}>{{ $district }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <input type="text" class="form-control d-none" id="latitude" value="{{ $build->latitude }}" name="latitude" >
                     </div>
 
                     <div class="form-group">
                         <input type="text" class="form-control d-none" id="longitude" value="{{ $build->longitude }}" name="longitude" >
                     </div>
+
 
                     <div class="form-group">
                         <div class="form-group col">

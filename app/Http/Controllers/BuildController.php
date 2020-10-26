@@ -25,6 +25,10 @@ class BuildController extends Controller
         return view('admin.builds.index');
     }
 
+    public function welcome() {
+        return view('welcome', ['types' => TypeBuild::all()]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -148,11 +152,40 @@ class BuildController extends Controller
     public function welcomedatatableData()
     {
         return DataTables::of(Build::query())
+            ->editColumn('type_id', function (Build $build) {
+                $type = TypeBuild::find($build->type_id);
+                return $type['name'];
+            })
+            ->addIndexColumn()
             ->make(true);
     }
 
     public function map()
     {
-        return view('objects.maps', ['builds' => Build::all(), 'checks' => Check::all()]);
+        return view('objects.maps', ['builds' => Build::all(), 'checks' => Check::all(), 'types' => TypeBuild::all()]);
+    }
+
+    public function map_ajax(Request $request) {
+
+        if ($request->district === "0" && $request->type === "0")
+        {
+            $builds = Build::all();
+        }
+        elseif ($request->district === "0")
+        {
+            $builds = Build::where('type_id', $request->type)->get();
+        }
+        elseif ($request->type === "0")
+        {
+            $builds = Build::where('district', $request->district)->get();
+        }
+        else {
+            $builds = Build::where('district', $request->district)
+                ->where('type_id', $request->type)->get();
+        }
+        $view = view('maps', compact('builds'))->render();
+        return response()->json([
+            'view' => $view,
+        ]);
     }
 }

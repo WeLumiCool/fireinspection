@@ -15,6 +15,7 @@
                     <tr>
                         <th scope="col">Наименование</th>
                         <th scope="col">Адрес</th>
+                        <th scope="col">Район</th>
                         <th scope="col">Тип объекта</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -40,6 +41,7 @@
                 columns: [
                     {data: 'name', name: 'name'},
                     {data: 'address', name: 'address'},
+                    {data: 'district', name: 'district'},
                     {data: 'type_id', name: 'type_id'},
                     {data: 'actions', name: 'actions', searchable: false, orderable: false},
                 ],
