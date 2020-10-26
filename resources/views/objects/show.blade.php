@@ -41,11 +41,11 @@
 
                 </div>
             </div>
-            <div class="col-10 col-lg-7 mx-auto py-4">
-                <iframe
-                    src="https://yandex.ru/map-widget/v1/?um=constructor%3A509077053c8294c7f409760ef365f9ab054949a326b8fb1d4b78dc03afb4f255&amp;source=constructor"
-                    width="100%" height="300" frameborder="0"></iframe>
-            </div>
+                @if($build->latitude && $build->longitude)
+                    <div class="col-7 mx-auto py-4">
+                        <div id="map" class="border-0" style="width: 100%; height: 400px;"></div>
+                    </div>
+                @endif
 
         </div>
         <div class="row bg-white py-4 mt-4 shadow px-lg-5" style="border-radius: 10px">
@@ -83,7 +83,7 @@
                                        aria-expanded="true"
                                        aria-controls="build-{{ $check->build_id }}Stage-{{ $check->id }}">
                                         <h6 class="mt-1 mb-0">
-                                            <span>Дата проверка: <span>{{ $check->created_at }}</span></span>
+                                            <span>{{ $check->type->name }} проверка: <span>{{ $check->created_at }}</span></span>
                                             <i class="fas fa-angle-down rotate-icon" style="margin-top: 2px;"></i>
                                         </h6>
                                     </a>
@@ -98,7 +98,7 @@
                                     <div class="table-ui  mb-3">
                                         <div class="row px-3">
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center">
-                                                <p class="h6 font-weight-bold ">АУПС:</p>
+                                                <p class="h6 font-weight-bold ">Автоматическая установка пожарной сигнализации:</p>
                                                 @if($check->has_aups)
                                                     <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
                                                 @else
@@ -108,7 +108,7 @@
                                                 @endif
                                             </div>
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">АУПТ:</p>
+                                                <p class="h6 font-weight-bold ">Автоматическая установка пожаротушения:</p>
                                                 @if($check->has_aupt)
                                                     <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
                                                 @else
@@ -118,7 +118,7 @@
                                                 @endif
                                             </div>
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">Кран:</p>
+                                                <p class="h6 font-weight-bold ">Противопожарные краны:</p>
                                                 @if($check->has_cranes)
                                                     <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
                                                 @else
@@ -138,7 +138,7 @@
                                                 @endif
                                             </div>
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">Запасы пенооброзование:</p>
+                                                <p class="h6 font-weight-bold ">Запасы пенооброзователя(200л):</p>
                                                 @if($check->has_foam)
                                                     <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
                                                 @else
@@ -238,3 +238,29 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+
+    <script type="text/javascript">
+        // Функция ymaps.ready() будет вызвана, когда
+        // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
+        ymaps.ready(init);
+
+        function init() {
+            // Создание карты.
+            var myMap = new ymaps.Map("map", {
+                center: [{{ $build->latitude ?? 42.865388923088396 }}, {{ $build->longitude ?? 74.60104350048829 }}],
+                zoom: 19
+            });
+            myMap.geoObjects.add(new ymaps.Placemark([{{ $build->latitude ?? 42.865388923088396 }}, {{ $build->longitude ?? 74.60104350048829 }}], {
+                balloonContentHeader: '{{ $build->name }}',
+                balloonContentBody: '{{ $build->address }}'
+            }, {
+                preset: 'islands#icon',
+                iconColor: '#0095b6'
+            }))
+        }
+
+
+    </script>
+@endpush

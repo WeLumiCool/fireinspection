@@ -12,6 +12,7 @@ use App\TypeViolation;
 use App\Violation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class CheckController extends Controller
@@ -316,7 +317,15 @@ class CheckController extends Controller
         foreach ($check->violations as $violation) {
             $violation->delete();
         }
+        if (!is_null($check->images))
+        {
+            foreach (json_decode($check->images) as $image_path) {
+                Storage::disk('public')->delete($image_path);
+            }
+        }
         $check->delete();
+        SetHistory::save('Удалил', $check->build->id, $check->id);
+
         return redirect()->route('admin.builds.show', $check->build_id);
     }
 }
