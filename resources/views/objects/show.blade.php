@@ -60,7 +60,7 @@
                                 <i class="fas fa-plus-circle text-success" style="font-size: 20px"></i>
                             </a>
                         @elseif($agent->isDesktop())
-                            <a href="{{ route('inspector.create', $build->id) }}" class="btn-green-stage d-flex" style="padding: 10px 6px;">
+                            <a href="{{ route('inspector.create', $build->id) }}" class="btn-green-stage d-flex text-decoration-none" style="padding: 10px 6px;">
                                 Добавить проверку
                             </a>
                         @endif
