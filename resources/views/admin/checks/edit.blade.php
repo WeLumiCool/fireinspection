@@ -193,8 +193,10 @@
 
                     <input type="hidden" name="build_id" value="{{ $check->build_id }}">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                    <button type="submit" title="{{ __('Изменить') }}"
-                            class="btn n btn-success">{{ __('Изменить') }}</button>
+                    <div class="col-12 text-center pt-4 ">
+                        <button type="submit" title="{{ __('Изменить') }}"
+                                class="btn n btn-success px-3">{{ __('Изменить') }}</button>
+                    </div>
                 </form>
             </div>
         </div>

@@ -2,13 +2,13 @@
 @section('dashboard_content')
     <div class="container bg-form card-body-admin mt-3 pt-3">
         <div class="row justify-content-end">
-            <div class="col-3">
+            <div class="col-12 text-right">
                 <a class="btn btn-info text-white" href="#">
                     Посмотреть историю
                 </a>
             </div>
         </div>
-        <div class="row px-5 pb-4 mb-4" style="border-radius: 10px">
+        <div class="row  pb-4 mb-4" >
             <div class="col-12 col-lg-5 py-4 ">
                 <div class="row">
                     <div class="col-6 mb-4">
