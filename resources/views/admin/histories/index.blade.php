@@ -10,7 +10,7 @@
                         <th scope="col">Пользователь</th>
                         <th scope="col">Событие</th>
                         <th scope="col">Объект</th>
-                        <th scope="col">Этап</th>
+                        <th scope="col">Проверка</th>
                         <th scope="col">Дата</th>
                     </tr>
                     </thead>
@@ -32,14 +32,14 @@
             $('#histories-table').DataTable({
                 processing: true,
                 serverSide: true,
-                {{--ajax: '{!! route('admin.history.datatable.data', $build) !!}',--}}
-                {{--columns: [--}}
-                {{--    {data: 'user_id', name: 'user_id'},--}}
-                {{--    {data: 'action', name: 'action'},--}}
-                {{--    {data: 'object_id', name: 'object_id'},--}}
-                {{--    {data: 'stage_id', name: 'stage_id'},--}}
-                {{--    {data: 'created_at', name: 'created_at'},--}}
-                {{--]--}}
+                ajax: '{!! route('admin.history.datatable.data', $build) !!}',
+                columns: [
+                    {data: 'user_id', name: 'user_id'},
+                    {data: 'action', name: 'action'},
+                    {data: 'object_id', name: 'object_id'},
+                    {data: 'check_id', name: 'check_id'},
+                    {data: 'created_at', name: 'created_at'},
+                ]
             });
         });
     </script>

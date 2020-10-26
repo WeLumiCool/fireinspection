@@ -316,6 +316,7 @@ class CheckController extends Controller
         foreach ($check->violations as $violation) {
             $violation->delete();
         }
+        SetHistory::save('Удалил', $check->build->id, $check->id);
         $check->delete();
         return redirect()->route('admin.builds.show', $check->build_id);
     }

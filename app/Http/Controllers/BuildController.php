@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Build;
 use App\Check;
+use App\History;
 use App\Services\SetHistory;
 use App\Type;
 use App\TypeBuild;
@@ -33,7 +34,9 @@ class BuildController extends Controller
     {
         return view('admin.builds.create', ['types' => TypeBuild::all()]);
     }
-    public function insp_create() {
+
+    public function insp_create()
+    {
         return view('objects.create', ['types' => TypeBuild::all()]);
 
     }
@@ -46,10 +49,11 @@ class BuildController extends Controller
 
         return redirect()->route('welcome');
     }
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return void
      */
     public function store(Request $request)
@@ -72,10 +76,12 @@ class BuildController extends Controller
     }
 
 
-    public function insp_show($id) {
+    public function insp_show($id)
+    {
         $build = Build::find($id);
         return view('objects.show', compact('build'));
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -90,7 +96,7 @@ class BuildController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @param Build $build
      * @return void
      */
@@ -110,6 +116,12 @@ class BuildController extends Controller
      */
     public function destroy(Build $build)
     {
+        $histories = History::all();
+        foreach ($histories as $history) {
+            if ($history->object_id === $build->id) {
+                $history->delete();
+            }
+        }
         $build->delete();
         return redirect()->route('admin.builds.index');
     }
@@ -137,6 +149,7 @@ class BuildController extends Controller
         return DataTables::of(Build::query())
             ->make(true);
     }
+
     public function map()
     {
         return view('objects.maps', ['builds' => Build::all(), 'checks' => Check::all()]);

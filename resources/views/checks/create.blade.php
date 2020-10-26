@@ -8,7 +8,7 @@
                     <form action="{{ route('inspector.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row justify-content-center">
-                            <p class="font-weight-bold h2 text-center">Добавление проверки1</p>
+                            <p class="font-weight-bold h2 text-center">Добавление проверки</p>
                         </div>
                         <div class="form-group">
                             <label class="font-weight-bold h6" for="type_check-select">Тип проверки:</label>

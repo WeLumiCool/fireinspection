@@ -14,9 +14,9 @@ class HistoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Build $build)
     {
-        //
+        return view('admin.histories.index', compact('build'));
     }
 
     /**
@@ -94,9 +94,9 @@ class HistoryController extends Controller
             ->editColumn('object_id', function (History $history) {
                 return $history->build->address;
             })
-            ->editColumn('stage_id', function (History $history) {
-                if (!is_null($history->stage)) {
-                    return $history->stage->stage;
+            ->editColumn('check_id', function (History $history) {
+                if (!is_null($history->check)) {
+                    return $history->check->type->name;
                 }
             })
             ->editColumn('created_at', function (History $history) {

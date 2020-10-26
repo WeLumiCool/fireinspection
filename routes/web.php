@@ -20,6 +20,9 @@ Route::prefix('admin')->name('admin.')/*->middleware('admin')*/
     Route::get('/', 'AdminController@index')->name('admin');
     Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
 
+    Route::get('history/index/{build}', 'HistoryController@index')->name('history.index');
+    Route::get('/histories/datatable/{build}', 'HistoryController@datatableData')->name('history.datatable.data');
+
     //CRUD for builds
     Route::get('/builds/datatable', 'BuildController@datatableData')->name('build.datatable.data');
     Route::resource('builds', 'BuildController');
@@ -55,9 +58,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/show', function () {
         return view('objects.show');
     })->name('show');
-    Route::get('/history', function () {
-        return view('admin.histories.index');
-    })->name('history');
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/create', 'BuildController@insp_create')->name('create');

@@ -3,7 +3,7 @@
     <div class="container bg-form card-body-admin mt-3 pt-3">
         <div class="row justify-content-end">
             <div class="col-3">
-                <a class="btn btn-info text-white" href="#">
+                <a class="btn btn-info text-white" href="{{ route('admin.history.index', $build) }}">
                     Посмотреть историю
                 </a>
             </div>
