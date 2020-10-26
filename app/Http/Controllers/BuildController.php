@@ -122,6 +122,7 @@ class BuildController extends Controller
                 $history->delete();
             }
         }
+
         $build->delete();
         return redirect()->route('admin.builds.index');
     }
