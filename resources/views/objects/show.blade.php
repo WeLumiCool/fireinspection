@@ -42,7 +42,7 @@
                 </div>
             </div>
                 @if($build->latitude && $build->longitude)
-                    <div class="col-7 mx-auto py-4">
+                    <div class="col-lg-7 col-12 mx-auto py-4">
                         <div id="map" class="border-0" style="width: 100%; height: 400px;"></div>
                     </div>
                 @endif
@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-6 col-lg-2 text-right text-lg-left">
                         @if($agent->isMobile())
-                            <a href="{{ route('create') }}" class="btn">
+                            <a href="{{ route('inspector.create', $build->id) }}" class="btn">
                                 <i class="fas fa-plus-circle text-success" style="font-size: 20px"></i>
                             </a>
                         @elseif($agent->isDesktop())
