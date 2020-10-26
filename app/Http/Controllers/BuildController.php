@@ -135,7 +135,6 @@ class BuildController extends Controller
     public function welcomedatatableData()
     {
         return DataTables::of(Build::query())
-
             ->make(true);
     }
     public function map()

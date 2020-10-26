@@ -1,5 +1,5 @@
 <main class="pt-5 my-5" >
-    <div class="container pt-5">
+    <div class="container">
         <div class="p-3 bg-show">
             <div class="col-12 ">
                 <p class="h2 font-weight-bold text-center text-caral">Список объектов</p>
@@ -11,12 +11,8 @@
                             <div class="form-group">
                                 <label for="type">Выберите тип объекта:</label>
                                 <select id="type" data-column="2" class="form-control filter-select mb-2    ">
-                                    <option value="">Все</option>
-
-                                    <option value="12">sdfsdfsd</option>
-                                    <option value="12">sdfssdfsdfbcvdfsd</option>
-                                    <option value="12">sdfssdfsdfdfsd</option>
-
+                                    <option value="">Все</option>"
+                                    в
                                 </select>
                             </div>
                         </div>
@@ -56,7 +52,7 @@
 
 @push('scripts')
     <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-            <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+{{--            <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>--}}
     <script>
 
             let table;
