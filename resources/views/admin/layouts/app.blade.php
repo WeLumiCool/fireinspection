@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+
     @stack('styles')
     <script src="https://api-maps.yandex.ru/2.1/?apikey={{ env('YANDEX_MAPS_API_KEY') }}&lang=ru_RU"
             type="text/javascript"></script>
@@ -20,6 +23,7 @@
     <header>
         <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
             <div class="container-fluid">
+
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent"
