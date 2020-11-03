@@ -64,7 +64,8 @@
                             <div class="col-lg-4 col-12">
                                 <div class="form-group d-flex">
                                     <div class="button r mr-3" id="button-1">
-                                        <input id="has_hydrant_check" type="checkbox" class="checkbox" name="has_hydrant">
+                                        <input id="has_hydrant_check" type="checkbox" class="checkbox"
+                                               name="has_hydrant">
                                         <div class="knobs"></div>
                                         <div class="layer"></div>
                                     </div>
@@ -82,17 +83,20 @@
                                     <label class="font-weight-bold h5 pr-3" for="has_reservoir_check">Водоем</label>
                                 </div>
                             </div>
-                            <div class="col-lg-5 col-12">
-                                <div class="form-group d-flex">
-                                    <div class="button r mr-3" id="button-1">
-                                        <input id="has_foam_check" type="checkbox" class="checkbox" name="has_foam">
-                                        <div class="knobs"></div>
-                                        <div class="layer"></div>
+
+                            @if($build->type_id == 1 || $build->type_id == 6)
+                                <div class="col-lg-5 col-12">
+                                    <div class="form-group d-flex">
+                                        <div class="button r mr-3" id="button-1">
+                                            <input id="has_foam_check" type="checkbox" class="checkbox" name="has_foam">
+                                            <div class="knobs"></div>
+                                            <div class="layer"></div>
+                                        </div>
+                                        <label class="font-weight-bold h5" for="has_foam_check">Запасы
+                                            пенооброзование</label>
                                     </div>
-                                    <label class="font-weight-bold h5" for="has_foam_check">Запасы
-                                        пенооброзование</label>
                                 </div>
-                            </div>
+                            @endif
                         </div>
                         <div class="form-group py-2">
                             <label class="font-weight-bold h6" for="image_input">Изображении</label>
@@ -104,7 +108,6 @@
                                     <label class="font-weight-bold h6" for="type_psp_select">Первичные средства
                                         пожаротушения:</label>
                                     <div id="psps_div">
-                                        {{--place for psps--}}
 
                                     </div>
                                     <button id="add_psp" class="btn btn-success mt-2" type="button">

@@ -30,6 +30,14 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="role-select">Запланированная проверка:</label>
+                            <select name="planned_check" id="role-select" class="form-control">
+                                @foreach(['1-квартал', '2-квартал', '3-квартал', '4-квартал', '1-год'] as $date)
+                                    <option value="{{ $date }}">{{ $date }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="address_field">Адрес:<span class="text-danger">*</span></label>
                             <input id="address_field" type="text" class="form-control" name="address"
                                    placeholder="Поставьте маркер на карте" required>

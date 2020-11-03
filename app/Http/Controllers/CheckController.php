@@ -58,19 +58,21 @@ class CheckController extends Controller
         $typePsps = TypePsp::all();
         $typeViolations = TypeViolation::all();
         $typeChecks = TypeCheck::all();
+        $build = Build::find($id);
         return view('checks.create',
             compact(
                 'id',
                 'typePsps',
                 'typeViolations',
-                'typeChecks'
+                'typeChecks',
+                'build'
             ));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return Route
      */
     public function store(Request $request)
@@ -84,6 +86,38 @@ class CheckController extends Controller
         $check->has_evacuation = $request->has('has_evacuation');
         $check->has_foam = $request->has('has_foam');
         //get check images
+        if (!$request->has('has_aups')) {
+            $check->legality = "1";
+        }
+        if (!$request->has('has_aupt')) {
+            $check->legality = "1";
+        }
+        if (!$request->has('has_hydrant')) {
+            $check->legality = "1";
+        }
+        if (!$request->has('has_reservoir')) {
+            $check->legality = "1";
+        }
+        if (!$request->has('has_cranes')) {
+            $check->legality = "1";
+        }
+        if (!$request->has('has_evacuation')) {
+            $check->legality = "1";
+        }
+        if (!$request->has('has_foam')) {
+            $check->legality = "1";
+        }
+        if (!$request->has('has_shild')) {
+            $check->legality = "1";
+        }
+        if (Build::find($request->build_id)->type_id == 1 || Build::find($request->build_id)->type_id == 6) {
+            $check->has_foam = $request->has('has_foam');
+            if (!$request->has('has_foam')) {
+                $check->legality = "1";
+            }
+        } else {
+            $check->has_foam = NULL;
+        }
         if ($request->has('images')) {
             $path_images = [];
             foreach ($request->images as $image) {
@@ -117,35 +151,15 @@ class CheckController extends Controller
             }
             $check->legality = '1';
         }
-        if (!$request->has('has_aups'))
-        {
-            $check->legality = "1";
-        }
-        if (!$request->has('has_aupt')){
-            $check->legality = "1";
-        }
-        if (!$request->has('has_hydrant')){
-            $check->legality = "1";
-        }
-        if (!$request->has('has_reservoir')){
-            $check->legality = "1";
-        }
-        if (!$request->has('has_cranes')){
-            $check->legality = "1";
-        }
-        if (!$request->has('has_evacuation')){
-            $check->legality = "1";
-        }
-        if (!$request->has('has_foam')){
-            $check->legality = "1";
-        }
+
         $check->save();
         return redirect()->route('admin.builds.show', $check->build_id);
     }
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return Route
      */
     public function inspector_store(Request $request)
@@ -157,7 +171,36 @@ class CheckController extends Controller
         $check->has_reservoir = $request->has('has_reservoir');
         $check->has_cranes = $request->has('has_cranes');
         $check->has_evacuation = $request->has('has_evacuation');
-        $check->has_foam = $request->has('has_foam');
+        $check->has_shild = $request->has('has_shild');
+        if (!$request->has('has_aups')) {
+            $check->legality = "1";
+        }
+        if (!$request->has('has_aupt')) {
+            $check->legality = "1";
+        }
+        if (!$request->has('has_hydrant')) {
+            $check->legality = "1";
+        }
+        if (!$request->has('has_reservoir')) {
+            $check->legality = "1";
+        }
+        if (!$request->has('has_cranes')) {
+            $check->legality = "1";
+        }
+        if (!$request->has('has_evacuation')) {
+            $check->legality = "1";
+        }
+        if (!$request->has('has_shild')) {
+            $check->legality = "1";
+        }
+        if (Build::find($request->build_id)->type_id == 1 || Build::find($request->build_id)->type_id == 6) {
+            $check->has_foam = $request->has('has_foam');
+            if (!$request->has('has_foam')) {
+                $check->legality = "1";
+            }
+        } else {
+            $check->has_foam = NULL;
+        }
         //get check images
         if ($request->has('images')) {
             $path_images = [];
@@ -192,28 +235,8 @@ class CheckController extends Controller
             }
             $check->legality = '1';
         }
-        if (!$request->has('has_aups'))
-        {
-            $check->legality = "1";
-        }
-        if (!$request->has('has_aupt')){
-            $check->legality = "1";
-        }
-        if (!$request->has('has_hydrant')){
-            $check->legality = "1";
-        }
-        if (!$request->has('has_reservoir')){
-            $check->legality = "1";
-        }
-        if (!$request->has('has_cranes')){
-            $check->legality = "1";
-        }
-        if (!$request->has('has_evacuation')){
-            $check->legality = "1";
-        }
-        if (!$request->has('has_foam')){
-            $check->legality = "1";
-        }
+
+
         $check->save();
 
         return redirect()->route('build.show', $check->build_id);
@@ -251,7 +274,7 @@ class CheckController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @param Check $check
      * @return Route
      */
@@ -303,26 +326,25 @@ class CheckController extends Controller
                 $violation->save();
             }
         }
-        if ($request->has('has_aups'))
-        {
+        if ($request->has('has_aups')) {
             $check->legality = "0";
         }
-        if ($request->has('has_aupt')){
+        if ($request->has('has_aupt')) {
             $check->legality = "0";
         }
-        if ($request->has('has_hydrant')){
+        if ($request->has('has_hydrant')) {
             $check->legality = "0";
         }
-        if ($request->has('has_reservoir')){
+        if ($request->has('has_reservoir')) {
             $check->legality = "0";
         }
-        if ($request->has('has_cranes')){
+        if ($request->has('has_cranes')) {
             $check->legality = "0";
         }
-        if ($request->has('has_evacuation')){
+        if ($request->has('has_evacuation')) {
             $check->legality = "0";
         }
-        if ($request->has('has_foam')){
+        if ($request->has('has_foam')) {
             $check->legality = "0";
         }
         $check->save();
@@ -341,8 +363,7 @@ class CheckController extends Controller
         foreach ($check->violations as $violation) {
             $violation->delete();
         }
-        if (!is_null($check->images))
-        {
+        if (!is_null($check->images)) {
             foreach (json_decode($check->images) as $image_path) {
                 Storage::disk('public')->delete($image_path);
             }

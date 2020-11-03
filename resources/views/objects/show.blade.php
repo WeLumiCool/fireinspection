@@ -10,42 +10,81 @@
 
         <div class="row bg-white px-lg-5 pb-4 mb-4 shadow" style="border-radius: 10px">
             <div class="col-12 col-lg-5 py-4 ">
-                <div class="row">
-                    <div class="col-6 mb-4">
-                        <span class="h5 font-weight-bold pr-2">Имя объекта:</span>
+                <div class="card">
+                    <div class="card-header text-center h4 bg-red-table">
+                        Информация об объекте
                     </div>
-                    <div class="col-6">
-                        <span> {{ $build->name }}</span>
-                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <table class="table">
+                                <thead></thead>
+                                <tbody>
+                                <tr>
+                                    <th class="h5 font-weight-bold border-top-0">Имя объекта:</th>
+                                    <th class="h6   border-top-0">{{ $build->name }}</th>
+                                </tr>
+                                <tr>
+                                    <th class="h5 font-weight-bold">Адресс:</th>
+                                    <th class="h6">{{ $build->address }}</th>
+                                </tr>
+                                <tr>
+                                    <th class="h5 font-weight-bold">Район:</th>
+                                    <th class="h6">{{ $build->district }}</th>
+                                </tr>
+                                <tr>
+                                    <th class="h5 font-weight-bold">Тип объекта:</th>
+                                    <th class="h6">{{ $build->type->name }}</th>
+                                </tr>
+                                <tr>
+                                    <th class="h5 font-weight-bold">Запланированная проверка:</th>
+                                    <th class="h6">{{ $build->planned_check }}</th>
+                                </tr>
+                                </tbody>
+                            </table>
+{{--                            <div class="row">--}}
+{{--                                <div class="col-6 mb-4">--}}
+{{--                                    <span class="h5 font-weight-bold pr-2">Имя объекта:</span>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-6">--}}
+{{--                                    <span class="h6"> {{ $build->name }}</span>--}}
+{{--                                </div>--}}
 
-                    <div class="col-6 mb-4">
-                        <span class="h5 font-weight-bold pr-2">Адресс:</span>
-                    </div>
-                    <div class="col-6">
-                        <span> {{ $build->address }}</span>
-                    </div>
+{{--                                <div class="col-6 mb-4">--}}
+{{--                                    <span class="h5 font-weight-bold pr-2">Адресс:</span>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-6">--}}
+{{--                                    <span class="h6"> {{ $build->address }}</span>--}}
+{{--                                </div>--}}
 
-                    <div class="col-6 mb-4">
-                        <span class="h5 font-weight-bold pr-2">Район:</span>
-                    </div>
-                    <div class="col-6">
-                        <span> {{ $build->district }}</span>
-                    </div>
+{{--                                <div class="col-6 mb-4">--}}
+{{--                                    <span class="h5 font-weight-bold pr-2">Район:</span>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-6">--}}
+{{--                                    <span class="h6"> {{ $build->district }}</span>--}}
+{{--                                </div>--}}
 
-                    <div class="col-6 mb-4">
-                        <span class="h5 font-weight-bold pr-2">Тип объекта:</span>
+{{--                                <div class="col-6 mb-4">--}}
+{{--                                    <span class="h5 font-weight-bold pr-2">Тип объекта:</span>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-6">--}}
+{{--                                    <span class="h6"> {{ $build->type->name }}</span>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-6 mb-4">--}}
+{{--                                    <span class="h5 font-weight-bold pr-2">Запланированная проверка:</span>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-6">--}}
+{{--                                    <span class="h6"> {{ $build->planned_check }}</span>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+                        </blockquote>
                     </div>
-                    <div class="col-6">
-                        <span> {{ $build->type->name }}</span>
-                    </div>
-
                 </div>
             </div>
-                @if($build->latitude && $build->longitude)
-                    <div class="col-lg-7 col-12 mx-auto py-4">
-                        <div id="map" class="border-0" style="width: 100%; height: 400px;"></div>
-                    </div>
-                @endif
+            @if($build->latitude && $build->longitude)
+                <div class="col-lg-7 col-12 mx-auto py-4">
+                    <div id="map" class="border-0" style="width: 100%; height: 400px;"></div>
+                </div>
+            @endif
 
         </div>
         <div class="row bg-white py-4 mt-4 shadow px-lg-5" style="border-radius: 10px">
@@ -60,7 +99,8 @@
                                 <i class="fas fa-plus-circle text-success" style="font-size: 20px"></i>
                             </a>
                         @elseif($agent->isDesktop())
-                            <a href="{{ route('inspector.create', $build->id) }}" class="btn-green-stage d-flex text-decoration-none" style="padding: 10px 6px;">
+                            <a href="{{ route('inspector.create', $build->id) }}"
+                               class="btn-green-stage d-flex text-decoration-none" style="padding: 10px 6px;">
                                 Добавить проверку
                             </a>
                         @endif
@@ -98,7 +138,8 @@
                                     <div class="table-ui  mb-3">
                                         <div class="row px-3">
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center">
-                                                <p class="h6 font-weight-bold ">Автоматическая установка пожарной сигнализации:</p>
+                                                <p class="h6 font-weight-bold ">Автоматическая установка пожарной
+                                                    сигнализации:</p>
                                                 @if($check->has_aups)
                                                     <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
                                                 @else
@@ -108,7 +149,8 @@
                                                 @endif
                                             </div>
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">Автоматическая установка пожаротушения:</p>
+                                                <p class="h6 font-weight-bold ">Автоматическая установка
+                                                    пожаротушения:</p>
                                                 @if($check->has_aupt)
                                                     <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
                                                 @else
@@ -137,16 +179,18 @@
                                                     </p>
                                                 @endif
                                             </div>
-                                            <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">Запасы пенооброзователя(200л):</p>
-                                                @if($check->has_foam)
-                                                    <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                @else
-                                                    <p>
-                                                        <i class="fa fa-times-circle text-danger fa-2x"></i>
-                                                    </p>
-                                                @endif
-                                            </div>
+                                            @isset($check->has_foam)
+                                                <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
+                                                    <p class="h6 font-weight-bold ">Запасы пенооброзователя(200л):</p>
+                                                    @if($check->has_foam)
+                                                        <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
+                                                    @else
+                                                        <p>
+                                                            <i class="fa fa-times-circle text-danger fa-2x"></i>
+                                                        </p>
+                                                    @endif
+                                                </div>
+                                            @endisset
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
                                                 <p class="h6 font-weight-bold ">Гидрант:</p>
                                                 @if($check->has_hydrant)

@@ -14,6 +14,7 @@ class Build extends Model
             'latitude',
             'longitude',
             'district',
+            'planned_check'
         ];
 
     public function checks()
