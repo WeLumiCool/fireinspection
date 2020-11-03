@@ -38,12 +38,14 @@ class CheckController extends Controller
         $typePsps = TypePsp::all();
         $typeViolations = TypeViolation::all();
         $typeChecks = TypeCheck::all();
+        $build = Build::find($id);
         return view('admin.checks.create',
             compact(
                 'id',
                 'typePsps',
                 'typeViolations',
-                'typeChecks'
+                'typeChecks',
+                'build'
             ));
     }
 
@@ -84,8 +86,20 @@ class CheckController extends Controller
         $check->has_reservoir = $request->has('has_reservoir');
         $check->has_cranes = $request->has('has_cranes');
         $check->has_evacuation = $request->has('has_evacuation');
-        $check->has_foam = $request->has('has_foam');
-        //get check images
+
+        $build = Build::find($request->build_id);
+
+        $build->planned_check = $request->planned_check;
+
+        if ($request->has('has_shield'))
+        {
+            if (is_null($request->has_shield)){
+                $check->has_shild = 0;
+            }
+            else {
+                $check->has_shild = $request->has_shield;
+            }
+        }
         if (!$request->has('has_aups')) {
             $check->legality = "1";
         }
@@ -104,13 +118,10 @@ class CheckController extends Controller
         if (!$request->has('has_evacuation')) {
             $check->legality = "1";
         }
-        if (!$request->has('has_foam')) {
+        if ($request->has_shield == 0) {
             $check->legality = "1";
         }
-        if (!$request->has('has_shild')) {
-            $check->legality = "1";
-        }
-        if (Build::find($request->build_id)->type_id == 1 || Build::find($request->build_id)->type_id == 6) {
+        if ($build->type_id == 1 || $build->type_id == 6) {
             $check->has_foam = $request->has('has_foam');
             if (!$request->has('has_foam')) {
                 $check->legality = "1";
@@ -118,6 +129,7 @@ class CheckController extends Controller
         } else {
             $check->has_foam = NULL;
         }
+        //get check images
         if ($request->has('images')) {
             $path_images = [];
             foreach ($request->images as $image) {
@@ -137,8 +149,8 @@ class CheckController extends Controller
             }
             $check->psp_count = json_encode($pspArray);
         }
-        SetHistory::save('Добавил', $check->build->id, $check->id);
-
+        SetHistory::save('Проведена проверка', $check->build->id, $check->id);
+        $check->save();
 
         //save violations by check
         if ($request->has('type_violations')) {
@@ -152,6 +164,7 @@ class CheckController extends Controller
             $check->legality = '1';
         }
 
+        $build->save();
         $check->save();
         return redirect()->route('admin.builds.show', $check->build_id);
     }
@@ -171,7 +184,19 @@ class CheckController extends Controller
         $check->has_reservoir = $request->has('has_reservoir');
         $check->has_cranes = $request->has('has_cranes');
         $check->has_evacuation = $request->has('has_evacuation');
-        $check->has_shild = $request->has('has_shild');
+
+        $build = Build::find($request->build_id);
+        $build->planned_check = $request->planned_check;
+
+        if ($request->has('has_shield'))
+        {
+            if (is_null($request->has_shield)){
+                $check->has_shild = 0;
+            }
+            else {
+                $check->has_shild = $request->has_shield;
+            }
+        }
         if (!$request->has('has_aups')) {
             $check->legality = "1";
         }
@@ -190,10 +215,10 @@ class CheckController extends Controller
         if (!$request->has('has_evacuation')) {
             $check->legality = "1";
         }
-        if (!$request->has('has_shild')) {
+        if ($request->has_shield == 0) {
             $check->legality = "1";
         }
-        if (Build::find($request->build_id)->type_id == 1 || Build::find($request->build_id)->type_id == 6) {
+        if ($build->type_id == 1 || $build->type_id == 6) {
             $check->has_foam = $request->has('has_foam');
             if (!$request->has('has_foam')) {
                 $check->legality = "1";
@@ -221,7 +246,7 @@ class CheckController extends Controller
             }
             $check->psp_count = json_encode($pspArray);
         }
-        SetHistory::save('Добавил', $check->build->id, $check->id);
+        SetHistory::save('Проведена проверка', $check->build->id, $check->id);
         $check->save();
 
         //save violations by check
@@ -236,7 +261,7 @@ class CheckController extends Controller
             $check->legality = '1';
         }
 
-
+        $build->save();
         $check->save();
 
         return redirect()->route('build.show', $check->build_id);

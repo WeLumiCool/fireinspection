@@ -34,7 +34,7 @@
                                     <label class="font-weight-bold h5 pr-3" for="aups_check">АУПС</label>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-12 ">
+                            <div class="col-lg-4 col-12">
                                 <div class="form-group d-flex">
                                     <div class="button r mr-3" id="button-1">
                                         <input id="aupt_check" type="checkbox" class="checkbox" name="has_aupt">
@@ -108,7 +108,7 @@
                                         <div class="d-flex justify-content-center align-items-center">
                                             <div class="button r mr-3" id="button-1" disabled="">
                                                 <input id="has_shield_check" type="checkbox" class="checkbox"
-                                                       name="has_shield"
+                                                       name="shield"
                                                        style="display: none">
                                                 <div class="knobs" disabled="true"></div>
                                                 <div class="layer" disabled="true"></div>
@@ -116,14 +116,14 @@
                                             <div class="">
                                                 <label class="font-weight-bold h5 " for="has_shield_check">Пожарный
                                                     щит</label>
-                                                <input type="number" id="counter" class="counter form-control" value=""
+                                                <input type="number" name="has_shield" id="counter" class="counter form-control"
                                                        placeholder="Кол-во щитов" >
                                             </div>
                                         </div>
                                     @elseif($agent->isDesktop())
                                         <div class="button r mr-3" id="button-1" disabled="">
                                             <input id="has_shield_check" type="checkbox" class="checkbox"
-                                                   name="has_shield"
+                                                   name="shield"
                                                    style="display: none">
                                             <div class="knobs" disabled="true"></div>
                                             <div class="layer" disabled="true"></div>
@@ -133,11 +133,10 @@
                                                 щит</label>
                                         </div>
                                         <div class="pl-lg-2 ">
-                                            <input type="number" id="counter" class="counter form-control" value=""
+                                            <input type="number" name="has_shield" id="counter" class="counter form-control" value=""
                                                    placeholder="Кол-во щитов" style="width: 67%!important;">
                                         </div>
                                     @endif
-
                                 </div>
                             </div>
                         </div>
@@ -168,6 +167,16 @@
                                     <button id="add_violation" class="btn btn-success mt-2" type="button">
                                         <i class="fas fa-plus"><span class="px-4">Добавить Нарушение</span></i>
                                     </button>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="role-select">Назначить дату следующей проверки:</label>
+                                    <select name="planned_check" id="role-select" class="form-control">
+                                        @foreach(['1-квартал', '2-квартал', '3-квартал', '4-квартал', '1-год'] as $date)
+                                            <option value="{{ $date }}">{{ $date }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>

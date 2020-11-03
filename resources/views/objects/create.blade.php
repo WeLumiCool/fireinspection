@@ -14,6 +14,10 @@
                             <input id="name_field" type="text" class="form-control" name="name" required>
                         </div>
                         <div class="form-group">
+                            <label for="name_field">ИНН: <span class="text-danger">*</span></label>
+                            <input id="name_field" type="text" class="form-control" name="inn" required>
+                        </div>
+                        <div class="form-group">
                             <label for="role-select">Район:</label>
                             <select name="district" id="role-select" class="form-control">
                                 @foreach(['Первомайский', 'Свердловский', 'Ленинский', 'Октябрьский'] as $district)

@@ -3,48 +3,53 @@
     <div class="container bg-form card-body-admin mt-3 pt-3">
         <div class="row justify-content-end">
             <div class="col-12 text-right">
-                <a class="btn btn-info text-white" href="{{ route('admin.history.index', $build) }}">
-                    Посмотреть историю
-                </a>
+
             </div>
         </div>
         <div class="row  pb-4 mb-4" >
             <div class="col-12 col-lg-5 py-4 ">
-                <div class="row">
-                    <div class="col-6 mb-4">
-                        <h4 class="font-weight-bold pr-2">Имя объекта:</h4>
+                <div class="card">
+                    <div class="card-header text-center h4 bg-red-table">
+                        Информация об объекте
                     </div>
-                    <div class="col-6">
-                        <span> {{ $build->name }}</span>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <table class="table">
+                                <thead></thead>
+                                <tbody>
+                                <tr>
+                                    <th class="h5 font-weight-bold border-top-0">Имя объекта:</th>
+                                    <th class="h6   border-top-0">{{ $build->name }}</th>
+                                </tr>
+                                <tr>
+                                    <th class="h5 font-weight-bold">Адресс:</th>
+                                    <th class="h6">{{ $build->address }}</th>
+                                </tr>
+                                <tr>
+                                    <th class="h5 font-weight-bold">ИНН:</th>
+                                    <th class="h6">{{ $build->inn }}</th>
+                                </tr>
+                                <tr>
+                                    <th class="h5 font-weight-bold">Район:</th>
+                                    <th class="h6">{{ $build->district }}</th>
+                                </tr>
+                                <tr>
+                                    <th class="h5 font-weight-bold">Тип объекта:</th>
+                                    <th class="h6">{{ $build->type->name }}</th>
+                                </tr>
+                                <tr>
+                                    <th class="h5 font-weight-bold">Запланированная проверка:</th>
+                                    <th class="h6">{{ $build->planned_check }}</th>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="text-center">
+                                <a class="btn btn-info text-white " href="{{ route('admin.history.index', $build) }}">
+                                    Посмотреть историю
+                                </a>
+                            </div>
+                        </blockquote>
                     </div>
-
-                    <div class="col-6 mb-4">
-                        <h4 class="font-weight-bold pr-2">Адресс:</h4>
-                    </div>
-                    <div class="col-6">
-                        <span> {{ $build->address }}</span>
-                    </div>
-
-                    <div class="col-6 mb-4">
-                        <h4 class="font-weight-bold pr-2">Район:</h4>
-                    </div>
-                    <div class="col-6">
-                        <span> {{ $build->district }}</span>
-                    </div>
-
-                    <div class="col-6 mb-4">
-                        <h4 class="font-weight-bold pr-2">Тип объекта:</h4>
-                    </div>
-                    <div class="col-6">
-                        <span> {{ $build->type->name }}</span>
-                    </div>
-                    <div class="col-6 mb-4">
-                        <h4 class="font-weight-bold pr-2">Запланированная проверка:</h4>
-                    </div>
-                    <div class="col-6">
-                        <span> {{ $build->planned_check }}</span>
-                    </div>
-
                 </div>
             </div>
             @if($build->latitude && $build->longitude)
@@ -147,16 +152,18 @@
                                                     </p>
                                                 @endif
                                             </div>
-                                            <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">Запасы пенооброзование:</p>
-                                                @if($check->has_foam)
-                                                    <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                @else
-                                                    <p>
-                                                        <i class="fa fa-times-circle text-danger fa-2x"></i>
-                                                    </p>
-                                                @endif
-                                            </div>
+                                            @isset($check->has_foam)
+                                                <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
+                                                    <p class="h6 font-weight-bold ">Запасы пенооброзователя(200л):</p>
+                                                    @if($check->has_foam)
+                                                        <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
+                                                    @else
+                                                        <p>
+                                                            <i class="fa fa-times-circle text-danger fa-2x"></i>
+                                                        </p>
+                                                    @endif
+                                                </div>
+                                            @endisset
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
                                                 <p class="h6 font-weight-bold ">Гидрант:</p>
                                                 @if($check->has_hydrant)
@@ -171,6 +178,19 @@
                                                 <p class="h6 font-weight-bold ">Водоем:</p>
                                                 @if($check->has_reservoir)
                                                     <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
+                                                @else
+                                                    <p>
+                                                        <i class="fa fa-times-circle text-danger fa-2x"></i>
+                                                    </p>
+                                                @endif
+                                            </div>
+                                            <div class="col-lg-6 col-12 text-lg-left py-2 text-center ">
+                                                <p class="h6 font-weight-bold ">Пожарный щит:</p>
+                                                @if($check->has_shild > 0)
+                                                    <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
+                                                    <p class="text-muted m-0 border-bottom py-1">
+                                                        Кол-во:{{ $check->has_shild }}
+                                                    </p>
                                                 @else
                                                     <p>
                                                         <i class="fa fa-times-circle text-danger fa-2x"></i>
@@ -263,13 +283,36 @@
                 center: [{{ $build->latitude ?? 42.865388923088396 }}, {{ $build->longitude ?? 74.60104350048829 }}],
                 zoom: 19
             });
+
+            getPointOptions = function (legality) {
+                console.log(legality)
+                if (legality === 1) {
+
+                    return {
+                        preset: 'islands#redDotIcon',
+                    }
+                } else if (legality === 0) {
+                    return {
+                        preset: 'islands#darkGreenDotIcon',
+                    }
+                } else if (legality === 2) {
+                    return {
+                        preset: 'islands#violetDotIcon',
+                    }
+                }
+            },
+
             myMap.geoObjects.add(new ymaps.Placemark([{{ $build->latitude ?? 42.865388923088396 }}, {{ $build->longitude ?? 74.60104350048829 }}], {
                 balloonContentHeader: '{{ $build->name }}',
                 balloonContentBody: '{{ $build->address }}'
-            }, {
-                preset: 'islands#icon',
-                iconColor: '#0095b6'
-            }))
+            },
+                @if($build->checks->first())
+                getPointOptions({{ $build->checks->first()->legality }}),
+                @else
+                getPointOptions(2),
+                @endif
+                {{--                --}}
+            ))
         }
 
 

@@ -28,6 +28,10 @@
                                     <th class="h6">{{ $build->address }}</th>
                                 </tr>
                                 <tr>
+                                    <th class="h5 font-weight-bold">ИНН:</th>
+                                    <th class="h6">{{ $build->inn }}</th>
+                                </tr>
+                                <tr>
                                     <th class="h5 font-weight-bold">Район:</th>
                                     <th class="h6">{{ $build->district }}</th>
                                 </tr>
@@ -41,41 +45,7 @@
                                 </tr>
                                 </tbody>
                             </table>
-{{--                            <div class="row">--}}
-{{--                                <div class="col-6 mb-4">--}}
-{{--                                    <span class="h5 font-weight-bold pr-2">Имя объекта:</span>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-6">--}}
-{{--                                    <span class="h6"> {{ $build->name }}</span>--}}
-{{--                                </div>--}}
 
-{{--                                <div class="col-6 mb-4">--}}
-{{--                                    <span class="h5 font-weight-bold pr-2">Адресс:</span>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-6">--}}
-{{--                                    <span class="h6"> {{ $build->address }}</span>--}}
-{{--                                </div>--}}
-
-{{--                                <div class="col-6 mb-4">--}}
-{{--                                    <span class="h5 font-weight-bold pr-2">Район:</span>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-6">--}}
-{{--                                    <span class="h6"> {{ $build->district }}</span>--}}
-{{--                                </div>--}}
-
-{{--                                <div class="col-6 mb-4">--}}
-{{--                                    <span class="h5 font-weight-bold pr-2">Тип объекта:</span>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-6">--}}
-{{--                                    <span class="h6"> {{ $build->type->name }}</span>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-6 mb-4">--}}
-{{--                                    <span class="h5 font-weight-bold pr-2">Запланированная проверка:</span>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-6">--}}
-{{--                                    <span class="h6"> {{ $build->planned_check }}</span>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
                         </blockquote>
                     </div>
                 </div>
@@ -209,6 +179,19 @@
                                                     </p>
                                                 @endif
                                             </div>
+                                            <div class="col-lg-6 col-12 text-lg-left py-2 text-center ">
+                                                <p class="h6 font-weight-bold ">Пожарный щит:</p>
+                                                @if($check->has_shild > 0)
+                                                    <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
+                                                    <p class="text-muted m-0 border-bottom py-1">
+                                                        Кол-во:{{ $check->has_shild }}
+                                                    </p>
+                                                @else
+                                                    <p>
+                                                        <i class="fa fa-times-circle text-danger fa-2x"></i>
+                                                    </p>
+                                                @endif
+                                            </div>
                                             @if(!is_null($check->psp_count))
                                                 <div class="col-12 d-flex text-left mb-3">
                                                     <div class="col-6 col-lg-3">
@@ -288,19 +271,44 @@
         // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
         ymaps.ready(init);
 
+
+
         function init() {
             // Создание карты.
             var myMap = new ymaps.Map("map", {
                 center: [{{ $build->latitude ?? 42.865388923088396 }}, {{ $build->longitude ?? 74.60104350048829 }}],
                 zoom: 19
             });
+
+            getPointOptions = function (legality) {
+                console.log(legality)
+                if (legality === 1) {
+
+                    return {
+                        preset: 'islands#redDotIcon',
+                    }
+                } else if (legality === 0) {
+                    return {
+                        preset: 'islands#darkGreenDotIcon',
+                    }
+                } else if (legality === 2) {
+                    return {
+                        preset: 'islands#violetDotIcon',
+                    }
+                }
+            },
+
             myMap.geoObjects.add(new ymaps.Placemark([{{ $build->latitude ?? 42.865388923088396 }}, {{ $build->longitude ?? 74.60104350048829 }}], {
-                balloonContentHeader: '{{ $build->name }}',
-                balloonContentBody: '{{ $build->address }}'
-            }, {
-                preset: 'islands#icon',
-                iconColor: '#0095b6'
-            }))
+                    balloonContentHeader: '{{ $build->name }}',
+                    balloonContentBody: '{{ $build->address }}'
+                },
+                @if($build->checks->first())
+                getPointOptions({{ $build->checks->first()->legality }}),
+                @else
+                getPointOptions(2),
+                @endif
+{{--                --}}
+            ))
         }
 
 
