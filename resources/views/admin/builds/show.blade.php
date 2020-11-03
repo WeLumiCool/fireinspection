@@ -38,6 +38,12 @@
                     <div class="col-6">
                         <span> {{ $build->type->name }}</span>
                     </div>
+                    <div class="col-6 mb-4">
+                        <h4 class="font-weight-bold pr-2">Запланированная проверка:</h4>
+                    </div>
+                    <div class="col-6">
+                        <span> {{ $build->planned_check }}</span>
+                    </div>
 
                 </div>
             </div>
