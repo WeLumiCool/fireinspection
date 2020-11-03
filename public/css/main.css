@@ -30,7 +30,9 @@ body {
     border-bottom: 0;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-}
+}.fa-angle-down:before {
+     content: "\f107";
+ }
 .accordion .card{
     border-bottom: 0;
     border-top-right-radius: 5px!important;

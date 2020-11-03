@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+    <?php
+    use Jenssegers\Agent\Agent;
+
+    $agent = new Agent();
+    ?>
     <div class="container">
         <div class="p-3 bg-form card-body-admin">
             <div class="row">
@@ -46,7 +51,7 @@
                                         <div class="knobs"></div>
                                         <div class="layer"></div>
                                     </div>
-                                    <label class="font-weight-bold h5 pr-3" for="has_cranes_check">Кран</label>
+                                    <label class="font-weight-bold h5 pr-3" for="has_cranes_check">Пожарный кран</label>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-12">
@@ -64,11 +69,13 @@
                             <div class="col-lg-4 col-12">
                                 <div class="form-group d-flex">
                                     <div class="button r mr-3" id="button-1">
-                                        <input id="has_hydrant_check" type="checkbox" class="checkbox" name="has_hydrant">
+                                        <input id="has_hydrant_check" type="checkbox" class="checkbox"
+                                               name="has_hydrant">
                                         <div class="knobs"></div>
                                         <div class="layer"></div>
                                     </div>
-                                    <label class="font-weight-bold h5 pr-3" for="has_hydrant_check">Гидрант</label>
+                                    <label class="font-weight-bold h5 pr-3" for="has_hydrant_check">Пожарный
+                                        гидрант</label>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-12">
@@ -82,7 +89,7 @@
                                     <label class="font-weight-bold h5 pr-3" for="has_reservoir_check">Водоем</label>
                                 </div>
                             </div>
-                            <div class="col-lg-5 col-12">
+                            <div class="col-lg-4 col-12">
                                 <div class="form-group d-flex">
                                     <div class="button r mr-3" id="button-1">
                                         <input id="has_foam_check" type="checkbox" class="checkbox" name="has_foam">
@@ -91,6 +98,44 @@
                                     </div>
                                     <label class="font-weight-bold h5" for="has_foam_check">Запасы
                                         пенооброзование</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-12 ">
+                                <div class="form-group d-lg-flex">
+                                    @if($agent->isMobile())
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <div class="button r mr-3" id="button-1" disabled="">
+                                                <input id="has_shield_check" type="checkbox" class="checkbox"
+                                                       name="has_shield"
+                                                       style="display: none">
+                                                <div class="knobs" disabled="true"></div>
+                                                <div class="layer" disabled="true"></div>
+                                            </div>
+                                            <div class="">
+                                                <label class="font-weight-bold h5 " for="has_shield_check">Пожарный
+                                                    щит</label>
+                                                <input type="number" id="counter" class="counter form-control" value=""
+                                                       placeholder="Кол-во щитов" >
+                                            </div>
+                                        </div>
+                                    @elseif($agent->isDesktop())
+                                        <div class="button r mr-3" id="button-1" disabled="">
+                                            <input id="has_shield_check" type="checkbox" class="checkbox"
+                                                   name="has_shield"
+                                                   style="display: none">
+                                            <div class="knobs" disabled="true"></div>
+                                            <div class="layer" disabled="true"></div>
+                                        </div>
+                                        <div class=" pt-2">
+                                            <label class="font-weight-bold h5 " for="has_shield_check">Пожарный
+                                                щит</label>
+                                        </div>
+                                        <div class="pl-lg-2 ">
+                                            <input type="number" id="counter" class="counter form-control" value=""
+                                                   placeholder="Кол-во щитов" style="width: 67%!important;">
+                                        </div>
+                                    @endif
+
                                 </div>
                             </div>
                         </div>
@@ -281,6 +326,17 @@
             $(this).parent().parent().remove();
         })
     </script>
+    <script>
+        document.getElementById("has_shield_check").disabled;
+        $('#counter').on('input', function () {
+            let count = $(this).val();
+            if (count > 0) {
+                $("#has_shield_check").prop('checked', true);
+            } else {
+                $("#has_shield_check").prop('checked', false)
+            }
+        })
 
+    </script>
 
 @endpush

@@ -87,10 +87,8 @@
                                             <i class="fas fa-angle-down rotate-icon" style="margin-top: 2px;"></i>
                                         </h6>
                                     </a>
-
                                 </h2>
                             </div>
-
                             <div id="build-{{ $check->build_id }}Stage-{{ $check->id }}" class="collapse"
                                  role="tabpanel" aria-labelledby="Stage-{{ $check->id }}"
                                  data-parent="#accordionStages">
