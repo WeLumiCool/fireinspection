@@ -128,7 +128,7 @@
                                                 @endif
                                             </div>
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">Кран:</p>
+                                                <p class="h6 font-weight-bold ">Пожарный кран:</p>
                                                 @if($check->has_cranes)
                                                     <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
                                                 @else
@@ -158,7 +158,7 @@
                                                 @endif
                                             </div>
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">Гидрант:</p>
+                                                <p class="h6 font-weight-bold ">Пожарный гидрант:</p>
                                                 @if($check->has_hydrant)
                                                     <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
                                                 @else
