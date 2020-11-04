@@ -182,30 +182,52 @@
                                             <div class="col-lg-6 col-12 text-lg-left py-2 text-center ">
                                                 <p class="h6 font-weight-bold ">Пожарный щит:</p>
                                                 @if($check->has_shild > 0)
-                                                    <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                    <p class="text-muted m-0 border-bottom py-1">
-                                                        Кол-во:{{ $check->has_shild }}
-                                                    </p>
+                                                    <div class="d-flex justify-content-center justify-content-lg-start">
+                                                        <p class="pr-2"><i class="fa fa-check-circle text-success fa-2x"></i></p>
+                                                        <p class="text-muted m-0  py-1">
+                                                            <span class="font-weight-bold pr-1">Кол-во:</span>{{ $check->has_shild }}
+                                                        </p>
+                                                    </div>
                                                 @else
                                                     <p>
                                                         <i class="fa fa-times-circle text-danger fa-2x"></i>
                                                     </p>
                                                 @endif
                                             </div>
-                                            @if(!is_null($check->psp_count))
-                                                <div class="col-12 d-flex text-left mb-3">
+                                            @if(is_null($check->psp_count))
+                                                <div class="col-12 d-flex text-left mb-3 px-lg-0">
                                                     <div class="col-6 col-lg-3">
                                                         <p class="h6 font-weight-bold"> Первичные средства
-                                                            пожаротущения:</p>
+                                                            пожаротушения:</p>
                                                     </div>
                                                     <div class="col-6 col-lg-3">
                                                         <p class="h6 font-weight-bold">
-                                                            Колличество
+                                                            Количество:
                                                         </p>
                                                     </div>
-
                                                 </div>
-                                                <div class="col-12 d-flex text-left mb-3">
+                                                <div class="col-12 d-flex text-left mb-3 px-lg-0">
+                                                    <div class="col-6 col-lg-3">
+                                                        <hr  style="height:2px;border:none;color:#333;background-color:#333;width: 28px;margin-left: 61px;">
+                                                    </div>
+                                                    <div class="col-6 col-lg-3 ">
+                                                        <hr  style="height:2px;border:none;color:#333;background-color:#333;width: 28px;margin-left: 25px;">
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            @if(!is_null($check->psp_count))
+                                                <div class="col-12 d-flex text-left mb-3 px-lg-0">
+                                                    <div class="col-6 col-lg-3">
+                                                        <p class="h6 font-weight-bold"> Первичные средства
+                                                            пожаротушения:</p>
+                                                    </div>
+                                                    <div class="col-6 col-lg-3">
+                                                        <p class="h6 font-weight-bold">
+                                                            Количество:
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 d-flex text-left mb-3 px-lg-0">
                                                     <div class="col-6 col-lg-3">
                                                         @foreach(json_decode($check->psp_count) as $psp)
                                                             <p class="text-muted m-0 border-bottom py-1">
@@ -224,13 +246,13 @@
                                             @endif
                                             @if(!is_null($check->images))
                                                 <div class="col-12 my-2">
-                                                    <p class="h5 text-left font-weight-bold">
-                                                        Изображение
+                                                    <p class="h5 text-lg-left text-center font-weight-bold">
+                                                        Изображение:
                                                     </p>
-                                                    <div class="row">
+                                                    <div class="row ">
                                                         @foreach(json_decode($check->images) as $image)
-                                                            <div class="col-12 col-md-4 col-lg-3 pb-3">
-                                                                <a class="grouped_elements" rel="group1"
+                                                            <div class="col-12 col-md-4 col-lg-3 pb-3 text-center">
+                                                                <a class="grouped_elements px-2" rel="group1"
                                                                    href="{{ asset('storage/' .  $image) }}"
                                                                    data-fancybox="media-img-{{ $check->id }}">
                                                                     <img src="{{ asset('storage/' .  $image) }}"
@@ -272,7 +294,6 @@
         ymaps.ready(init);
 
 
-
         function init() {
             // Создание карты.
             var myMap = new ymaps.Map("map", {
@@ -298,17 +319,17 @@
                 }
             },
 
-            myMap.geoObjects.add(new ymaps.Placemark([{{ $build->latitude ?? 42.865388923088396 }}, {{ $build->longitude ?? 74.60104350048829 }}], {
-                    balloonContentHeader: '{{ $build->name }}',
-                    balloonContentBody: '{{ $build->address }}'
-                },
-                @if($build->checks->first())
-                getPointOptions({{ $build->checks->first()->legality }}),
-                @else
-                getPointOptions(2),
-                @endif
-{{--                --}}
-            ))
+                myMap.geoObjects.add(new ymaps.Placemark([{{ $build->latitude ?? 42.865388923088396 }}, {{ $build->longitude ?? 74.60104350048829 }}], {
+                        balloonContentHeader: '{{ $build->name }}',
+                        balloonContentBody: '{{ $build->address }}'
+                    },
+                    @if($build->checks->first())
+                    getPointOptions({{ $build->checks->first()->legality }}),
+                    @else
+                    getPointOptions(2),
+                    @endif
+                    {{--                --}}
+                ))
         }
 
 
