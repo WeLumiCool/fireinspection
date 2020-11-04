@@ -6,7 +6,7 @@
 
             </div>
         </div>
-        <div class="row  pb-4 mb-4" >
+        <div class="row  pb-4 mb-4">
             <div class="col-12 col-lg-5 py-4 ">
                 <div class="card">
                     <div class="card-header text-center h4 bg-red-table">
@@ -78,9 +78,11 @@
     border-bottom: 0;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;">
-                            <div class="card-header d-flex justify-content-between align-items-center border-0" style="background: white"
+                            <div class="card-header d-flex justify-content-between align-items-center border-0"
+                                 style="background: white"
                                  role="tab" id="Stage-{{ $check->id }}">
-                                <a class="text-left w-100 collapsed" data-toggle="collapse" data-parent="#accordionStages"
+                                <a class="text-left w-100 collapsed" data-toggle="collapse"
+                                   data-parent="#accordionStages"
                                    href="#build-{{ $check->build_id }}Stage-{{ $check->id }}"
                                    aria-expanded="true"
                                    aria-controls="build-{{ $check->build_id }}Stage-{{ $check->id }}">
@@ -133,7 +135,7 @@
                                                 @endif
                                             </div>
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">Кран:</p>
+                                                <p class="h6 font-weight-bold ">Пожарный кран:</p>
                                                 @if($check->has_cranes)
                                                     <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
                                                 @else
@@ -165,7 +167,7 @@
                                                 </div>
                                             @endisset
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">Гидрант:</p>
+                                                <p class="h6 font-weight-bold ">Пожарный гидрант:</p>
                                                 @if($check->has_hydrant)
                                                     <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
                                                 @else
@@ -187,10 +189,14 @@
                                             <div class="col-lg-6 col-12 text-lg-left py-2 text-center ">
                                                 <p class="h6 font-weight-bold ">Пожарный щит:</p>
                                                 @if($check->has_shild > 0)
-                                                    <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                    <p class="text-muted m-0 border-bottom py-1">
-                                                        Кол-во:{{ $check->has_shild }}
-                                                    </p>
+                                                    <div class="d-flex">
+                                                        <p class="pr-2"><i
+                                                                class="fa fa-check-circle text-success fa-2x"></i></p>
+                                                        <p class="text-muted m-0  py-1">
+                                                            <span
+                                                                class="font-weight-bold pr-1">Кол-во:</span>{{ $check->has_shild }}
+                                                        </p>
+                                                    </div>
                                                 @else
                                                     <p>
                                                         <i class="fa fa-times-circle text-danger fa-2x"></i>
@@ -198,26 +204,43 @@
                                                 @endif
                                             </div>
                                             @if(!is_null($check->psp_count))
-                                                <div class="col-12 text-left mb-3">
-                                                    <p class="h5 font-weight-bold"> Первичные средства
-                                                        пожаротущения:</p>
-                                                    @foreach(json_decode($check->psp_count) as $psp)
-                                                        <p class="text-muted m-0">
-                                                        <span class="text-dark font-weight-bold">{{ $psp->type }}:</span>
-                                                            {{ $psp->count }}
+                                                <div class="col-12 d-flex text-left mb-3 px-lg-0">
+                                                    <div class="col-6 col-lg-3">
+                                                        <p class="h6 font-weight-bold"> Первичные средства
+                                                            пожаротушения:</p>
+                                                    </div>
+                                                    <div class="col-6 col-lg-3">
+                                                        <p class="h6 font-weight-bold">
+                                                            Количество:
                                                         </p>
-                                                    @endforeach
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 d-flex text-left mb-3 px-lg-0">
+                                                    <div class="col-6 col-lg-3">
+                                                        @foreach(json_decode($check->psp_count) as $psp)
+                                                            <p class="text-muted m-0 border-bottom py-1">
+                                                                <span class="text-dark font-weight-bold">{{ $psp->type }}:</span>
+                                                            </p>
+                                                        @endforeach
+                                                    </div>
+                                                    <div class="col-6 col-lg-3">
+                                                        @foreach(json_decode($check->psp_count) as $psp)
+                                                            <p class="text-muted m-0 border-bottom py-1">
+                                                                {{ $psp->count }}
+                                                            </p>
+                                                        @endforeach
+                                                    </div>
                                                 </div>
                                             @endif
                                             @if(!is_null($check->images))
                                                 <div class="col-12 my-2">
                                                     <p class="h5 text-left font-weight-bold">
-                                                        Изображение
+                                                        Изображение:
                                                     </p>
                                                     <div class="row">
                                                         @foreach(json_decode($check->images) as $image)
                                                             <div class="col-2">
-                                                                <a class="grouped_elements" rel="group1"
+                                                                <a class="grouped_elements px-32" rel="group1"
                                                                    href="{{ asset('storage/' .  $image) }}"
                                                                    data-fancybox="media-img-{{ $check->id }}">
                                                                     <img src="{{ asset('storage/' .  $image) }}"
@@ -299,17 +322,17 @@
                 }
             },
 
-            myMap.geoObjects.add(new ymaps.Placemark([{{ $build->latitude ?? 42.865388923088396 }}, {{ $build->longitude ?? 74.60104350048829 }}], {
-                balloonContentHeader: '{{ $build->name }}',
-                balloonContentBody: '{{ $build->address }}'
-            },
-                @if($build->checks->first())
-                getPointOptions({{ $build->checks->first()->legality }}),
-                @else
-                getPointOptions(2),
-                @endif
-                {{--                --}}
-            ))
+                myMap.geoObjects.add(new ymaps.Placemark([{{ $build->latitude ?? 42.865388923088396 }}, {{ $build->longitude ?? 74.60104350048829 }}], {
+                        balloonContentHeader: '{{ $build->name }}',
+                        balloonContentBody: '{{ $build->address }}'
+                    },
+                    @if($build->checks->first())
+                    getPointOptions({{ $build->checks->first()->legality }}),
+                    @else
+                    getPointOptions(2),
+                    @endif
+                    {{--                --}}
+                ))
         }
 
 
