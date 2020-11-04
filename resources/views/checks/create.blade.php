@@ -15,13 +15,27 @@
                         <div class="row justify-content-center">
                             <p class="font-weight-bold h2 text-center">Добавление проверки</p>
                         </div>
-                        <div class="form-group">
-                            <label class="font-weight-bold h6" for="type_check-select">Тип проверки:</label>
-                            <select class="form-control" name="type_id" id="type_check-select">
-                                @foreach($typeChecks as $typeCheck)
-                                    <option value="{{ $typeCheck->id }}">{{ $typeCheck->name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="row">
+                            <div class="col-12 col-lg-6">
+                                <div class="form-group">
+                                    <label class="font-weight-bold h6" for="type_check-select">Тип проверки:</label>
+                                    <select class="form-control" name="type_id" id="type_check-select">
+                                        @foreach($typeChecks as $typeCheck)
+                                            <option value="{{ $typeCheck->id }}">{{ $typeCheck->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <div class="form-group">
+                                    <label class="font-weight-bold h6"  for="role-select">Назначить дату следующей проверки:</label>
+                                    <select name="planned_check" id="role-select" class="form-control">
+                                        @foreach(['1-квартал', '2-квартал', '3-квартал', '4-квартал', '1-год'] as $date)
+                                            <option value="{{ $date }}">{{ $date }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="row ">
                             <div class="col-lg-4 col-12 ">
@@ -98,7 +112,7 @@
                                             <div class="layer"></div>
                                         </div>
                                         <label class="font-weight-bold h5" for="has_foam_check">Запасы
-                                            пенооброзование</label>
+                                            пенооброзования</label>
                                     </div>
                                 </div>
                             @endif
@@ -142,10 +156,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group py-2">
-                            <label class="font-weight-bold h6" for="image_input">Изображении</label>
-                            <input id="image_input" name="images[]" type="file" accept="image/*" multiple>
-                        </div>
+
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
@@ -161,19 +172,25 @@
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="font-weight-bold h6" for="type_psp_select">Нарушения:</label>
-                                    <div id="violations_div">
-                                        {{--place for violations--}}
+                                <div class="form-group ">
+                                    <div>
+                                        <label class="font-weight-bold h6" for="image_input">Изображении:</label>
                                     </div>
-                                    <button id="add_violation" class="btn btn-success mt-2" type="button">
-                                        <i class="fas fa-plus"><span class="px-4">Добавить Нарушение</span></i>
-                                    </button>
+                                    <input class="py-2" id="image_input" name="images[]" type="file" accept="image/*" multiple>
                                 </div>
+                                {{--                                <div class="form-group">--}}
+                                {{--                                    <label class="font-weight-bold h6" for="type_psp_select">Нарушения:</label>--}}
+                                {{--                                    <div id="violations_div">--}}
+                                {{--                                        --}}{{--place for violations--}}
+                                {{--                                    </div>--}}
+                                {{--                                    <button id="add_violation" class="btn btn-success mt-2" type="button">--}}
+                                {{--                                        <i class="fas fa-plus"><span class="px-4">Добавить Нарушение</span></i>--}}
+                                {{--                                    </button>--}}
+                                {{--                                </div>--}}
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="role-select">Назначить дату следующей проверки:</label>
+                                    <label class="font-weight-bold" for="role-select">Назначить дату следующей проверки:</label>
                                     <select name="planned_check" id="role-select" class="form-control">
                                         @foreach(['1-квартал', '2-квартал', '3-квартал', '4-квартал', '1-год'] as $date)
                                             <option value="{{ $date }}">{{ $date }}</option>
@@ -181,26 +198,46 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                @foreach($violations as $violation)
-                                    <div class="col-lg-12 col-12">
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <div class="form-group d-flex">
+                            @if($agent->isMobile())
+                                <div class="col-12">
+                                    @foreach($violations as $violation)
+                                        <div class="form-group d-flex justify-content-center">
+                                            <div class="button r mr-3" id="button-1">
+                                                <input id="{{$violation->id}}_check" type="checkbox"
+                                                       class="checkbox"
+                                                       name="violation[{{$violation->id}}]">
+                                                <div class="knobs "></div>
+                                                <div class="layer "></div>
+                                            </div>
+                                        </div>
+                                        <label class="font-weight-bold h5 pr-3 " for="{{$violation->id}}_check">
+                                            {{ $violation->name }}
+                                        </label>
+                                    @endforeach
+                                </div>
+                            @elseif($agent->isDesktop())
+                                <div class="col-12">
+                                    @foreach($violations as $violation)
+                                        <div
+                                            class="d-flex justify-content-lg-start justify-content-center align-items-center">
+                                            <div class="form-group d-flex py-2">
                                                 <div class="button r mr-3" id="button-1">
-                                                    <input id="{{$violation->id}}_check" type="checkbox" class="checkbox"
+                                                    <input id="{{$violation->id}}_check" type="checkbox"
+                                                           class="checkbox"
                                                            name="violation[{{$violation->id}}]">
                                                     <div class="knobs "></div>
                                                     <div class="layer "></div>
                                                 </div>
 
                                             </div>
-                                            <label class="font-weight-bold h5 pr-3 " for="{{$violation->id}}_check">
+                                            <label class="font-weight-bold h5 pr-3 py-2" for="{{$violation->id}}_check">
                                                 {{ $violation->name }}
                                             </label>
                                         </div>
-                                    </div>
-                                @endforeach
-                            </div>
+                                    @endforeach
+                                </div>
+                            @endif
+
                         </div>
                         <input type="hidden" name="build_id" value="{{ $id }}">
                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
@@ -358,17 +395,17 @@
         {{--    $(document).on('click', '.delete-violation', function () {--}}
         {{--        $(this).parent().parent().remove();--}}
         {{--    })--}}
-        </script>
-        <script>
-            document.getElementById("has_shield_check").disabled;
-            $('#counter').on('input', function () {
-                let count = $(this).val();
-                if (count > 0) {
-                    $("#has_shield_check").prop('checked', true);
-                } else {
-                    $("#has_shield_check").prop('checked', false)
-                }
-            })
+    </script>
+    <script>
+        document.getElementById("has_shield_check").disabled;
+        $('#counter').on('input', function () {
+            let count = $(this).val();
+            if (count > 0) {
+                $("#has_shield_check").prop('checked', true);
+            } else {
+                $("#has_shield_check").prop('checked', false)
+            }
+        })
 
     </script>
 

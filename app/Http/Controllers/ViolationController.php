@@ -48,7 +48,7 @@ class ViolationController extends Controller
      */
     public function show(Violation $violation)
     {
-        return view('admin.violations.show', compact('violation'));
+        return view('admin.types.show', compact('violation'));
     }
 
     /**

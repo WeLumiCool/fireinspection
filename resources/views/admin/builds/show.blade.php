@@ -81,11 +81,11 @@
                             <div class="card-header d-flex justify-content-between align-items-center border-0"
                                  style="background: white"
                                  role="tab" id="Stage-{{ $check->id }}">
-                                <a class="text-left w-100 collapsed" data-toggle="collapse"
+                                <a class="text-left w-100 collapsed text-decoration-none" data-toggle="collapse"
                                    data-parent="#accordionStages"
                                    href="#build-{{ $check->build_id }}Stage-{{ $check->id }}"
                                    aria-expanded="true"
-                                   aria-controls="build-{{ $check->build_id }}Stage-{{ $check->id }}">
+                                   aria-controls="build-{{ $check->build_id }}Stage-{{ $check->id }}" >
                                     <h6 class="mt-1 mb-0">
                                         <span>{{ $check->type->name }} проверка: <span>{{ $check->created_at }}</span></span>
                                         <i class="fas fa-angle-down mr-3 rotate-icon" style="margin-top: 2px;"></i>
@@ -176,7 +176,7 @@
                                                     </p>
                                                 @endif
                                             </div>
-                                            <div class="col-lg-6 col-12 text-lg-left py-2 text-center ">
+                                            <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
                                                 <p class="h6 font-weight-bold ">Водоем:</p>
                                                 @if($check->has_reservoir)
                                                     <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
@@ -186,7 +186,7 @@
                                                     </p>
                                                 @endif
                                             </div>
-                                            <div class="col-lg-6 col-12 text-lg-left py-2 text-center ">
+                                            <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
                                                 <p class="h6 font-weight-bold ">Пожарный щит:</p>
                                                 @if($check->has_shild > 0)
                                                     <div class="d-flex">
@@ -203,19 +203,28 @@
                                                     </p>
                                                 @endif
                                             </div>
-                                            @if(!is_null($check->psp_count))
-                                                <div class="col-12 d-flex text-left mb-3 px-lg-0">
-                                                    <div class="col-6 col-lg-3">
-                                                        <p class="h6 font-weight-bold"> Первичные средства
-                                                            пожаротушения:</p>
-                                                    </div>
-                                                    <div class="col-6 col-lg-3">
-                                                        <p class="h6 font-weight-bold">
-                                                            Количество:
-                                                        </p>
-                                                    </div>
+                                            <div class="col-12 d-flex text-left mb-3 px-lg-0">
+                                                <div class="col-6 col-lg-3">
+                                                    <p class="h6 font-weight-bold"> Первичные средства
+                                                        пожаротушения:</p>
                                                 </div>
-                                                <div class="col-12 d-flex text-left mb-3 px-lg-0">
+                                                <div class="col-6 col-lg-3">
+                                                    <p class="h6 font-weight-bold">
+                                                        Количество:
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 d-flex text-left mb-3 px-lg-0">
+                                                @if(is_null($check->psp_count))
+                                                    <div class="col-12 d-flex text-left mb-3 px-lg-0">
+                                                        <div class="col-6 col-lg-3">
+                                                            <hr style="height:2px;border:none;color:#333;background-color:#333;width: 28px;margin-left: 61px;">
+                                                        </div>
+                                                        <div class="col-6 col-lg-3 ">
+                                                            <hr style="height:2px;border:none;color:#333;background-color:#333;width: 28px;margin-left: 25px;">
+                                                        </div>
+                                                    </div>
+                                                @else
                                                     <div class="col-6 col-lg-3">
                                                         @foreach(json_decode($check->psp_count) as $psp)
                                                             <p class="text-muted m-0 border-bottom py-1">
@@ -230,8 +239,8 @@
                                                             </p>
                                                         @endforeach
                                                     </div>
-                                                </div>
-                                            @endif
+                                                @endif
+                                            </div>
                                             @if(!is_null($check->images))
                                                 <div class="col-12 my-2">
                                                     <p class="h5 text-left font-weight-bold">
@@ -239,12 +248,12 @@
                                                     </p>
                                                     <div class="row">
                                                         @foreach(json_decode($check->images) as $image)
-                                                            <div class="col-2">
-                                                                <a class="grouped_elements px-32" rel="group1"
+                                                            <div class="col-2 px-2">
+                                                                <a class="grouped_elements " rel="group1"
                                                                    href="{{ asset('storage/' .  $image) }}"
                                                                    data-fancybox="media-img-{{ $check->id }}">
                                                                     <img src="{{ asset('storage/' .  $image) }}"
-                                                                         class="" alt="" height="200"/>
+                                                                          alt="" class="img-fluid"/>
                                                                 </a>
                                                             </div>
                                                         @endforeach
@@ -253,11 +262,15 @@
                                             @endif
                                             <div class="col-12 col-lg-11 text-left">
                                                 <p class="h5 font-weight-bold">Примечание:</p>
-                                                @foreach($check->violations as $violation)
-                                                    <p class="alert alert-danger">
-                                                        <span>{{ $violation->name }}:</span>
-                                                    </p>
-                                                @endforeach
+                                                @if($check->violations->isEmpty())
+                                                    <hr style="height:2px;border:none;color:#333;background-color:#333;width: 28px;margin-left: 61px;">
+                                                @else
+                                                    @foreach($check->violations as $violation)
+                                                        <p class="alert alert-danger">
+                                                            <span>{{ $violation->name }}:</span>
+                                                        </p>
+                                                    @endforeach
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
