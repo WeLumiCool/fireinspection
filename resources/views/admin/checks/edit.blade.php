@@ -14,7 +14,9 @@
                         <label class="font-weight-bold h5" for="type_check-select">Тип проверки:</label>
                         <select class="form-control" name="type_id" id="type_check-select">
                             @foreach($typeChecks as $typeCheck)
-                                <option value="{{ $typeCheck->id }}" {{ $typeCheck->id==$check->type_id?'selected':''}}>{{ $typeCheck->name }}</option>
+                                <option value="{{ $typeCheck->id }}" {{ $typeCheck->id==$check->type_id?'selected':''}}>
+                                    {{ $typeCheck->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -124,7 +126,10 @@
                                                     <select class="form-control-sm" name="type_psps[]"
                                                             id="type_psp_select">
                                                         @foreach($typePsps as $typePsp)
-                                                            <option value="{{ $typePsp->name }}" {{ $typePsp->name==$psp->type?'selected':'' }}>{{ $typePsp->name }}</option>
+                                                            <option
+                                                                value="{{ $typePsp->name }}" {{ $typePsp->name==$psp->type?'selected':'' }}>
+                                                                {{ $typePsp->name }}
+                                                            </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -151,38 +156,60 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="font-weight-bold h6" for="type_psp_select">Нарушения:</label>
-                                <div id="violations_div">
-                                    @if($check->violations->count())
-                                        @foreach($check->violations as $violation)
-                                            <div class="row card-body-admin my-2 mx-1 bg-form" style="padding:0.7px 0">
-                                                <div class="col-lg-5 d-flex align-items-center">
-                                                    <select class="form-control-sm " name="type_violations[]"
-                                                            id="type_psp_select">
-                                                        @foreach($typeViolations as $typeViolation)
-                                                            <option value="{{ $typeViolation->id }}" {{ $typeViolation->id==$violation->id?'select':'' }}>{{ $typeViolation->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div style="padding-top: 6px">
-                                                <textarea class="" name="descs[]" cols=25" rows="1"
-                                                          style="padding: 2.25px 0;">{{ $violation->note }}</textarea>
+                                <div class="col-12">
+                                    @foreach($violations as $violation)
+                                            <div class="col-lg-12 col-12">
+                                                <div class="d-flex justify-content-center align-items-center">
+                                                    <div class="form-group d-flex">
+                                                        <div class="button r mr-3" id="button-1">
+                                                            <input id="{{$violation->id}}_check" type="checkbox"
+                                                                   class="checkbox"
+                                                                   name="violation[{{$violation->id}}]
+                                                                       ">
+                                                            <div class="knobs "></div>
+                                                            <div class="layer "></div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-1 justify-content-center d-flex">
-                                                    <button class="btn delete-violation" type="button"
-                                                            style="font-size:18px;color: red">
-                                                        <i class="far fa-trash-alt"></i>
-                                                    </button>
+                                                    <label class="font-weight-bold h5 pr-3 "
+                                                           for="{{$violation->id}}_check">
+                                                        {{ $violation->name }}
+                                                    </label>
                                                 </div>
                                             </div>
                                         @endforeach
-                                    @endif
-                                    {{--place for violations--}}
                                 </div>
+                                {{--                                <div id="violations_div">--}}
+                                {{--                                    @if($check->violations->count())--}}
+                                {{--                                        @foreach($check->violations as $violation)--}}
+                                {{--                                            <div class="row card-body-admin my-2 mx-1 bg-form" style="padding:0.7px 0">--}}
+                                {{--                                                <div class="col-lg-5 d-flex align-items-center">--}}
+                                {{--                                                    <select class="form-control-sm " name="type_violations[]"--}}
+                                {{--                                                            id="type_psp_select">--}}
+                                {{--                                                        @foreach($typeViolations as $typeViolation)--}}
+                                {{--                                                            <option value="{{ $typeViolation->id }}" {{ $typeViolation->id==$violation->id?'select':'' }}>{{ $typeViolation->name }}</option>--}}
+                                {{--                                                        @endforeach--}}
+                                {{--                                                    </select>--}}
+                                {{--                                                </div>--}}
+                                {{--                                                <div class="col-lg-6">--}}
+                                {{--                                                    <div style="padding-top: 6px">--}}
+                                {{--                                                <textarea class="" name="descs[]" cols=25" rows="1"--}}
+                                {{--                                                          style="padding: 2.25px 0;">{{ $violation->note }}</textarea>--}}
+                                {{--                                                    </div>--}}
+                                {{--                                                </div>--}}
+                                {{--                                                <div class="col-lg-1 justify-content-center d-flex">--}}
+                                {{--                                                    <button class="btn delete-violation" type="button"--}}
+                                {{--                                                            style="font-size:18px;color: red">--}}
+                                {{--                                                        <i class="far fa-trash-alt"></i>--}}
+                                {{--                                                    </button>--}}
+                                {{--                                                </div>--}}
+                                {{--                                            </div>--}}
+                                {{--                                        @endforeach--}}
+                                {{--                                    @endif--}}
+                                {{--                                    --}}{{--place for violations--}}
+                                {{--                                </div>--}}
                                 <button id="add_violation" class="btn btn-success mt-2" type="button">
                                     <i class="fas fa-plus"><span class="px-4">Добавить Нарушение</span></i>
                                 </button>
@@ -289,10 +316,10 @@
                 `<div class="row card-body-admin my-2 mx-1 bg-form">
         <div class="col-lg-4 d-flex align-items-center">
             <select class="form-control-sm" name="type_psps[]" id="type_psp_select">`
-                    @foreach($typePsps as $typePsp)
+                @foreach($typePsps as $typePsp)
                 + `
                 <option value="{{ $typePsp->name }}">{{ $typePsp->name }}</option>`
-                    @endforeach
+                @endforeach
                 + `</select>
         </div>
         <div class="col-lg-7">
@@ -312,24 +339,24 @@
             $(this).parent().remove();
         });
 
-        $('#add_violation').click(function () {
-            let html =
-                `<div class="border">
-                         <select name="type_violations[]" id="type_psp_select">`
-                    @foreach($typeViolations as $typeViolation)
-                + `<option value="{{ $typeViolation->id }}">{{ $typeViolation->name }}</option>`
-                    @endforeach
-                + `</select>
-                <textarea name="descs[]" cols="40" rows="1"></textarea>
-                <button class="btn delete-violation" type="button" style="color: red">
-                    <i class="far fa-trash-alt"></i>
-                </button>
-            </div>`;
-            $('#violations_div').append(html);
-        });
-        $(document).on('click', '.delete-violation', function () {
-            $(this).parent().remove();
-        })
+        {{--$('#add_violation').click(function () {--}}
+        {{--    let html =--}}
+        {{--        `<div class="border">--}}
+        {{--                 <select name="type_violations[]" id="type_psp_select">`--}}
+        {{--            @foreach($typeViolations as $typeViolation)--}}
+        {{--        + `<option value="{{ $typeViolation->id }}">{{ $typeViolation->name }}</option>`--}}
+        {{--            @endforeach--}}
+        {{--        + `</select>--}}
+        {{--        <textarea name="descs[]" cols="40" rows="1"></textarea>--}}
+        {{--        <button class="btn delete-violation" type="button" style="color: red">--}}
+        {{--            <i class="far fa-trash-alt"></i>--}}
+        {{--        </button>--}}
+        {{--    </div>`;--}}
+        {{--    $('#violations_div').append(html);--}}
+        {{--});--}}
+        {{--$(document).on('click', '.delete-violation', function () {--}}
+        {{--    $(this).parent().remove();--}}
+        {{--})--}}
     </script>
     <script>
         function readURL(input) {

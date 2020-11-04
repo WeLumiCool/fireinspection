@@ -17,7 +17,7 @@
             <i class="fas fa-users mr-3"></i>{{ __('Пользователи') }}</a>
 
         <a href="{{ route('admin.violations.index') }}"
-           class="list-group-item list-group-item-action waves-effect {{ request()->is('admin/typeViolation*') ? 'active' : '' }}">
+           class="list-group-item list-group-item-action waves-effect {{ request()->is('admin/violations*') ? 'active' : '' }}">
             <i class="fas fa-calculator mr-3"></i>{{ __('Тип нарушений') }}</a>
 
         <a href="{{ route('admin.typeBuilds.index') }}"

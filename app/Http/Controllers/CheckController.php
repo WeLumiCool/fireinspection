@@ -208,12 +208,12 @@ class CheckController extends Controller
     public function edit(Check $check)
     {
         $typePsps = TypePsp::all();
-        $typeViolations = TypeViolation::all();
+        $violations = Violation::all();
         $typeChecks = TypeCheck::all();
         return view('admin.checks.edit', compact(
             'check',
             'typePsps',
-            'typeViolations',
+            'violations',
             'typeChecks'));
     }
 
