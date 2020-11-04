@@ -177,6 +177,26 @@
                             </select>
                         </div>
                     </div>
+                    <div class="col-12">
+                        @foreach($violations as $violation)
+                            <div class="col-lg-12 col-12">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <div class="form-group d-flex">
+                                        <div class="button r mr-3" id="button-1">
+                                            <input id="{{$violation->id}}_check" type="checkbox" class="checkbox"
+                                                   name="violation[{{$violation->id}}]">
+                                            <div class="knobs "></div>
+                                            <div class="layer "></div>
+                                        </div>
+
+                                    </div>
+                                    <label class="font-weight-bold h5 pr-3 " for="{{$violation->id}}_check">
+                                        {{ $violation->name }}
+                                    </label>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                     <input type="hidden" name="build_id" value="{{ $id }}">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <div class="row pt-3">
@@ -303,35 +323,6 @@
         $(document).on('click', '.delete-psp', function () {
             $(this).parent().parent().remove();
         });
-
-        $('#add_violation').click(function () {
-            let html =
-                `
-    <div class="row card-body-admin my-2 mx-1 bg-form"  style="padding:0.7px 0">
-        <div class="col-lg-5 d-flex align-items-center">
-                <select class="form-control-sm " name="type_violations[]" id="type_psp_select">`
-                @foreach($typeViolations as $typeViolation)
-                + `
-                        <option value="{{ $typeViolation->id }}">{{ $typeViolation->name }}</option>`
-                @endforeach
-                + `</select>
-        </div>
-        <div class="col-lg-6">
-            <div style="padding-top: 6px">
-                <textarea class="" name="descs[]" cols=25" rows="1" style="padding: 2.25px 0;"></textarea>
-            </div>
-        </div>
-        <div class="col-lg-1 justify-content-center d-flex">
-            <button class="btn delete-violation" type="button" style="font-size:18px;color: red">
-                <i class="far fa-trash-alt"></i>
-            </button>
-        </div>
-    </div>`;
-            $('#violations_div').append(html);
-        });
-        $(document).on('click', '.delete-violation', function () {
-            $(this).parent().parent().remove();
-        })
     </script>
     <script>
         document.getElementById("has_shield_check").disabled;

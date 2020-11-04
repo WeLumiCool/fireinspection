@@ -37,8 +37,8 @@ Route::prefix('admin')->name('admin.')/*->middleware('admin')*/
     Route::get('/user/datatable', 'UserController@datatableData')->name('user.datatable.data');
     Route::resource('users', 'UserController');
     //CRUD for typesViolation
-    Route::get('/type/datatable', 'TypeViolationController@datatableData')->name('type.datatable.data');
-    Route::resource('typeViolations', 'TypeViolationController');
+    Route::get('/type/datatable', 'ViolationController@datatableData')->name('type.datatable.data');
+    Route::resource('violations', 'ViolationController');
     //CRUD for typesBuild
     Route::get('/typeBuild/datatable', 'TypeBuildController@datatableData')->name('typeBuild.datatable.data');
     Route::resource('typeBuilds', 'TypeBuildController');

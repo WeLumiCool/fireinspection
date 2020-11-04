@@ -228,17 +228,14 @@
                                                     </div>
                                                 </div>
                                             @endif
-                                            @if($check->violations->count())
-                                                <div class="col-11 text-left">
-                                                    <p class="h5 font-weight-bold">Примечание:</p>
-                                                    @foreach($check->violations as $violation)
-                                                        <p class="alert alert-danger mx-2">
-                                                            <span class="mx-2">{{ $violation->type->name }}:</span>
-                                                            {{ $violation->note }}
-                                                        </p>
-                                                    @endforeach
-                                                </div>
-                                            @endif
+                                            <div class="col-12 col-lg-11 text-left">
+                                                <p class="h5 font-weight-bold">Примечание:</p>
+                                                @foreach($check->violations as $violation)
+                                                    <p class="alert alert-danger">
+                                                        <span>{{ $violation->name }}:</span>
+                                                    </p>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

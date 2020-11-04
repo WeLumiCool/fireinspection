@@ -241,17 +241,14 @@
                                                     </div>
                                                 </div>
                                             @endif
-                                            @if($check->violations->count())
-                                                <div class="col-12 col-lg-11 text-left">
-                                                    <p class="h5 font-weight-bold">Примечание:</p>
-                                                    @foreach($check->violations as $violation)
-                                                        <p class="alert alert-danger">
-                                                            <span>{{ $violation->type->name }}:</span>
-                                                            {{ $violation->note }}
-                                                        </p>
-                                                    @endforeach
-                                                </div>
-                                            @endif
+                                            <div class="col-12 col-lg-11 text-left">
+                                                <p class="h5 font-weight-bold">Примечание:</p>
+                                                @foreach($check->violations as $violation)
+                                                    <p class="alert alert-danger">
+                                                        <span>{{ $violation->name }}:</span>
+                                                    </p>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -270,7 +267,6 @@
         // Функция ymaps.ready() будет вызвана, когда
         // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
         ymaps.ready(init);
-
 
 
         function init() {
@@ -298,17 +294,17 @@
                 }
             },
 
-            myMap.geoObjects.add(new ymaps.Placemark([{{ $build->latitude ?? 42.865388923088396 }}, {{ $build->longitude ?? 74.60104350048829 }}], {
-                    balloonContentHeader: '{{ $build->name }}',
-                    balloonContentBody: '{{ $build->address }}'
-                },
-                @if($build->checks->first())
-                getPointOptions({{ $build->checks->first()->legality }}),
-                @else
-                getPointOptions(2),
-                @endif
-{{--                --}}
-            ))
+                myMap.geoObjects.add(new ymaps.Placemark([{{ $build->latitude ?? 42.865388923088396 }}, {{ $build->longitude ?? 74.60104350048829 }}], {
+                        balloonContentHeader: '{{ $build->name }}',
+                        balloonContentBody: '{{ $build->address }}'
+                    },
+                    @if($build->checks->first())
+                    getPointOptions({{ $build->checks->first()->legality }}),
+                    @else
+                    getPointOptions(2),
+                    @endif
+                    {{--                --}}
+                ))
         }
 
 

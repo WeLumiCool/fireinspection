@@ -6,7 +6,7 @@
             <div class="col-sm-12 table-responsive">
                 <div class="row justify-content-end pb-2">
                     <div class="col-auto">
-                        <a href="{{ route('admin.typeViolations.create') }}" class="btn btn-success">{{ __('Создать') }}</a>
+                        <a href="{{ route('admin.violations.create') }}" class="btn btn-success">{{ __('Создать') }}</a>
                     </div>
                 </div>
 

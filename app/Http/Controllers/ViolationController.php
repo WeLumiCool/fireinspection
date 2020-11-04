@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Violation;
+use App\Violation;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class ViolationController extends Controller
 {
@@ -14,7 +15,7 @@ class ViolationController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.types.index');
     }
 
     /**
@@ -24,7 +25,7 @@ class ViolationController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.types.create');
     }
 
     /**
@@ -35,7 +36,8 @@ class ViolationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Violation::create($request->all());
+        return redirect()->route('admin.violations.index');
     }
 
     /**
@@ -46,7 +48,7 @@ class ViolationController extends Controller
      */
     public function show(Violation $violation)
     {
-        //
+        return view('admin.violations.show', compact('violation'));
     }
 
     /**
@@ -57,7 +59,7 @@ class ViolationController extends Controller
      */
     public function edit(Violation $violation)
     {
-        //
+        return view('admin.types.edit', compact('violation'));
     }
 
     /**
@@ -69,7 +71,8 @@ class ViolationController extends Controller
      */
     public function update(Request $request, Violation $violation)
     {
-        //
+        $violation->update($request->all());
+        return redirect()->route('admin.violations.index');
     }
 
     /**
@@ -80,6 +83,14 @@ class ViolationController extends Controller
      */
     public function destroy(Violation $violation)
     {
-        //
+        $violation->delete();
+        return redirect()->route('admin.violations.index');
+    }
+    public function datatableData() {
+        return DataTables::of(Violation::query())
+            ->addColumn('actions', function (Violation $violation) {
+                return view('admin.actions', ['type' => 'violations', 'model' => $violation]);
+            })
+            ->make(true);
     }
 }

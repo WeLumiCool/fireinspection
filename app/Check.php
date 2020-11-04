@@ -33,7 +33,7 @@ class Check extends Model
 
     public function violations()
     {
-        return $this->hasMany(Violation::class);
+        return $this->belongsToMany(Violation::class);
     }
 
     public function type()

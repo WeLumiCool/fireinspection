@@ -8,9 +8,8 @@ class Violation extends Model
 {
     protected $fillable =
         [
-            'note',
-            'type_id',
-            'check_id',
+            'name',
+
         ];
 
     public function check()
@@ -18,8 +17,8 @@ class Violation extends Model
         return $this->belongsTo(Check::class);
     }
 
-    public function type()
+    public function checks()
     {
-        return $this->belongsTo(Typeviolation::class, 'type_id');
+        return $this->belongsToMany(Check::class);
     }
 }
