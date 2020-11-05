@@ -1,6 +1,11 @@
 @extends('admin.layouts.dashboard')
 
 @section('dashboard_content')
+    <?php
+    use Jenssegers\Agent\Agent;
+
+    $agent = new Agent();
+    ?>
     <div class="p-3 bg-form card-body-admin">
         <div class="row">
             <div class="col-12 col-sm-10 col-lg-12 col-md-10">
@@ -10,15 +15,29 @@
                     <div class="row justify-content-center">
                         <p class="font-weight-bold h2">Изменение проверки</p>
                     </div>
-                    <div class="form-group">
-                        <label class="font-weight-bold h5" for="type_check-select">Тип проверки:</label>
-                        <select class="form-control" name="type_id" id="type_check-select">
-                            @foreach($typeChecks as $typeCheck)
-                                <option value="{{ $typeCheck->id }}" {{ $typeCheck->id==$check->type_id?'selected':''}}>
-                                    {{ $typeCheck->name }}
-                                </option>
-                            @endforeach
-                        </select>
+                    <div class="row">
+                        <div class="col-lg-6 col-12">
+                            <div class="form-group">
+                                <label class="font-weight-bold h5" for="type_check-select">Тип проверки:</label>
+                                <select class="form-control" name="type_id" id="type_check-select">
+                                    @foreach($typeChecks as $typeCheck)
+                                        <option value="{{ $typeCheck->id }}" {{ $typeCheck->id==$check->type_id?'selected':''}}>
+                                            {{ $typeCheck->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <div class="form-group">
+                                <label class="font-weight-bold h6"  for="role-select">Назначить дату следующей проверки:</label>
+                                <select name="planned_check" id="role-select" class="form-control">
+                                    @foreach(['1-квартал', '2-квартал', '3-квартал', '4-квартал', '1-год'] as $date)
+                                        <option value="{{ $date }}">{{ $date }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-4 col-12 ">
@@ -51,7 +70,7 @@
                                     <div class="knobs"></div>
                                     <div class="layer"></div>
                                 </div>
-                                <label class="font-weight-bold h5 pr-3" for="has_cranes_check">Кран</label>
+                                <label class="font-weight-bold h5 pr-3" for="has_cranes_check">Пожарный кран</label>
                             </div>
                         </div>
                         <div class="col-lg-4 col-12">
@@ -74,7 +93,7 @@
                                     <div class="knobs"></div>
                                     <div class="layer"></div>
                                 </div>
-                                <label class="font-weight-bold h5 pr-3" for="has_hydrant_check">Гидрант</label>
+                                <label class="font-weight-bold h5 pr-3" for="has_hydrant_check">Пожарный гидрант</label>
                             </div>
                         </div>
                         <div class="col-lg-4 col-12">
@@ -88,7 +107,7 @@
                                 <label class="font-weight-bold h5 pr-3" for="has_reservoir_check">Водоем</label>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-12">
+                        <div class="col-lg-4 col-12">
                             <div class="form-group d-flex">
                                 <div class="button r mr-3" id="button-1">
                                     <input id="has_foam_check" type="checkbox" class="checkbox"
@@ -100,23 +119,48 @@
                                     пенооброзование</label>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="font-weight-bold h5" for="image_input">Изображении</label>
-                        <input id="image_input" name="images[]" type="file" accept="image/*" onchange="readURL(this);"
-                               multiple>
-                        <div id="images">
-                            @if(!is_null($check->images))
-                                @foreach(json_decode($check->images) as $image)
-                                    <img src="{{ asset('storage/'. $image) }}" alt="{{ $image }}" height="200">
-                                @endforeach
-                            @endif
+                        <div class="col-lg-5 col-12 ">
+                            <div class="form-group d-lg-flex">
+                                @if($agent->isMobile())
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <div class="button r mr-3" id="button-1" disabled="">
+                                            <input id="has_shield_check" type="checkbox" class="checkbox"
+                                                   name="shield"
+                                                   style="display: none">
+                                            <div class="knobs" disabled="true"></div>
+                                            <div class="layer" disabled="true"></div>
+                                        </div>
+                                        <div class="">
+                                            <label class="font-weight-bold h5 " for="has_shield_check">Пожарный
+                                                щит</label>
+                                            <input type="number" name="has_shield" id="counter" class="counter form-control"
+                                                   placeholder="Кол-во щитов" min="0" value="0" >
+                                        </div>
+                                    </div>
+                                @elseif($agent->isDesktop())
+                                    <div class="button r mr-3" id="button-1" disabled="">
+                                        <input id="has_shield_check" type="checkbox" class="checkbox"
+                                               name="shield"
+                                               style="display: none">
+                                        <div class="knobs" disabled="true"></div>
+                                        <div class="layer" disabled="true"></div>
+                                    </div>
+                                    <div class=" pt-2">
+                                        <label class="font-weight-bold h5 " for="has_shield_check">Пожарный
+                                            щит</label>
+                                    </div>
+                                    <div class="pl-lg-2 ">
+                                        <input type="number" name="has_shield" id="counter" class="counter form-control"
+                                               placeholder="Кол-во щитов"  min="0" value="0" style="width: 67%!important;">
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="font-weight-bold h6" for="type_psp_select">Первичные средства
+                                <label class="font-weight-bold h5" for="type_psp_select">Первичные средства
                                     пожаротушения:</label>
                                 <div id="psps_div">
                                     @if(!is_null($check->psp_count))
@@ -156,68 +200,47 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="font-weight-bold h5" for="image_input">Изображении</label>
+                                <input id="image_input" name="images[]" type="file" accept="image/*"
+                                       onchange="readURL(this);"
+                                       multiple>
+                                <div id="images">
+                                    @if(!is_null($check->images))
+                                        @foreach(json_decode($check->images) as $image)
+                                            <img src="{{ asset('storage/'. $image) }}" alt="{{ $image }}" height="200">
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label class="font-weight-bold h6" for="type_psp_select">Нарушения:</label>
+                                <label class="font-weight-bold h5" for="type_psp_select">Нарушения:</label>
                                 <div class="col-12">
                                     @foreach($violations as $violation)
-                                        <div class="col-lg-12 col-12">
-                                            <div class="d-flex justify-content-center align-items-center">
-                                                    <div class="form-group d-flex">
-                                                        <div class="button r mr-3" id="button-1">
-
-                                                            <input id="{{$violation->id}}_check" type="checkbox"
-                                                                   class="checkbox"
-                                                                   name="violation[{{$violation->id}}]" {{ $check->violations->contains('id', $violation->id) ? "checked" : "" }}>
-                                                            <div class="knobs "></div>
-                                                            <div class="layer "></div>
-                                                        </div>
-                                                    </div>
-                                                <label class="font-weight-bold h5 pr-3 "
-                                                       for="{{$violation->id}}_check">
-                                                    {{ $violation->name }}
-                                                </label>
+                                        <div
+                                            class="d-flex justify-content-lg-start justify-content-center align-items-center">
+                                            <div class="form-group d-flex">
+                                                <div class="button r mr-3" id="button-1">
+                                                    <input id="{{$violation->id}}_check" type="checkbox"
+                                                           class="checkbox"
+                                                           name="violation[{{$violation->id}}]" {{ $check->violations->contains('id', $violation->id) ? "checked" : "" }}>
+                                                    <div class="knobs "></div>
+                                                    <div class="layer "></div>
+                                                </div>
                                             </div>
+                                            <label class="font-weight-bold h5 pr-3 "
+                                                   for="{{$violation->id}}_check">
+                                                {{ $violation->name }}
+                                            </label>
                                         </div>
                                     @endforeach
                                 </div>
-                                {{--                                <div id="violations_div">--}}
-                                {{--                                    @if($check->violations->count())--}}
-                                {{--                                        @foreach($check->violations as $violation)--}}
-                                {{--                                            <div class="row card-body-admin my-2 mx-1 bg-form" style="padding:0.7px 0">--}}
-                                {{--                                                <div class="col-lg-5 d-flex align-items-center">--}}
-                                {{--                                                    <select class="form-control-sm " name="type_violations[]"--}}
-                                {{--                                                            id="type_psp_select">--}}
-                                {{--                                                        @foreach($typeViolations as $typeViolation)--}}
-                                {{--                                                            <option value="{{ $typeViolation->id }}" {{ $typeViolation->id==$violation->id?'select':'' }}>{{ $typeViolation->name }}</option>--}}
-                                {{--                                                        @endforeach--}}
-                                {{--                                                    </select>--}}
-                                {{--                                                </div>--}}
-                                {{--                                                <div class="col-lg-6">--}}
-                                {{--                                                    <div style="padding-top: 6px">--}}
-                                {{--                                                <textarea class="" name="descs[]" cols=25" rows="1"--}}
-                                {{--                                                          style="padding: 2.25px 0;">{{ $violation->note }}</textarea>--}}
-                                {{--                                                    </div>--}}
-                                {{--                                                </div>--}}
-                                {{--                                                <div class="col-lg-1 justify-content-center d-flex">--}}
-                                {{--                                                    <button class="btn delete-violation" type="button"--}}
-                                {{--                                                            style="font-size:18px;color: red">--}}
-                                {{--                                                        <i class="far fa-trash-alt"></i>--}}
-                                {{--                                                    </button>--}}
-                                {{--                                                </div>--}}
-                                {{--                                            </div>--}}
-                                {{--                                        @endforeach--}}
-                                {{--                                    @endif--}}
-                                {{--                                    --}}{{--place for violations--}}
-                                {{--                                </div>--}}
-                                <button id="add_violation" class="btn btn-success mt-2" type="button">
-                                    <i class="fas fa-plus"><span class="px-4">Добавить Нарушение</span></i>
-                                </button>
                             </div>
                         </div>
                     </div>
-
-
                     <input type="hidden" name="build_id" value="{{ $check->build_id }}">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <div class="col-12 text-center pt-4 ">
@@ -373,5 +396,16 @@
                 }
             }
         }
+    </script>
+    <script>
+        document.getElementById("has_shield_check").disabled;
+        $('#counter').on('input',function () {
+            let count = $(this).val();
+            if(count > 0){
+                $("#has_shield_check").prop('checked', true);
+            }
+            else{ $("#has_shield_check").prop('checked', false)  }
+        })
+
     </script>
 @endpush
