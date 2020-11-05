@@ -132,7 +132,7 @@
                                                     щит</label>
                                                 <input type="number" name="has_shield" id="counter"
                                                        class="counter form-control"
-                                                       placeholder="Кол-во щитов">
+                                                       placeholder="Кол-во щитов" min="0" value="0">
                                             </div>
                                         </div>
                                     @elseif($agent->isDesktop())
@@ -149,8 +149,8 @@
                                         </div>
                                         <div class="pl-lg-2 ">
                                             <input type="number" name="has_shield" id="counter"
-                                                   class="counter form-control" value=""
-                                                   placeholder="Кол-во щитов" style="width: 67%!important;">
+                                                   class="counter form-control"
+                                                   placeholder="Кол-во щитов" min="0" value="0" style="width: 67%!important;">
                                         </div>
                                     @endif
                                 </div>
