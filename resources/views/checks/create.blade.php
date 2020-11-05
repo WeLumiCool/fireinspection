@@ -188,16 +188,6 @@
                                 {{--                                    </button>--}}
                                 {{--                                </div>--}}
                             </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label class="font-weight-bold" for="role-select">Назначить дату следующей проверки:</label>
-                                    <select name="planned_check" id="role-select" class="form-control">
-                                        @foreach(['1-квартал', '2-квартал', '3-квартал', '4-квартал', '1-год'] as $date)
-                                            <option value="{{ $date }}">{{ $date }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
                             @if($agent->isMobile())
                                 <div class="col-12">
                                     @foreach($violations as $violation)
