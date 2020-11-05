@@ -161,25 +161,25 @@
                                 <label class="font-weight-bold h6" for="type_psp_select">Нарушения:</label>
                                 <div class="col-12">
                                     @foreach($violations as $violation)
-                                            <div class="col-lg-12 col-12">
-                                                <div class="d-flex justify-content-center align-items-center">
+                                        <div class="col-lg-12 col-12">
+                                            <div class="d-flex justify-content-center align-items-center">
                                                     <div class="form-group d-flex">
                                                         <div class="button r mr-3" id="button-1">
+
                                                             <input id="{{$violation->id}}_check" type="checkbox"
                                                                    class="checkbox"
-                                                                   name="violation[{{$violation->id}}]
-                                                                       ">
+                                                                   name="violation[{{$violation->id}}]" {{ $check->violations->contains('id', $violation->id) ? "checked" : "" }}>
                                                             <div class="knobs "></div>
                                                             <div class="layer "></div>
                                                         </div>
                                                     </div>
-                                                    <label class="font-weight-bold h5 pr-3 "
-                                                           for="{{$violation->id}}_check">
-                                                        {{ $violation->name }}
-                                                    </label>
-                                                </div>
+                                                <label class="font-weight-bold h5 pr-3 "
+                                                       for="{{$violation->id}}_check">
+                                                    {{ $violation->name }}
+                                                </label>
                                             </div>
-                                        @endforeach
+                                        </div>
+                                    @endforeach
                                 </div>
                                 {{--                                <div id="violations_div">--}}
                                 {{--                                    @if($check->violations->count())--}}

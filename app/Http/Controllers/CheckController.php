@@ -226,7 +226,6 @@ class CheckController extends Controller
      */
     public function update(Request $request, Check $check)
     {
-
         $check->update($request->only('type_id', 'user_id', 'build_id'));
         $check->has_aups = $request->has('has_aups');
         $check->has_aupt = $request->has('has_aupt');
@@ -260,17 +259,16 @@ class CheckController extends Controller
         SetHistory::save('Обновил', $check->build->id, $check->id);
 
         //save violations by check
-        foreach ($check->violations as $violation) {
-            $violation->delete();
-        }
-        if ($request->has('type_violations')) {
-            foreach ($request->type_violations as $key => $type_violation) {
-                $violation = new Violation();
-                $violation->type_id = $type_violation;
-                $violation->note = $request->descs[$key];
-                $violation->check_id = $check->id;
-                $violation->save();
+        if ($request->violation)
+        {
+            $violations = [];
+            foreach ($request->violation as $key => $value)
+            {
+                $violations[] = (string)$key;
             }
+            $check->violations()->sync($violations);
+
+            $check->legality = "1";
         }
         if ($request->has('has_aups')) {
             $check->legality = "0";
