@@ -308,26 +308,26 @@ class CheckController extends Controller
         else {
             $check->violations()->detach();
         }
-        if ($request->has('has_aups')) {
-            $check->legality = "0";
+        if (!$request->has('has_aups')) {
+            $check->legality = "1";
         }
-        if ($request->has('has_aupt')) {
-            $check->legality = "0";
+        if (!$request->has('has_aupt')) {
+            $check->legality = "1";
         }
-        if ($request->has('has_hydrant')) {
-            $check->legality = "0";
+        if (!$request->has('has_hydrant')) {
+            $check->legality = "1";
         }
-        if ($request->has('has_reservoir')) {
-            $check->legality = "0";
+        if (!$request->has('has_reservoir')) {
+            $check->legality = "1";
         }
-        if ($request->has('has_cranes')) {
-            $check->legality = "0";
+        if (!$request->has('has_cranes')) {
+            $check->legality = "1";
         }
-        if ($request->has('has_evacuation')) {
-            $check->legality = "0";
+        if (!$request->has('has_evacuation')) {
+            $check->legality = "1";
         }
-        if ($request->has('has_foam')) {
-            $check->legality = "0";
+        if (!$request->has('has_foam')) {
+            $check->legality = "1";
         }
         $check->save();
         $check->build->save();
