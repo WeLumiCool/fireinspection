@@ -88,7 +88,8 @@
     border-bottom-left-radius: 5px;">
                             <div class="card-header">
                                 <h2 class="mb-0">
-                                    <a class="text-left text-decoration-none" data-toggle="collapse" data-parent="#accordionStages"
+                                    <a class="text-left text-decoration-none" data-toggle="collapse"
+                                       data-parent="#accordionStages"
                                        href="#build-{{ $check->build_id }}Stage-{{ $check->id }}"
                                        aria-expanded="true"
                                        aria-controls="build-{{ $check->build_id }}Stage-{{ $check->id }}">
@@ -169,16 +170,18 @@
                                                     </p>
                                                 @endif
                                             </div>
-                                            <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">Водоем:</p>
-                                                @if($check->has_reservoir)
-                                                    <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                @else
-                                                    <p>
-                                                        <i class="fa fa-times-circle text-danger fa-2x"></i>
-                                                    </p>
-                                                @endif
-                                            </div>
+                                            @isset($check->has_reservoir)
+                                                <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
+                                                    <p class="h6 font-weight-bold ">Водоем:</p>
+                                                    @if($check->has_reservoir)
+                                                        <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
+                                                    @else
+                                                        <p>
+                                                            <i class="fa fa-times-circle text-danger fa-2x"></i>
+                                                        </p>
+                                                    @endif
+                                                </div>
+                                            @endisset
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
                                                 <p class="h6 font-weight-bold ">Пожарный щит:</p>
                                                 @if($check->has_shild > 0)
@@ -251,12 +254,12 @@
                                                     <div class="row ">
                                                         @foreach(json_decode($check->images) as $image)
                                                             <div class="col-12 col-md-4 col-lg-3 pb-3 text-center">
-                                                                    <a class="grouped_elements px-2" rel="group1"
-                                                                       href="{{ asset('storage/' .  $image) }}"
-                                                                       data-fancybox="media-img-{{ $check->id }}">
-                                                                        <img src="{{ asset('storage/' .  $image) }}"
-                                                                             class="" alt="" width="200"/>
-                                                                    </a>
+                                                                <a class="grouped_elements px-2" rel="group1"
+                                                                   href="{{ asset('storage/' .  $image) }}"
+                                                                   data-fancybox="media-img-{{ $check->id }}">
+                                                                    <img src="{{ asset('storage/' .  $image) }}"
+                                                                         class="" alt="" width="200"/>
+                                                                </a>
                                                             </div>
                                                         @endforeach
                                                     </div>

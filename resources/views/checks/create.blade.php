@@ -92,6 +92,7 @@
                                         гидрант</label>
                                 </div>
                             </div>
+                            @if ($build->type_id == 5)
                             <div class="col-lg-4 col-12">
                                 <div class="form-group d-flex">
                                     <div class="button r mr-3" id="button-1">
@@ -103,7 +104,8 @@
                                     <label class="font-weight-bold h5 pr-3" for="has_reservoir_check">Водоем</label>
                                 </div>
                             </div>
-                            @if($build->type_id == 1 || $build->type_id == 6)
+                            @endif
+                            @if($build->type_id == 1 || $build->type_id == 5)
                                 <div class="col-lg-4 col-12">
                                     <div class="form-group d-flex">
                                         <div class="button r mr-3" id="button-1">

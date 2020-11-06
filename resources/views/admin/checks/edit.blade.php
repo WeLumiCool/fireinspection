@@ -33,7 +33,7 @@
                                 <label class="font-weight-bold h6"  for="role-select">Назначить дату следующей проверки:</label>
                                 <select name="planned_check" id="role-select" class="form-control">
                                     @foreach(['1-квартал', '2-квартал', '3-квартал', '4-квартал', '1-год'] as $date)
-                                        <option value="{{ $date }}">{{ $date }}</option>
+                                        <option value="{{ $date }}" {{ $date == $check->build->planned_check ? "selected" : "" }}>{{ $date }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -51,7 +51,7 @@
                                 <label class="font-weight-bold h5 pr-3" for="aups_check">АУПС</label>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-12 ">
+                        <div class="col-lg-3 col-12 ">
                             <div class="form-group d-flex">
                                 <div class="button r mr-3" id="button-1">
                                     <input id="aupt_check" type="checkbox" class="checkbox"
@@ -62,8 +62,8 @@
                                 <label class="font-weight-bold h5 pr-3" for="aupt_check">АУПТ</label>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-12">
-                            <div class="form-group d-flex">
+                        <div class="col-lg-5 col-12">
+                            <div class="form-group d-flex ml-5">
                                 <div class="button r mr-3" id="button-1">
                                     <input id="has_cranes_check" type="checkbox" class="checkbox"
                                            name="has_cranes" {{ $check->has_cranes?'checked':'' }}>
@@ -85,7 +85,7 @@
                                     эвакуации</label>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-12">
+                        <div class="col-lg-3 col-12">
                             <div class="form-group d-flex">
                                 <div class="button r mr-3" id="button-1">
                                     <input id="has_hydrant_check" type="checkbox" class="checkbox"
@@ -96,31 +96,8 @@
                                 <label class="font-weight-bold h5 pr-3" for="has_hydrant_check">Пожарный гидрант</label>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-12">
-                            <div class="form-group d-flex">
-                                <div class="button r mr-3" id="button-1">
-                                    <input id="has_reservoir_check" type="checkbox" class="checkbox"
-                                           name="has_reservoir" {{ $check->has_reservoir?'checked':'' }}>
-                                    <div class="knobs"></div>
-                                    <div class="layer"></div>
-                                </div>
-                                <label class="font-weight-bold h5 pr-3" for="has_reservoir_check">Водоем</label>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-12">
-                            <div class="form-group d-flex">
-                                <div class="button r mr-3" id="button-1">
-                                    <input id="has_foam_check" type="checkbox" class="checkbox"
-                                           name="has_foam" {{ $check->has_foam?'checked':'' }}>
-                                    <div class="knobs"></div>
-                                    <div class="layer"></div>
-                                </div>
-                                <label class="font-weight-bold h5" for="has_foam_check">Запасы
-                                    пенооброзование</label>
-                            </div>
-                        </div>
                         <div class="col-lg-5 col-12 ">
-                            <div class="form-group d-lg-flex">
+                            <div class="form-group d-lg-flex ml-5">
                                 @if($agent->isMobile())
                                     <div class="d-flex justify-content-center align-items-center">
                                         <div class="button r mr-3" id="button-1" disabled="">
@@ -150,12 +127,39 @@
                                             щит</label>
                                     </div>
                                     <div class="pl-lg-2 ">
-                                        <input type="number" name="has_shield" id="counter" class="counter form-control"
-                                               placeholder="Кол-во щитов"  min="0" value="0" style="width: 67%!important;">
+                                        <input type="number" name="has_shild" id="counter" class="counter form-control"
+                                               placeholder="Кол-во щитов"  min="0" value="{{ $check->has_shild }}" style="width: 67%!important;">
                                     </div>
                                 @endif
                             </div>
                         </div>
+                        @if($check->build->type_id == 5)
+                        <div class="col-lg-4 col-12">
+                            <div class="form-group d-flex">
+                                <div class="button r mr-3" id="button-1">
+                                    <input id="has_reservoir_check" type="checkbox" class="checkbox"
+                                           name="has_reservoir" {{ $check->has_reservoir?'checked':'' }}>
+                                    <div class="knobs"></div>
+                                    <div class="layer"></div>
+                                </div>
+                                <label class="font-weight-bold h5 pr-3" for="has_reservoir_check">Водоем</label>
+                            </div>
+                        </div>
+                        @endif
+                        @if($check->build->type_id == 1 || $check->build->type_id == 5)
+                        <div class="col-lg-4 col-12">
+                            <div class="form-group d-flex">
+                                <div class="button r mr-3" id="button-1">
+                                    <input id="has_foam_check" type="checkbox" class="checkbox"
+                                           name="has_foam" {{ $check->has_foam?'checked':'' }}>
+                                    <div class="knobs"></div>
+                                    <div class="layer"></div>
+                                </div>
+                                <label class="font-weight-bold h5" for="has_foam_check">Запасы
+                                    пенооброзование</label>
+                            </div>
+                        </div>
+                        @endif
                     </div>
                     <div class="row">
                         <div class="col-lg-6">

@@ -126,6 +126,17 @@ class CheckController extends Controller
         } else {
             $check->has_foam = NULL;
         }
+        if ($build->type_id == 5)
+        {
+            $check->has_reservoir = $request->has('has_reservoir');
+            if (!$request->has('has_reservoir')) {
+                $check->legality = "1";
+            }
+        }
+        else {
+            $check->has_reservoir = NULL;
+        }
+
         //get check images
         if ($request->has('images')) {
             $path_images = [];
@@ -256,6 +267,30 @@ class CheckController extends Controller
         } else {
             $check->psp_count = null;
         }
+        if ($check->build->type_id == 1 || $check->build->type_id == 5) {
+            $check->has_foam = $request->has('has_foam');
+            if (!$request->has('has_foam')) {
+                $check->legality = "1";
+            }
+        } else {
+            $check->has_foam = NULL;
+        }
+        if ($check->build->type_id == 5)
+        {
+            $check->has_reservoir = $request->has('has_reservoir');
+            if (!$request->has('has_reservoir')) {
+                $check->legality = "1";
+            }
+        }
+        else {
+            $check->has_reservoir = NULL;
+        }
+        if ($request->has('has_shild'))
+        {
+            $check->has_shild = $request->has_shild;
+        }
+        $check->build->planned_check = $request->planned_check;
+
         SetHistory::save('Обновил', $check->build->id, $check->id);
 
         //save violations by check
@@ -269,6 +304,9 @@ class CheckController extends Controller
             $check->violations()->sync($violations);
 
             $check->legality = "1";
+        }
+        else {
+            $check->violations()->detach();
         }
         if ($request->has('has_aups')) {
             $check->legality = "0";
@@ -292,6 +330,7 @@ class CheckController extends Controller
             $check->legality = "0";
         }
         $check->save();
+        $check->build->save();
         return redirect()->route('admin.builds.show', $check->build_id);
     }
 

@@ -85,7 +85,7 @@
                                    data-parent="#accordionStages"
                                    href="#build-{{ $check->build_id }}Stage-{{ $check->id }}"
                                    aria-expanded="true"
-                                   aria-controls="build-{{ $check->build_id }}Stage-{{ $check->id }}" >
+                                   aria-controls="build-{{ $check->build_id }}Stage-{{ $check->id }}">
                                     <h6 class="mt-1 mb-0">
                                         <span>{{ $check->type->name }} проверка: <span>{{ $check->created_at }}</span></span>
                                         <i class="fas fa-angle-down mr-3 rotate-icon" style="margin-top: 2px;"></i>
@@ -176,16 +176,18 @@
                                                     </p>
                                                 @endif
                                             </div>
-                                            <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">Водоем:</p>
-                                                @if($check->has_reservoir)
-                                                    <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                @else
-                                                    <p>
-                                                        <i class="fa fa-times-circle text-danger fa-2x"></i>
-                                                    </p>
-                                                @endif
-                                            </div>
+                                            @isset($check->has_reservoir)
+                                                <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
+                                                    <p class="h6 font-weight-bold ">Водоем:</p>
+                                                    @if($check->has_reservoir)
+                                                        <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
+                                                    @else
+                                                        <p>
+                                                            <i class="fa fa-times-circle text-danger fa-2x"></i>
+                                                        </p>
+                                                    @endif
+                                                </div>
+                                            @endisset
                                             <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
                                                 <p class="h6 font-weight-bold ">Пожарный щит:</p>
                                                 @if($check->has_shild > 0)
@@ -253,7 +255,7 @@
                                                                    href="{{ asset('storage/' .  $image) }}"
                                                                    data-fancybox="media-img-{{ $check->id }}">
                                                                     <img src="{{ asset('storage/' .  $image) }}"
-                                                                          alt="" class="img-fluid"/>
+                                                                         alt="" class="img-fluid"/>
                                                                 </a>
                                                             </div>
                                                         @endforeach
