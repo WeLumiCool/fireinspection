@@ -102,7 +102,7 @@
                                             <div class="layer" disabled="true"></div>
                                         </div>
                                         <div class="">
-                                            <label class="font-weight-bold h5 " for="has_shield_check">Пожарный
+                                            <label class="font-weight-bold h5 " >Пожарный
                                                 щит</label>
                                             <input type="number" name="has_shield" id="counter"
                                                    class="counter form-control"
@@ -117,8 +117,8 @@
                                         <div class="knobs" disabled="true"></div>
                                         <div class="layer" disabled="true"></div>
                                     </div>
-                                    <div class=" pt-2">
-                                        <label class="font-weight-bold h5 " for="has_shield_check">Пожарный
+                                    <div class="">
+                                        <label class="font-weight-bold h5 " >Пожарный
                                             щит</label>
                                     </div>
                                     <div class="pl-lg-2 ">
@@ -156,6 +156,15 @@
                             </div>
                         @endif
                     </div>
+                    <div class="col-lg-12">
+                        <div class="form-group ">
+                            <div>
+                                <label class="font-weight-bold h6" for="image_input">Изображении:</label>
+                            </div>
+                            <input class="py-2" id="image_input" name="images[]" type="file" accept="image/*"
+                                   multiple>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
@@ -163,33 +172,13 @@
                                     пожаротушения:</label>
                                 <div id="psps_div">
                                     {{--place for psps--}}
-
                                 </div>
                                 <button id="add_psp" class="btn btn-success mt-2" type="button">
                                     <i class="fas fa-plus "><span class="px-4">Добавить ПСП</span></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="form-group ">
-                                <div>
-                                    <label class="font-weight-bold h6" for="image_input">Изображении:</label>
-                                </div>
-                                <input class="py-2" id="image_input" name="images[]" type="file" accept="image/*"
-                                       multiple>
-                            </div>
-                            {{--                            <div class="form-group">--}}
-                            {{--                                <label class="font-weight-bold h6" for="type_psp_select">Нарушения:</label>--}}
-                            {{--                                <div id="violations_div">--}}
-                            {{--                                    --}}{{--place for violations--}}
-                            {{--                                </div>--}}
-                            {{--                                <button id="add_violation" class="btn btn-success mt-2" type="button">--}}
-                            {{--                                    <i class="fas fa-plus"><span class="px-4">Добавить Нарушение</span></i>--}}
-                            {{--                                </button>--}}
-                            {{--                            </div>--}}
-                        </div>
                     </div>
-
                     @if($agent->isMobile())
                         <div class="col-12">
                             @foreach($violations as $violation)

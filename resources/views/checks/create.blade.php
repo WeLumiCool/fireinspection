@@ -130,7 +130,7 @@
                                                 <div class="layer" disabled="true"></div>
                                             </div>
                                             <div class="">
-                                                <label class="font-weight-bold h5 " for="has_shield_check">Пожарный
+                                                <label class="font-weight-bold h5 " >Пожарный
                                                     щит</label>
                                                 <input type="number" name="has_shield" id="counter"
                                                        class="counter form-control"
@@ -146,7 +146,7 @@
                                             <div class="layer" disabled="true"></div>
                                         </div>
                                         <div class=" pt-2">
-                                            <label class="font-weight-bold h5 " for="has_shield_check">Пожарный
+                                            <label class="font-weight-bold h5 " >Пожарный
                                                 щит</label>
                                         </div>
                                         <div class="pl-lg-2 ">
@@ -158,11 +158,18 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group ">
+                                    <label class="font-weight-bold h5" for="image_input">Изображении:</label>
+                                    <input class="py-2" id="image_input" name="images[]" type="file" accept="image/*" multiple>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="font-weight-bold h6" for="type_psp_select">Первичные средства
+                                    <label class="font-weight-bold h5" for="type_psp_select">Первичные средства
                                         пожаротушения:</label>
                                     <div id="psps_div">
                                         {{--place for psps--}}
@@ -173,13 +180,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group ">
-                                    <div>
-                                        <label class="font-weight-bold h6" for="image_input">Изображении:</label>
-                                    </div>
-                                    <input class="py-2" id="image_input" name="images[]" type="file" accept="image/*" multiple>
-                                </div>
+
                                 {{--                                <div class="form-group">--}}
                                 {{--                                    <label class="font-weight-bold h6" for="type_psp_select">Нарушения:</label>--}}
                                 {{--                                    <div id="violations_div">--}}
@@ -189,7 +190,7 @@
                                 {{--                                        <i class="fas fa-plus"><span class="px-4">Добавить Нарушение</span></i>--}}
                                 {{--                                    </button>--}}
                                 {{--                                </div>--}}
-                            </div>
+
                             @if($agent->isMobile())
                                 <div class="col-12">
                                     @foreach($violations as $violation)

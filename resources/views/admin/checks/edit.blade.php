@@ -103,27 +103,27 @@
                                         <div class="button r mr-3" id="button-1" disabled="">
                                             <input id="has_shield_check" type="checkbox" class="checkbox"
                                                    name="shield"
-                                                   style="display: none">
+                                                   style="display: none" {{ $check->has_shild?'checked':'' }}>
                                             <div class="knobs" disabled="true"></div>
                                             <div class="layer" disabled="true"></div>
                                         </div>
                                         <div class="">
-                                            <label class="font-weight-bold h5 " for="has_shield_check">Пожарный
+                                            <label class="font-weight-bold h5 " disabled="">Пожарный
                                                 щит</label>
                                             <input type="number" name="has_shield" id="counter" class="counter form-control"
-                                                   placeholder="Кол-во щитов" min="0" value="0" >
+                                                   placeholder="Кол-во щитов" min="0" value="{{ $check->has_shild }}" >
                                         </div>
                                     </div>
                                 @elseif($agent->isDesktop())
                                     <div class="button r mr-3" id="button-1" disabled="">
                                         <input id="has_shield_check" type="checkbox" class="checkbox"
                                                name="shield"
-                                               style="display: none">
+                                               style="display: none" {{ $check->has_shild?'checked':'' }}>
                                         <div class="knobs" disabled="true"></div>
                                         <div class="layer" disabled="true"></div>
                                     </div>
-                                    <div class=" pt-2">
-                                        <label class="font-weight-bold h5 " for="has_shield_check">Пожарный
+                                    <div class="">
+                                        <label class="font-weight-bold h5 "  disabled>Пожарный
                                             щит</label>
                                     </div>
                                     <div class="pl-lg-2 ">
@@ -147,8 +147,8 @@
                         </div>
                         @endif
                         @if($check->build->type_id == 1 || $check->build->type_id == 5)
-                        <div class="col-lg-4 col-12">
-                            <div class="form-group d-flex">
+                        <div class="col-lg-4 col-12 ">
+                            <div class="form-group d-flex pb-0">
                                 <div class="button r mr-3" id="button-1">
                                     <input id="has_foam_check" type="checkbox" class="checkbox"
                                            name="has_foam" {{ $check->has_foam?'checked':'' }}>
@@ -204,7 +204,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="font-weight-bold h5" for="image_input">Изображении</label>
                                 <input id="image_input" name="images[]" type="file" accept="image/*"
@@ -213,7 +213,7 @@
                                 <div id="images">
                                     @if(!is_null($check->images))
                                         @foreach(json_decode($check->images) as $image)
-                                            <img src="{{ asset('storage/'. $image) }}" alt="{{ $image }}" height="200">
+                                            <img src="{{ asset('storage/'. $image) }}" alt="{{ $image }}" class="px-3 py-3" height="200">
                                         @endforeach
                                     @endif
                                 </div>
@@ -363,7 +363,7 @@
             $('#psps_div').append(html);
         });
         $(document).on('click', '.delete-psp', function () {
-            $(this).parent().remove();
+            $(this).parent().parent().remove();
         });
 
         {{--$('#add_violation').click(function () {--}}

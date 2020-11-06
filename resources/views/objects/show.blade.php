@@ -254,11 +254,11 @@
                                                     <div class="row ">
                                                         @foreach(json_decode($check->images) as $image)
                                                             <div class="col-12 col-md-4 col-lg-3 pb-3 text-center">
-                                                                <a class="grouped_elements px-2" rel="group1"
+                                                                <a class="grouped_elements px-2 py-2" rel="group1"
                                                                    href="{{ asset('storage/' .  $image) }}"
                                                                    data-fancybox="media-img-{{ $check->id }}">
                                                                     <img src="{{ asset('storage/' .  $image) }}"
-                                                                         class="" alt="" width="200"/>
+                                                                         class="py-2" alt="" width="200"/>
                                                                 </a>
                                                             </div>
                                                         @endforeach
