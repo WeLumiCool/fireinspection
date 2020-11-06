@@ -48,7 +48,7 @@
                                     <label class="font-weight-bold h5 pr-3" for="aups_check">АУПС</label>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-12">
+                            <div class="col-lg-3 col-12">
                                 <div class="form-group d-flex">
                                     <div class="button r mr-3" id="button-1">
                                         <input id="aupt_check" type="checkbox" class="checkbox" name="has_aupt">
@@ -58,8 +58,8 @@
                                     <label class="font-weight-bold h5 pr-3" for="aupt_check">АУПТ</label>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-12">
-                                <div class="form-group d-flex">
+                            <div class="col-lg-5 col-12">
+                                <div class="form-group d-flex ml-5">
                                     <div class="button r mr-3" id="button-1">
                                         <input id="has_cranes_check" type="checkbox" class="checkbox" name="has_cranes">
                                         <div class="knobs"></div>
@@ -80,7 +80,7 @@
                                         эвакуации</label>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-12">
+                            <div class="col-lg-3 col-12">
                                 <div class="form-group d-flex">
                                     <div class="button r mr-3" id="button-1">
                                         <input id="has_hydrant_check" type="checkbox" class="checkbox"
@@ -92,34 +92,8 @@
                                         гидрант</label>
                                 </div>
                             </div>
-                            @if ($build->type_id == 5)
-                            <div class="col-lg-4 col-12">
-                                <div class="form-group d-flex">
-                                    <div class="button r mr-3" id="button-1">
-                                        <input id="has_reservoir_check" type="checkbox" class="checkbox"
-                                               name="has_reservoir">
-                                        <div class="knobs"></div>
-                                        <div class="layer"></div>
-                                    </div>
-                                    <label class="font-weight-bold h5 pr-3" for="has_reservoir_check">Водоем</label>
-                                </div>
-                            </div>
-                            @endif
-                            @if($build->type_id == 1 || $build->type_id == 5)
-                                <div class="col-lg-4 col-12">
-                                    <div class="form-group d-flex">
-                                        <div class="button r mr-3" id="button-1">
-                                            <input id="has_foam_check" type="checkbox" class="checkbox" name="has_foam">
-                                            <div class="knobs"></div>
-                                            <div class="layer"></div>
-                                        </div>
-                                        <label class="font-weight-bold h5" for="has_foam_check">Запасы
-                                            пенооброзования</label>
-                                    </div>
-                                </div>
-                            @endif
-                            <div class="col-lg-8 col-12 ">
-                                <div class="form-group d-lg-flex">
+                            <div class="col-lg-5 col-12 ">
+                                <div class="form-group d-lg-flex ml-5">
                                     @if($agent->isMobile())
                                         <div class="d-flex justify-content-center align-items-center">
                                             <div class="button r mr-3" id="button-1" disabled="">
@@ -157,6 +131,32 @@
                                     @endif
                                 </div>
                             </div>
+                            @if ($build->type_id == 5)
+                            <div class="col-lg-4 col-12">
+                                <div class="form-group d-flex">
+                                    <div class="button r mr-3" id="button-1">
+                                        <input id="has_reservoir_check" type="checkbox" class="checkbox"
+                                               name="has_reservoir">
+                                        <div class="knobs"></div>
+                                        <div class="layer"></div>
+                                    </div>
+                                    <label class="font-weight-bold h5 pr-3" for="has_reservoir_check">Водоем</label>
+                                </div>
+                            </div>
+                            @endif
+                            @if($build->type_id == 1 || $build->type_id == 5)
+                                <div class="col-lg-4 col-12">
+                                    <div class="form-group d-flex">
+                                        <div class="button r mr-3" id="button-1">
+                                            <input id="has_foam_check" type="checkbox" class="checkbox" name="has_foam">
+                                            <div class="knobs"></div>
+                                            <div class="layer"></div>
+                                        </div>
+                                        <label class="font-weight-bold h5" for="has_foam_check">Запасы
+                                            пенооброзования</label>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
