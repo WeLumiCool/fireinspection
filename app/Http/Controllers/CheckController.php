@@ -102,9 +102,7 @@ class CheckController extends Controller
         if (!$request->has('has_hydrant')) {
             $check->legality = "1";
         }
-        if (!$request->has('has_reservoir')) {
-            $check->legality = "1";
-        }
+
         if (!$request->has('has_cranes')) {
             $check->legality = "1";
         }
