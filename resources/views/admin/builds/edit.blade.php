@@ -15,6 +15,10 @@
                         <input id="name_field" type="text" class="form-control" name="name" value="{{ $build->name }}" required>
                     </div>
                     <div class="form-group">
+                        <label for="name_field">ИНН: <span class="text-danger">*</span></label>
+                        <input id="name_field" type="text" class="form-control" name="inn" value="{{ $build->inn }}" required>
+                    </div>
+                    <div class="form-group">
                         <label for="type_of_object">Тип объекта:</label>
                         <select class="form-control" id="type_of_object" name="type_id">
                             @foreach($types as $type)
