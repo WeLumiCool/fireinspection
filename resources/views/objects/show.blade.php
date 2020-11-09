@@ -7,7 +7,6 @@
     $agent = new Agent();
     ?>
     <div class="container">
-
         <div class="row bg-white px-lg-5 pb-4 mb-4 shadow" style="border-radius: 10px">
             <div class="col-12 col-lg-5 py-4 ">
                 <div class="card">
@@ -16,7 +15,7 @@
                     </div>
                     <div class="card-body">
                         <blockquote class="blockquote mb-0">
-                            <table class="table">
+                            <table class="table table-responsive">
                                 <thead></thead>
                                 <tbody>
                                 <tr>
@@ -66,7 +65,7 @@
                     <div class="col-6 col-lg-2 text-right text-lg-left">
                         @if($agent->isMobile())
                             <a href="{{ route('inspector.create', $build->id) }}" class="btn">
-                                <i class="fas fa-plus-circle text-success" style="font-size: 20px"></i>
+                                <i class="fas fa-plus-circle text-success" style="font-size: 30px"></i>
                             </a>
                         @elseif($agent->isDesktop())
                             <a href="{{ route('inspector.create', $build->id) }}"

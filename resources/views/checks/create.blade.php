@@ -59,7 +59,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-5 col-12">
-                                <div class="form-group d-flex ml-5">
+                                <div class="form-group d-flex ml-lg-5">
                                     <div class="button r mr-3" id="button-1">
                                         <input id="has_cranes_check" type="checkbox" class="checkbox" name="has_cranes">
                                         <div class="knobs"></div>
@@ -93,7 +93,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-5 col-12 ">
-                                <div class="form-group d-lg-flex ml-5">
+                                <div class="form-group d-lg-flex ml-lg-5">
                                     @if($agent->isMobile())
                                         <div class="d-flex justify-content-center align-items-center">
                                             <div class="button r mr-3" id="button-1" disabled="">
@@ -119,7 +119,7 @@
                                             <div class="knobs" disabled="true"></div>
                                             <div class="layer" disabled="true"></div>
                                         </div>
-                                        <div class=" pt-2">
+                                        <div class="">
                                             <label class="font-weight-bold h5 " >Пожарный
                                                 щит</label>
                                         </div>
