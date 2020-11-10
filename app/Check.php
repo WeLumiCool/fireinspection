@@ -33,7 +33,7 @@ class Check extends Model
 
     public function violations()
     {
-        return $this->belongsToMany(Violation::class);
+        return $this->belongsToMany(Violation::class, 'check_violation', 'check_id')->withPivot('note')->withTimestamps();
     }
 
     public function type()

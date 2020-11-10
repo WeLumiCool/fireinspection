@@ -28,7 +28,8 @@
                             </div>
                             <div class="col-12 col-lg-6">
                                 <div class="form-group">
-                                    <label class="font-weight-bold h6"  for="role-select">Назначить дату следующей проверки:</label>
+                                    <label class="font-weight-bold h6" for="role-select">Назначить дату следующей
+                                        проверки:</label>
                                     <select name="planned_check" id="role-select" class="form-control">
                                         @foreach(['1-квартал', '2-квартал', '3-квартал', '4-квартал', '1-год'] as $date)
                                             <option value="{{ $date }}">{{ $date }}</option>
@@ -104,7 +105,7 @@
                                                 <div class="layer" disabled="true"></div>
                                             </div>
                                             <div class="">
-                                                <label class="font-weight-bold h5 " >Пожарный
+                                                <label class="font-weight-bold h5 ">Пожарный
                                                     щит</label>
                                                 <input type="number" name="has_shield" id="counter"
                                                        class="counter form-control"
@@ -120,18 +121,18 @@
                                             <div class="layer" disabled="true"></div>
                                         </div>
                                         <div class=" pt-2">
-                                            <label class="font-weight-bold h5 " >Пожарный
+                                            <label class="font-weight-bold h5 ">Пожарный
                                                 щит</label>
                                         </div>
                                         <div class="pl-lg-2 ">
                                             <input type="number" name="has_shield" id="counter"
                                                    class="counter form-control"
-                                                   placeholder="Кол-во щитов" min="0" value="0" style="width: 67%!important;">
+                                                   placeholder="Кол-во щитов" min="0" value="0"
+                                                   style="width: 67%!important;">
                                         </div>
                                     @endif
                                 </div>
                             </div>
-                            @if ($build->type_id == 5)
                             <div class="col-lg-4 col-12">
                                 <div class="form-group d-flex">
                                     <div class="button r mr-3" id="button-1">
@@ -143,26 +144,34 @@
                                     <label class="font-weight-bold h5 pr-3" for="has_reservoir_check">Водоем</label>
                                 </div>
                             </div>
-                            @endif
-                            @if($build->type_id == 1 || $build->type_id == 5)
-                                <div class="col-lg-4 col-12">
-                                    <div class="form-group d-flex">
-                                        <div class="button r mr-3" id="button-1">
-                                            <input id="has_foam_check" type="checkbox" class="checkbox" name="has_foam">
-                                            <div class="knobs"></div>
-                                            <div class="layer"></div>
-                                        </div>
-                                        <label class="font-weight-bold h5" for="has_foam_check">Запасы
-                                            пенооброзования</label>
+                            <div class="col-lg-4 col-12">
+                                <div class="form-group d-flex">
+                                    <div class="button r mr-3" id="button-1">
+                                        <input id="has_foam_check" type="checkbox" class="checkbox" name="has_foam">
+                                        <div class="knobs"></div>
+                                        <div class="layer"></div>
                                     </div>
+                                    <label class="font-weight-bold h5" for="has_foam_check">Запасы
+                                        пенооброзования</label>
                                 </div>
-                            @endif
+                            </div>
+                            <div class="col-lg-4 col-12">
+                                <div class="form-group d-flex">
+                                    <div class="button r mr-3" id="button-1">
+                                        <input id="legality" type="checkbox" class="checkbox" name="legality">
+                                        <div class="knobs"></div>
+                                        <div class="layer"></div>
+                                    </div>
+                                    <label class="font-weight-bold h5" for="legality">Соответсвие</label>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group ">
                                     <label class="font-weight-bold h5" for="image_input">Изображении:</label>
-                                    <input class="py-2" id="image_input" name="images[]" type="file" accept="image/*" multiple>
+                                    <input class="py-2" id="image_input" name="images[]" type="file" accept="image/*"
+                                           multiple>
                                 </div>
                             </div>
                         </div>
@@ -172,8 +181,6 @@
                                     <label class="font-weight-bold h5" for="type_psp_select">Первичные средства
                                         пожаротушения:</label>
                                     <div id="psps_div">
-                                        {{--place for psps--}}
-
                                     </div>
                                     <button id="add_psp" class="btn btn-success mt-2" type="button">
                                         <i class="fas fa-plus "><span class="px-4">Добавить ПСП</span></i>
@@ -181,15 +188,6 @@
                                 </div>
                             </div>
 
-                                {{--                                <div class="form-group">--}}
-                                {{--                                    <label class="font-weight-bold h6" for="type_psp_select">Нарушения:</label>--}}
-                                {{--                                    <div id="violations_div">--}}
-                                {{--                                        --}}{{--place for violations--}}
-                                {{--                                    </div>--}}
-                                {{--                                    <button id="add_violation" class="btn btn-success mt-2" type="button">--}}
-                                {{--                                        <i class="fas fa-plus"><span class="px-4">Добавить Нарушение</span></i>--}}
-                                {{--                                    </button>--}}
-                                {{--                                </div>--}}
 
                             @if($agent->isMobile())
                                 <div class="col-12">
@@ -209,8 +207,8 @@
                                     @endforeach
                                 </div>
                             @elseif($agent->isDesktop())
-                                <div class="col-12">
-                                    @foreach($violations as $violation)
+                                @foreach($violations as $violation)
+                                    <div class="col-8">
                                         <div
                                             class="d-flex justify-content-lg-start justify-content-center align-items-center">
                                             <div class="form-group d-flex py-2">
@@ -227,8 +225,14 @@
                                                 {{ $violation->name }}
                                             </label>
                                         </div>
-                                    @endforeach
-                                </div>
+                                    </div>
+                                    <div class="col-4 p-0">
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="notes[{{$violation->id}}]" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                @endforeach
+
                             @endif
 
                         </div>

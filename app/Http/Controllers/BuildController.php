@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Build;
 use App\Check;
+use App\CheckViolation;
 use App\History;
 use App\Services\SetHistory;
 use App\Type;
@@ -82,8 +83,12 @@ class BuildController extends Controller
 
     public function insp_show($id)
     {
-        $build = Build::find($id);
-        return view('objects.show', compact('build'));
+        $build = Build::find(2);
+        foreach ($build->checks as $check){
+            $violations = CheckViolation::where('check_id', $check->id)->get();
+        }
+        dd($violations);
+        return view('objects.show', compact('build', 'violations'));
     }
 
     /**

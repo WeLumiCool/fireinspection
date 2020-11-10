@@ -79,62 +79,20 @@ class CheckController extends Controller
         $check->has_reservoir = $request->has('has_reservoir');
         $check->has_cranes = $request->has('has_cranes');
         $check->has_evacuation = $request->has('has_evacuation');
-
+        $check->has_foam = $request->has('has_foam');
+        $check->has_reservoir = $request->has('has_reservoir');
+        $check->legality = $request->has('legality');
+//        Дата  запланированной проверки
         $build = Build::find($request->build_id);
-
         $build->planned_check = $request->planned_check;
-
-        if ($request->has('has_shield'))
-        {
-            if (is_null($request->has_shield)){
+//      Кол-во пожарного щита
+        if ($request->has('has_shield')) {
+            if (is_null($request->has_shield)) {
                 $check->has_shild = 0;
-            }
-            else {
+            } else {
                 $check->has_shild = $request->has_shield;
             }
         }
-        if (!$request->has('has_aups')) {
-            $check->legality = "1";
-        }
-        if (!$request->has('has_aupt')) {
-            $check->legality = "1";
-        }
-        if (!$request->has('has_hydrant')) {
-            $check->legality = "1";
-        }
-
-        if (!$request->has('has_cranes')) {
-            $check->legality = "1";
-        }
-        if (!$request->has('has_evacuation')) {
-            $check->legality = "1";
-        }
-        if ($request->has_shield == 0) {
-            $check->legality = "1";
-        }
-        if (!$request->type_psps)
-        {
-            $check->legality = "1";
-        }
-        if ($build->type_id == 1 || $build->type_id == 5) {
-            $check->has_foam = $request->has('has_foam');
-            if (!$request->has('has_foam')) {
-                $check->legality = "1";
-            }
-        } else {
-            $check->has_foam = NULL;
-        }
-        if ($build->type_id == 5)
-        {
-            $check->has_reservoir = $request->has('has_reservoir');
-            if (!$request->has('has_reservoir')) {
-                $check->legality = "1";
-            }
-        }
-        else {
-            $check->has_reservoir = NULL;
-        }
-
         //get check images
         if ($request->has('images')) {
             $path_images = [];
@@ -156,16 +114,24 @@ class CheckController extends Controller
             $check->psp_count = json_encode($pspArray);
         }
         SetHistory::save('Проведена проверка', $check->build->id, $check->id);
-
         //save violations by check
-        if ($request->violation)
-        {
-            foreach ($request->violation as $key => $value)
+        if ($request->violation) {
+            foreach ($request->violation as $k => $value)
             {
-                $check->violations()->attach($key);
+                foreach ($request->notes as $key => $note) {
+                    if ($k == $key)
+                    {
+                        if (!is_null($note)){
+                            $check->violations()->attach($k, ['note' => $note]);
+                        }
+                        else
+                        {
+                            $check->violations()->attach($k, ['note' => null]);
+                        }
+                    }
 
+                }
             }
-            $check->legality = "1";
         }
 
         $build->save();
@@ -173,6 +139,7 @@ class CheckController extends Controller
 
         return $check;
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -273,18 +240,15 @@ class CheckController extends Controller
         } else {
             $check->has_foam = NULL;
         }
-        if ($check->build->type_id == 5)
-        {
+        if ($check->build->type_id == 5) {
             $check->has_reservoir = $request->has('has_reservoir');
             if (!$request->has('has_reservoir')) {
                 $check->legality = "1";
             }
-        }
-        else {
+        } else {
             $check->has_reservoir = NULL;
         }
-        if ($request->has('has_shild'))
-        {
+        if ($request->has('has_shild')) {
             $check->has_shild = $request->has_shild;
         }
         $check->build->planned_check = $request->planned_check;
@@ -292,18 +256,15 @@ class CheckController extends Controller
         SetHistory::save('Обновил', $check->build->id, $check->id);
 
         //save violations by check
-        if ($request->violation)
-        {
+        if ($request->violation) {
             $violations = [];
-            foreach ($request->violation as $key => $value)
-            {
+            foreach ($request->violation as $key => $value) {
                 $violations[] = (string)$key;
             }
             $check->violations()->sync($violations);
 
             $check->legality = "1";
-        }
-        else {
+        } else {
             $check->violations()->detach();
         }
         if (!$request->has('has_aups')) {

@@ -106,85 +106,53 @@
                                 <div class="card-body p-0">
                                     <div class="table-ui  mb-3">
                                         <div class="row px-3">
-                                            <div class="col-lg-3 col-12 text-lg-left py-2 text-center">
-                                                <p class="h6 font-weight-bold ">Автоматическая установка пожарной
-                                                    сигнализации:</p>
-                                                @if($check->has_aups)
+                                            @if($check->has_aups)
+                                                <div class="col-lg-3 col-12 text-lg-left py-2 text-center">
+                                                    <p class="h6 font-weight-bold ">Автоматическая установка пожарной
+                                                        сигнализации:</p>
                                                     <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                @else
-                                                    <p>
-                                                        <i class="fa fa-times-circle text-danger fa-2x"></i>
-                                                    </p>
-                                                @endif
-                                            </div>
-                                            <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">Автоматическая установка
-                                                    пожаротушения:</p>
-                                                @if($check->has_aupt)
+                                                </div>
+                                            @endif
+                                            @if($check->has_aupt)
+                                                <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
+                                                    <p class="h6 font-weight-bold ">Автоматическая установка
+                                                        пожаротушения:</p>
                                                     <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                @else
-                                                    <p>
-                                                        <i class="fa fa-times-circle text-danger fa-2x"></i>
-                                                    </p>
-                                                @endif
-                                            </div>
-                                            <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">Противопожарные краны:</p>
-                                                @if($check->has_cranes)
+                                                </div>
+                                            @endif
+                                            @if($check->has_cranes)
+                                                <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
+                                                    <p class="h6 font-weight-bold ">Противопожарные краны:</p>
                                                     <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                @else
-                                                    <p>
-                                                        <i class="fa fa-times-circle text-danger fa-2x"></i>
-                                                    </p>
-                                                @endif
-                                            </div>
-                                            <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">План эвакуации:</p>
-                                                @if($check->has_evacuation)
+                                                </div>
+                                            @endif
+                                            @if($check->has_evacuation)
+                                                <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
+                                                    <p class="h6 font-weight-bold ">План эвакуации:</p>
                                                     <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                @else
-                                                    <p>
-                                                        <i class="fa fa-times-circle text-danger fa-2x"></i>
-                                                    </p>
-                                                @endif
-                                            </div>
-                                            @isset($check->has_foam)
+                                                </div>
+                                            @endif
+                                            @if($check->has_foam)
                                                 <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
                                                     <p class="h6 font-weight-bold ">Запасы пенооброзователя(200л):</p>
-                                                    @if($check->has_foam)
-                                                        <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                    @else
-                                                        <p>
-                                                            <i class="fa fa-times-circle text-danger fa-2x"></i>
-                                                        </p>
-                                                    @endif
-                                                </div>
-                                            @endisset
-                                            <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">Гидрант:</p>
-                                                @if($check->has_hydrant)
                                                     <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                @else
-                                                    <p>
-                                                        <i class="fa fa-times-circle text-danger fa-2x"></i>
-                                                    </p>
-                                                @endif
-                                            </div>
-                                            @isset($check->has_reservoir)
+                                                </div>
+                                            @endif
+                                            @if($check->has_hydrant)
+                                                <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
+                                                    <p class="h6 font-weight-bold ">Гидрант:</p>
+                                                    <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
+                                                </div>
+                                            @endif
+                                            @if($check->has_reservoir)
                                                 <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
                                                     <p class="h6 font-weight-bold ">Водоем:</p>
-                                                    @if($check->has_reservoir)
-                                                        <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                    @else
-                                                        <p>
-                                                            <i class="fa fa-times-circle text-danger fa-2x"></i>
-                                                        </p>
-                                                    @endif
+                                                    <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
                                                 </div>
-                                            @endisset
-                                            <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                <p class="h6 font-weight-bold ">Пожарный щит:</p>
-                                                @if($check->has_shild > 0)
+                                            @endif
+                                            @if($check->has_shild > 0)
+                                                <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
+                                                    <p class="h6 font-weight-bold ">Пожарный щит:</p>
                                                     <div class="d-flex justify-content-center justify-content-lg-start">
                                                         <p class="pr-2"><i
                                                                 class="fa fa-check-circle text-success fa-2x"></i></p>
@@ -193,12 +161,8 @@
                                                                 class="font-weight-bold pr-1">Кол-во:</span>{{ $check->has_shild }}
                                                         </p>
                                                     </div>
-                                                @else
-                                                    <p>
-                                                        <i class="fa fa-times-circle text-danger fa-2x"></i>
-                                                    </p>
-                                                @endif
-                                            </div>
+                                                </div>
+                                            @endif
 
                                             <div class="col-12 d-flex text-left mb-3 px-lg-0">
                                                 <div class="col-6 col-lg-3">
@@ -277,6 +241,7 @@
                                                     @foreach($check->violations as $violation)
                                                         <p class="alert alert-danger">
                                                             <span>{{ $violation->name }}:</span>
+                                                            <span>{{ $violation->note }}</span>
                                                         </p>
                                                     @endforeach
                                                 @endif
@@ -310,12 +275,12 @@
 
             getPointOptions = function (legality) {
                 console.log(legality)
-                if (legality === 1) {
+                if (legality === 0) {
 
                     return {
                         preset: 'islands#redDotIcon',
                     }
-                } else if (legality === 0) {
+                } else if (legality === 1) {
                     return {
                         preset: 'islands#darkGreenDotIcon',
                     }
