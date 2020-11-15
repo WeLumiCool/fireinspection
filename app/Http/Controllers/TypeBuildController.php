@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Point;
 use App\TypeBuild;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -25,7 +26,7 @@ class TypeBuildController extends Controller
      */
     public function create()
     {
-        return  view('admin.typeBuilds.create');
+        return  view('admin.typeBuilds.create', ['points' => Point::all()]);
     }
 
     /**
@@ -36,7 +37,9 @@ class TypeBuildController extends Controller
      */
     public function store(Request $request)
     {
-        TypeBuild::create($request->all());
+        $type = TypeBuild::create($request->all());
+        $type->points()->attach($request->points);
+        $type->save();
         return redirect()->route('admin.typeBuilds.index');
     }
 
@@ -48,7 +51,13 @@ class TypeBuildController extends Controller
      */
     public function show(TypeBuild $typeBuild)
     {
-        return view('admin.typeBuilds.show', compact('typeBuild'));
+        $points = [];
+        foreach ($typeBuild->points as $point)
+        {
+            $points[] = $point;
+        }
+
+        return view('admin.typeBuilds.show', compact('typeBuild', 'points'));
     }
 
     /**

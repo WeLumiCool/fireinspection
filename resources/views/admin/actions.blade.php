@@ -8,8 +8,9 @@
             <i class="fas fa-trash"></i>
         </button>
     </form>
-
+    @if($type != 'typeBuilds')
     <a class="btn btn-primary ml-1" href="{{ route('admin.'.$type.'.edit', $model) }}" ><i class="fas fa-pen"></i></a>
+    @endif
     <a class="btn btn-success ml-1" href="{{ route('admin.' . $type . '.show', $model) }}" ><i class="fas fa-eye"></i></a>
 </div>
 

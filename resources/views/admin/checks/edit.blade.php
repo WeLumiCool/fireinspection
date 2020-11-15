@@ -21,7 +21,8 @@
                                 <label class="font-weight-bold h5" for="type_check-select">Тип проверки:</label>
                                 <select class="form-control" name="type_id" id="type_check-select">
                                     @foreach($typeChecks as $typeCheck)
-                                        <option value="{{ $typeCheck->id }}" {{ $typeCheck->id==$check->type_id?'selected':''}}>
+                                        <option
+                                            value="{{ $typeCheck->id }}" {{ $typeCheck->id==$check->type_id?'selected':''}}>
                                             {{ $typeCheck->name }}
                                         </option>
                                     @endforeach
@@ -30,136 +31,33 @@
                         </div>
                         <div class="col-12 col-lg-6">
                             <div class="form-group">
-                                <label class="font-weight-bold h6"  for="role-select">Назначить дату следующей проверки:</label>
+                                <label class="font-weight-bold h6" for="role-select">Назначить дату следующей
+                                    проверки:</label>
                                 <select name="planned_check" id="role-select" class="form-control">
                                     @foreach(['1-квартал', '2-квартал', '3-квартал', '4-квартал', '1-год'] as $date)
-                                        <option value="{{ $date }}" {{ $date == $check->build->planned_check ? "selected" : "" }}>{{ $date }}</option>
+                                        <option
+                                            value="{{ $date }}" {{ $date == $check->build->planned_check ? "selected" : "" }}>
+                                            {{ $date }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-4 col-12 ">
-                            <div class="form-group d-flex">
-                                <div class="button r mr-3" id="button-1">
-                                    <input id="aups_check" type="checkbox" class="checkbox"
-                                           name="has_aups" {{ $check->has_aups?'checked':'' }}>
-                                    <div class="knobs"></div>
-                                    <div class="layer"></div>
-                                </div>
-                                <label class="font-weight-bold h5 pr-3" for="aups_check">АУПС</label>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-12 ">
-                            <div class="form-group d-flex">
-                                <div class="button r mr-3" id="button-1">
-                                    <input id="aupt_check" type="checkbox" class="checkbox"
-                                           name="has_aupt" {{ $check->has_aupt?'checked':'' }}>
-                                    <div class="knobs"></div>
-                                    <div class="layer"></div>
-                                </div>
-                                <label class="font-weight-bold h5 pr-3" for="aupt_check">АУПТ</label>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 col-12">
-                            <div class="form-group d-flex ml-5">
-                                <div class="button r mr-3" id="button-1">
-                                    <input id="has_cranes_check" type="checkbox" class="checkbox"
-                                           name="has_cranes" {{ $check->has_cranes?'checked':'' }}>
-                                    <div class="knobs"></div>
-                                    <div class="layer"></div>
-                                </div>
-                                <label class="font-weight-bold h5 pr-3" for="has_cranes_check">Пожарный кран</label>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-12">
-                            <div class="form-group d-flex">
-                                <div class="button r mr-3" id="button-1">
-                                    <input id="has_evacuation_check" type="checkbox" class="checkbox"
-                                           name="has_evacuation" {{ $check->has_evacuation?'checked':'' }}>
-                                    <div class="knobs"></div>
-                                    <div class="layer"></div>
-                                </div>
-                                <label class="font-weight-bold h5 pr-3" for="has_evacuation_check">План
-                                    эвакуации</label>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-12">
-                            <div class="form-group d-flex">
-                                <div class="button r mr-3" id="button-1">
-                                    <input id="has_hydrant_check" type="checkbox" class="checkbox"
-                                           name="has_hydrant" {{ $check->has_hydrant?'checked':'' }}>
-                                    <div class="knobs"></div>
-                                    <div class="layer"></div>
-                                </div>
-                                <label class="font-weight-bold h5 pr-3" for="has_hydrant_check">Пожарный гидрант</label>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 col-12 ">
-                            <div class="form-group d-lg-flex ml-5">
-                                @if($agent->isMobile())
-                                    <div class="d-flex justify-content-center align-items-center">
-                                        <div class="button r mr-3" id="button-1" disabled="">
-                                            <input id="has_shield_check" type="checkbox" class="checkbox"
-                                                   name="shield"
-                                                   style="display: none" {{ $check->has_shild?'checked':'' }}>
-                                            <div class="knobs" disabled="true"></div>
-                                            <div class="layer" disabled="true"></div>
-                                        </div>
-                                        <div class="">
-                                            <label class="font-weight-bold h5 " disabled="">Пожарный
-                                                щит</label>
-                                            <input type="number" name="has_shield" id="counter" class="counter form-control"
-                                                   placeholder="Кол-во щитов" min="0" value="{{ $check->has_shild }}" >
-                                        </div>
+                        @foreach($check->build->type->points as $point)
+                            <div class="col-lg-4 col-12 ">
+                                <div class="form-group d-flex">
+                                    <div class="button r mr-3" id="button-1">
+                                        <input id="point_{{ $point->id }}" type="checkbox" class="checkbox"
+                                               name="points[{{ $point->id }}]" {{ $check->checkpoints->contains('point_id', $point->id) ? 'checked' : '' }}>
+                                        <div class="knobs"></div>
+                                        <div class="layer"></div>
                                     </div>
-                                @elseif($agent->isDesktop())
-                                    <div class="button r mr-3" id="button-1" disabled="">
-                                        <input id="has_shield_check" type="checkbox" class="checkbox"
-                                               name="shield"
-                                               style="display: none" {{ $check->has_shild?'checked':'' }}>
-                                        <div class="knobs" disabled="true"></div>
-                                        <div class="layer" disabled="true"></div>
-                                    </div>
-                                    <div class="">
-                                        <label class="font-weight-bold h5 "  disabled>Пожарный
-                                            щит</label>
-                                    </div>
-                                    <div class="pl-lg-2 ">
-                                        <input type="number" name="has_shild" id="counter" class="counter form-control"
-                                               placeholder="Кол-во щитов"  min="0" value="{{ $check->has_shild }}" style="width: 67%!important;">
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                        @if($check->build->type_id == 5)
-                        <div class="col-lg-4 col-12">
-                            <div class="form-group d-flex">
-                                <div class="button r mr-3" id="button-1">
-                                    <input id="has_reservoir_check" type="checkbox" class="checkbox"
-                                           name="has_reservoir" {{ $check->has_reservoir?'checked':'' }}>
-                                    <div class="knobs"></div>
-                                    <div class="layer"></div>
+                                    <label class="font-weight-bold h5 pr-3" for="point_{{ $point->id }}">{{ $point->name }}</label>
                                 </div>
-                                <label class="font-weight-bold h5 pr-3" for="has_reservoir_check">Водоем</label>
                             </div>
-                        </div>
-                        @endif
-                        @if($check->build->type_id == 1 || $check->build->type_id == 5)
-                        <div class="col-lg-4 col-12 ">
-                            <div class="form-group d-flex pb-0">
-                                <div class="button r mr-3" id="button-1">
-                                    <input id="has_foam_check" type="checkbox" class="checkbox"
-                                           name="has_foam" {{ $check->has_foam?'checked':'' }}>
-                                    <div class="knobs"></div>
-                                    <div class="layer"></div>
-                                </div>
-                                <label class="font-weight-bold h5" for="has_foam_check">Запасы
-                                    пенооброзование</label>
-                            </div>
-                        </div>
-                        @endif
+                        @endforeach
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
@@ -213,7 +111,8 @@
                                 <div id="images">
                                     @if(!is_null($check->images))
                                         @foreach(json_decode($check->images) as $image)
-                                            <img src="{{ asset('storage/'. $image) }}" alt="{{ $image }}" class="px-3 py-3" height="200">
+                                            <img src="{{ asset('storage/'. $image) }}" alt="{{ $image }}"
+                                                 class="px-3 py-3" height="200">
                                         @endforeach
                                     @endif
                                 </div>
@@ -222,23 +121,26 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="font-weight-bold h5" for="type_psp_select">Нарушения:</label>
-                                <div class="col-12">
+                                <div class="row">
                                     @foreach($violations as $violation)
-                                        <div
-                                            class="d-flex justify-content-lg-start justify-content-center align-items-center">
-                                            <div class="form-group d-flex">
-                                                <div class="button r mr-3" id="button-1">
-                                                    <input id="{{$violation->id}}_check" type="checkbox"
-                                                           class="checkbox"
-                                                           name="violation[{{$violation->id}}]" {{ $check->violations->contains('id', $violation->id) ? "checked" : "" }}>
-                                                    <div class="knobs "></div>
-                                                    <div class="layer "></div>
+                                        <div class="col-12">
+                                            <div
+                                                class="d-flex justify-content-lg-start justify-content-center align-items-center">
+                                                <div class="form-group d-flex">
+                                                    <div class="button r mr-3" id="button-1">
+                                                        <input id="{{$violation->id}}_check" type="checkbox"
+                                                               class="checkbox"
+                                                               name="violation[{{$violation->id}}]" {{ $check->violations->contains('id', $violation->id) ? "checked" : "" }}>
+                                                        <div class="knobs "></div>
+                                                        <div class="layer "></div>
+                                                    </div>
                                                 </div>
+                                                <label class="font-weight-bold h5 pr-3 "
+                                                       for="{{$violation->id}}_check">
+                                                    {{ $violation->name }}
+                                                </label>
+
                                             </div>
-                                            <label class="font-weight-bold h5 pr-3 "
-                                                   for="{{$violation->id}}_check">
-                                                {{ $violation->name }}
-                                            </label>
                                         </div>
                                     @endforeach
                                 </div>
@@ -403,12 +305,13 @@
     </script>
     <script>
         document.getElementById("has_shield_check").disabled;
-        $('#counter').on('input',function () {
+        $('#counter').on('input', function () {
             let count = $(this).val();
-            if(count > 0){
+            if (count > 0) {
                 $("#has_shield_check").prop('checked', true);
+            } else {
+                $("#has_shield_check").prop('checked', false)
             }
-            else{ $("#has_shield_check").prop('checked', false)  }
         })
 
     </script>

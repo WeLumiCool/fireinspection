@@ -116,12 +116,12 @@
 
                 getPointOptions = function (legality) {
 
-                    if (legality === "1") {
+                    if (legality === "0") {
 
                         return {
                             preset: 'islands#redDotIcon',
                         }
-                    } else if (legality === "0") {
+                    } else if (legality === "1") {
                         return {
                             preset: 'islands#darkGreenDotIcon',
                         }

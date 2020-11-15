@@ -12,13 +12,9 @@ class Violation extends Model
 
         ];
 
-    public function check()
-    {
-        return $this->belongsTo(Check::class);
-    }
 
     public function checks()
     {
-        return $this->belongsToMany(Check::class);
+        return $this->belongsToMany(Check::class, 'check_violation', 'violation_id')->withPivot('note')->withTimestamps();
     }
 }
