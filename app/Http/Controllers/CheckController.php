@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Build;
 use App\Check;
+use App\Checkpoint;
+use App\Point;
 use App\Services\ImageUploader;
 use App\Services\SetHistory;
 use App\TypeCheck;
@@ -13,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use PhpParser\Node\Stmt\Else_;
 
 class CheckController extends Controller
 {
@@ -26,6 +29,7 @@ class CheckController extends Controller
         //
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -38,6 +42,8 @@ class CheckController extends Controller
         $violations = Violation::all();
         $typeChecks = TypeCheck::all();
         $build = Build::find($id);
+        $points = [];
+
         return view('admin.checks.create',
             compact(
                 'id',
@@ -70,29 +76,20 @@ class CheckController extends Controller
             ));
     }
 
+    public $flag;
+    public $flag1;
+    public $flag2;
+
     public function general_store($request)
     {
+
+
         $check = Check::create($request->only('type_id', 'user_id', 'build_id'));
-        $check->has_aups = $request->has('has_aups');
-        $check->has_aupt = $request->has('has_aupt');
-        $check->has_hydrant = $request->has('has_hydrant');
-        $check->has_reservoir = $request->has('has_reservoir');
-        $check->has_cranes = $request->has('has_cranes');
-        $check->has_evacuation = $request->has('has_evacuation');
-        $check->has_foam = $request->has('has_foam');
-        $check->has_reservoir = $request->has('has_reservoir');
-        $check->legality = $request->has('legality');
+
 //        Дата  запланированной проверки
         $build = Build::find($request->build_id);
         $build->planned_check = $request->planned_check;
-//      Кол-во пожарного щита
-        if ($request->has('has_shield')) {
-            if (is_null($request->has_shield)) {
-                $check->has_shild = 0;
-            } else {
-                $check->has_shild = $request->has_shield;
-            }
-        }
+
         //get check images
         if ($request->has('images')) {
             $path_images = [];
@@ -103,6 +100,7 @@ class CheckController extends Controller
         }
         //get all psps
         if ($request->has('type_psps')) {
+            $this->flag1 = 1;
             $pspArray = [];
             for ($i = 0; $i < count($request->type_psps); $i++) {
                 $pspArray[] =
@@ -112,31 +110,66 @@ class CheckController extends Controller
                     ];
             }
             $check->psp_count = json_encode($pspArray);
+        } else {
+            $this->flag1 = 0;
         }
-        SetHistory::save('Проведена проверка', $check->build->id, $check->id);
-        //save violations by check
-        if ($request->violation) {
-            foreach ($request->violation as $k => $value)
-            {
-                foreach ($request->notes as $key => $note) {
-                    if ($k == $key)
-                    {
-                        if (!is_null($note)){
-                            $check->violations()->attach($k, ['note' => $note]);
-                        }
-                        else
-                        {
-                            $check->violations()->attach($k, ['note' => null]);
-                        }
-                    }
 
+
+        if ($request->points) {
+            $shield = Point::where('name', 'Пожарный щит')->get();
+
+            foreach ($request->points as $key => $point) {
+                if ($shield[0]->id == $key)
+                {
+                    Checkpoint::create([
+                        'check_id' => $check->id,
+                        'point_id' => $key,
+                        'value' => $request->has_shield
+                    ]);
+                } else {
+                    Checkpoint::create([
+                        'check_id' => $check->id,
+                        'point_id' => $key,
+                        'value' => '1'
+                    ]);
                 }
+
+            }
+        }
+        foreach ($build->type->points as $point) {
+            if ($check->checkpoints->contains('point_id', $point->id)) {
+                $this->flag = 1;
+            } else {
+                $this->flag = 0;
             }
         }
 
+
+        SetHistory::save('Проведена проверка', $check->build->id, $check->id);
+        //save violations by check
+        if ($request->violation) {
+            $this->flag2 = 0;
+            $violations = [];
+            foreach ($request->violation as $k => $value) {
+                $violations[] = $k;
+            }
+            $check->violations()->attach($violations);
+        } else {
+            $this->flag2 = 1;
+        }
+
+
+//        dd('flag:',$this->flag, 'flag1:',$this->flag1,'flag2:',$this->flag2);
+        if ($this->flag == 0 || $this->flag == null || $this->flag1 == 0 || $this->flag1 == null || $this->flag2 == 0 || $this->flag2 == null) {
+            $check->legality = '0';
+        } else {
+            $check->legality = '1';
+        }
+//        dd($check->legality);
+
+
         $build->save();
         $check->save();
-
         return $check;
     }
 
@@ -203,13 +236,7 @@ class CheckController extends Controller
     public function update(Request $request, Check $check)
     {
         $check->update($request->only('type_id', 'user_id', 'build_id'));
-        $check->has_aups = $request->has('has_aups');
-        $check->has_aupt = $request->has('has_aupt');
-        $check->has_hydrant = $request->has('has_hydrant');
-        $check->has_reservoir = $request->has('has_reservoir');
-        $check->has_cranes = $request->has('has_cranes');
-        $check->has_evacuation = $request->has('has_evacuation');
-        $check->has_foam = $request->has('has_foam');
+
         //get check images
         if ($request->has('images')) {
             $path_images = [];
@@ -232,24 +259,18 @@ class CheckController extends Controller
         } else {
             $check->psp_count = null;
         }
-        if ($check->build->type_id == 1 || $check->build->type_id == 5) {
-            $check->has_foam = $request->has('has_foam');
-            if (!$request->has('has_foam')) {
-                $check->legality = "1";
+
+        //Edit checkpoints don't work
+        if ($request->points) {
+
+            foreach ($request->points as $key => $item) {
+
+                Checkpoint::where('check_id', $check->id)->update([
+                    'check_id' => $check->id,
+                    'point_id' => $key,
+                    'value' => 1
+                ]);
             }
-        } else {
-            $check->has_foam = NULL;
-        }
-        if ($check->build->type_id == 5) {
-            $check->has_reservoir = $request->has('has_reservoir');
-            if (!$request->has('has_reservoir')) {
-                $check->legality = "1";
-            }
-        } else {
-            $check->has_reservoir = NULL;
-        }
-        if ($request->has('has_shild')) {
-            $check->has_shild = $request->has_shild;
         }
         $check->build->planned_check = $request->planned_check;
 
@@ -263,31 +284,10 @@ class CheckController extends Controller
             }
             $check->violations()->sync($violations);
 
-            $check->legality = "1";
         } else {
             $check->violations()->detach();
         }
-        if (!$request->has('has_aups')) {
-            $check->legality = "1";
-        }
-        if (!$request->has('has_aupt')) {
-            $check->legality = "1";
-        }
-        if (!$request->has('has_hydrant')) {
-            $check->legality = "1";
-        }
-        if (!$request->has('has_reservoir')) {
-            $check->legality = "1";
-        }
-        if (!$request->has('has_cranes')) {
-            $check->legality = "1";
-        }
-        if (!$request->has('has_evacuation')) {
-            $check->legality = "1";
-        }
-        if (!$request->has('has_foam')) {
-            $check->legality = "1";
-        }
+
         $check->save();
         $check->build->save();
         return redirect()->route('admin.builds.show', $check->build_id);
@@ -302,14 +302,15 @@ class CheckController extends Controller
      */
     public function destroy(Check $check)
     {
-        foreach ($check->violations as $violation) {
-            $violation->delete();
-        }
         if (!is_null($check->images)) {
             foreach (json_decode($check->images) as $image_path) {
                 Storage::disk('public')->delete($image_path);
             }
         }
+        foreach ($check->checkpoints as $checkpoint) {
+            $checkpoint->delete();
+        }
+        $check->violations()->detach();
         $check->delete();
         SetHistory::save('Удалил', $check->build->id, $check->id);
 

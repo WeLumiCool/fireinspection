@@ -38,123 +38,40 @@
                         </div>
                     </div>
                     <div class="row ">
-                        <div class="col-lg-4 col-12 ">
-                            <div class="form-group d-flex">
-                                <div class="button r mr-3" id="button-1">
-                                    <input id="aups_check" type="checkbox" class="checkbox" name="has_aups">
-                                    <div class="knobs"></div>
-                                    <div class="layer"></div>
-                                </div>
-                                <label class="font-weight-bold h5 pr-3" for="aups_check">АУПС</label>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-12 ">
-                            <div class="form-group d-flex">
-                                <div class="button r mr-3" id="button-1">
-                                    <input id="aupt_check" type="checkbox" class="checkbox" name="has_aupt">
-                                    <div class="knobs"></div>
-                                    <div class="layer"></div>
-                                </div>
-                                <label class="font-weight-bold h5 pr-3" for="aupt_check">АУПТ</label>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 col-12">
-                            <div class="form-group d-flex pl-5">
-                                <div class="button r mr-3" id="button-1">
-                                    <input id="has_cranes_check" type="checkbox" class="checkbox" name="has_cranes">
-                                    <div class="knobs"></div>
-                                    <div class="layer"></div>
-                                </div>
-                                <label class="font-weight-bold h5 pr-3" for="has_cranes_check">Пожарный кран</label>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-12">
-                            <div class="form-group d-flex">
-                                <div class="button r mr-3" id="button-1">
-                                    <input id="has_evacuation_check" type="checkbox" class="checkbox"
-                                           name="has_evacuation">
-                                    <div class="knobs"></div>
-                                    <div class="layer"></div>
-                                </div>
-                                <label class="font-weight-bold h5 pr-3" for="has_evacuation_check">План
-                                    эвакуации</label>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-12">
-                            <div class="form-group d-flex">
-                                <div class="button r mr-3" id="button-1">
-                                    <input id="has_hydrant_check" type="checkbox" class="checkbox" name="has_hydrant">
-                                    <div class="knobs"></div>
-                                    <div class="layer"></div>
-                                </div>
-                                <label class="font-weight-bold h5 pr-3" for="has_hydrant_check">Пожарный гидрант</label>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 col-12 ">
-                            <div class="form-group d-lg-flex pl-5">
-                                @if($agent->isMobile())
-                                    <div class="d-flex justify-content-center align-items-center">
-                                        <div class="button r mr-3" id="button-1" disabled="">
-                                            <input id="has_shield_check" type="checkbox" class="checkbox"
-                                                   name="shield"
-                                                   style="display: none">
+                        @foreach($build->type->points as $point)
+                            <div class="col-lg-4 col-12 ">
+                                <div class="form-group d-flex">
+                                    @if($point->name == 'Пожарный щит')
+                                        <div class="button r mr-3" id="button-1">
+                                            <input id="point_{{ $point->id }}" type="checkbox" class="checkbox"
+                                                   name="points[{{ $point->id }}]" style="display: none">
                                             <div class="knobs" disabled="true"></div>
                                             <div class="layer" disabled="true"></div>
                                         </div>
-                                        <div class="">
-                                            <label class="font-weight-bold h5 " >Пожарный
+                                        <div class=" pt-2">
+                                            <label class="font-weight-bold h5 ">Пожарный
                                                 щит</label>
+                                        </div>
+                                        <div class="pl-lg-2 ">
                                             <input type="number" name="has_shield" id="counter"
                                                    class="counter form-control"
-                                                   placeholder="Кол-во щитов" min="0" value="0">
+                                                   placeholder="Кол-во щитов" min="0" value="0"
+                                                   style="width: 67%!important;">
                                         </div>
-                                    </div>
-                                @elseif($agent->isDesktop())
-                                    <div class="button r mr-3" id="button-1" disabled="">
-                                        <input id="has_shield_check" type="checkbox" class="checkbox"
-                                               name="shield"
-                                               style="display: none">
-                                        <div class="knobs" disabled="true"></div>
-                                        <div class="layer" disabled="true"></div>
-                                    </div>
-                                    <div class="">
-                                        <label class="font-weight-bold h5 " >Пожарный
-                                            щит</label>
-                                    </div>
-                                    <div class="pl-lg-2 ">
-                                        <input type="number" name="has_shield" id="counter" class="counter form-control"
-                                               placeholder="Кол-во щитов" min="0" value="0"
-                                               style="width: 50%!important;">
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                        @if($build->type_id == 5)
-                            <div class="col-lg-4 col-12">
-                                <div class="form-group d-flex">
-                                    <div class="button r mr-3" id="button-1">
-                                        <input id="has_reservoir_check" type="checkbox" class="checkbox"
-                                               name="has_reservoir">
-                                        <div class="knobs"></div>
-                                        <div class="layer"></div>
-                                    </div>
-                                    <label class="font-weight-bold h5 pr-3" for="has_reservoir_check">Водоем</label>
+                                    @else
+                                        <div class="button r mr-3" id="button-1">
+                                            <input id="point_{{ $point->id }}" type="checkbox" class="checkbox"
+                                                   name="points[{{ $point->id }}]">
+                                            <div class="knobs"></div>
+                                            <div class="layer"></div>
+                                        </div>
+                                        <label class="font-weight-bold h5 pr-3"
+                                               for="point_{{ $point->id }}">{{ $point->name }}</label>
+                                    @endif
+
                                 </div>
                             </div>
-                        @endif
-                        @if($build->type_id == 1 || $build->type_id == 5)
-                            <div class="col-lg-4 col-12">
-                                <div class="form-group d-flex">
-                                    <div class="button r mr-3" id="button-1">
-                                        <input id="has_foam_check" type="checkbox" class="checkbox" name="has_foam">
-                                        <div class="knobs"></div>
-                                        <div class="layer"></div>
-                                    </div>
-                                    <label class="font-weight-bold h5" for="has_foam_check">Запасы
-                                        пенооброзования</label>
-                                </div>
-                            </div>
-                        @endif
+                        @endforeach
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group ">
@@ -179,28 +96,10 @@
                             </div>
                         </div>
                     </div>
-                    @if($agent->isMobile())
-                        <div class="col-12">
-                            @foreach($violations as $violation)
-                                <div class="form-group d-flex justify-content-center">
-                                    <div class="button r mr-3" id="button-1">
-                                        <input id="{{$violation->id}}_check" type="checkbox"
-                                               class="checkbox"
-                                               name="violation[{{$violation->id}}]">
-                                        <div class="knobs "></div>
-                                        <div class="layer "></div>
-                                    </div>
-                                </div>
-                                <label class="font-weight-bold h5 pr-3 " for="{{$violation->id}}_check">
-                                    {{ $violation->name }}
-                                </label>
-                            @endforeach
-                        </div>
-                    @elseif($agent->isDesktop())
-                        <div class="col-12">
-                            @foreach($violations as $violation)
-                                <div
-                                    class="d-flex justify-content-lg-start justify-content-center align-items-center">
+                    <div class="row">
+                        @foreach($violations as $violation)
+                            <div class="col-12">
+                                <div class="d-flex justify-content-lg-start justify-content-center align-items-center">
                                     <div class="form-group d-flex py-2">
                                         <div class="button r mr-3" id="button-1">
                                             <input id="{{$violation->id}}_check" type="checkbox"
@@ -215,9 +114,9 @@
                                         {{ $violation->name }}
                                     </label>
                                 </div>
-                            @endforeach
-                        </div>
-                    @endif
+                            </div>
+                        @endforeach
+                    </div>
                     <input type="hidden" name="build_id" value="{{ $id }}">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <div class="row pt-3">
@@ -346,13 +245,13 @@
         });
     </script>
     <script>
-        document.getElementById("has_shield_check").disabled;
+        document.getElementById("point_16").disabled;
         $('#counter').on('input', function () {
             let count = $(this).val();
             if (count > 0) {
-                $("#has_shield_check").prop('checked', true);
+                $("#point_16").prop('checked', true);
             } else {
-                $("#has_shield_check").prop('checked', false)
+                $("#point_16").prop('checked', false)
             }
         })
 

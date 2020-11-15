@@ -63,7 +63,8 @@
                     <div class="col-6 col-lg-4">
                         <span class="h2-lg h4">Проверка</span>
                     </div>
-                    <div class="col-6 col-lg-2 text-right text-lg-left">
+                    <div class="col-6 col-lg-2
+                   offset-md-3 col-md-3 text-right text-lg-left text-md-center">
                         @if($agent->isMobile())
                             <a href="{{ route('inspector.create', $build->id) }}" class="btn">
                                 <i class="fas fa-plus-circle text-success" style="font-size: 20px"></i>
@@ -106,63 +107,32 @@
                                 <div class="card-body p-0">
                                     <div class="table-ui  mb-3">
                                         <div class="row px-3">
-                                            @if($check->has_aups)
+                                            @foreach($build->type->points as $point)
                                                 <div class="col-lg-3 col-12 text-lg-left py-2 text-center">
-                                                    <p class="h6 font-weight-bold ">Автоматическая установка пожарной
-                                                        сигнализации:</p>
-                                                    <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                </div>
-                                            @endif
-                                            @if($check->has_aupt)
-                                                <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                    <p class="h6 font-weight-bold ">Автоматическая установка
-                                                        пожаротушения:</p>
-                                                    <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                </div>
-                                            @endif
-                                            @if($check->has_cranes)
-                                                <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                    <p class="h6 font-weight-bold ">Противопожарные краны:</p>
-                                                    <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                </div>
-                                            @endif
-                                            @if($check->has_evacuation)
-                                                <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                    <p class="h6 font-weight-bold ">План эвакуации:</p>
-                                                    <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                </div>
-                                            @endif
-                                            @if($check->has_foam)
-                                                <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                    <p class="h6 font-weight-bold ">Запасы пенооброзователя(200л):</p>
-                                                    <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                </div>
-                                            @endif
-                                            @if($check->has_hydrant)
-                                                <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                    <p class="h6 font-weight-bold ">Гидрант:</p>
-                                                    <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                </div>
-                                            @endif
-                                            @if($check->has_reservoir)
-                                                <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                    <p class="h6 font-weight-bold ">Водоем:</p>
-                                                    <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                </div>
-                                            @endif
-                                            @if($check->has_shild > 0)
-                                                <div class="col-lg-3 col-12 text-lg-left py-2 text-center ">
-                                                    <p class="h6 font-weight-bold ">Пожарный щит:</p>
-                                                    <div class="d-flex justify-content-center justify-content-lg-start">
-                                                        <p class="pr-2"><i
-                                                                class="fa fa-check-circle text-success fa-2x"></i></p>
-                                                        <p class="text-muted m-0  py-1">
-                                                            <span
-                                                                class="font-weight-bold pr-1">Кол-во:</span>{{ $check->has_shild }}
-                                                        </p>
+                                                    <p class="h6 font-weight-bold ">{{ $point->name }}:</p>
+                                                    <div class="d-flex">
+                                                        @if($check->checkpoints->contains('point_id', $point->id))
+                                                            <p><i class="fa fa-check-circle text-success fa-2x"></i></p>
+                                                        @else
+                                                            <p><i class="fa fa-times-circle text-danger fa-2x"></i></p>
+                                                        @endif
+                                                        @if($point->name == 'Пожарный щит')
+                                                            @foreach($check->checkpoints as $key => $value)
+
+                                                                @if($value->point_id == $shield[0]->id)
+                                                                    <p class="text-muted m-0  py-1">
+                                                                        <span
+                                                                            class="font-weight-bold pr-1">Кол-во:</span>{{ $value->value }}
+                                                                    </p>
+                                                                    @break
+
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+
                                                     </div>
                                                 </div>
-                                            @endif
+                                            @endforeach
 
                                             <div class="col-12 d-flex text-left mb-3 px-lg-0">
                                                 <div class="col-6 col-lg-3">
@@ -241,7 +211,7 @@
                                                     @foreach($check->violations as $violation)
                                                         <p class="alert alert-danger">
                                                             <span>{{ $violation->name }}:</span>
-                                                            <span>{{ $violation->note }}</span>
+                                                            <span>{{ $violation->pivot->note }}</span>
                                                         </p>
                                                     @endforeach
                                                 @endif

@@ -42,6 +42,9 @@ Route::prefix('admin')->name('admin.')/*->middleware('admin')*/
     //CRUD for typesBuild
     Route::get('/typeBuild/datatable', 'TypeBuildController@datatableData')->name('typeBuild.datatable.data');
     Route::resource('typeBuilds', 'TypeBuildController');
+    //CRUD points
+    Route::get('/point/datatable', 'PointController@datatableData')->name('point.datatable.data');
+    Route::resource('points', 'PointController');
     //AJAX
     Route::get('change_permission', 'UserController@change_permission')->name('change.permission');
 });

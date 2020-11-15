@@ -37,13 +37,13 @@
             },
 
             getPointOptions = function (legality) {
-
-                if (legality === "1") {
+                if (legality === "0") {
+                    console.log(legality)
 
                     return {
                         preset: 'islands#redDotIcon',
                     }
-                } else if (legality === "0") {
+                } else if (legality === "1") {
                     return {
                         preset: 'islands#darkGreenDotIcon',
                     }
@@ -61,16 +61,15 @@
         legality = [];
 
         @foreach($builds as $build)
-
-        points.push([{{ $build->latitude }}, {{ $build->longitude }}]);
-        owner.push("{{ $build->name }}");
-        address.push("{{ $build->address }}");
-        category.push("{{ $build->type->name }}");
-        id.push("{{ $build->id }}");
+            points.push([{{ $build->latitude }}, {{ $build->longitude }}]);
+            owner.push("{{ $build->name }}");
+            address.push("{{ $build->address }}");
+            category.push("{{ $build->type->name }}");
+            id.push("{{ $build->id }}");
         @if($build->checks->first())
-        legality.push("{{ $build->checks->first()->legality }}");
+            legality.push("{{ $build->checks->first()->legality }}");
         @else
-        legality.push('2');
+            legality.push('2');
         @endif
             @endforeach
 

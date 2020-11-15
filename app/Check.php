@@ -40,4 +40,9 @@ class Check extends Model
     {
         return $this->belongsTo(TypeCheck::class);
     }
+
+    public function checkpoints()
+    {
+        return $this->hasMany(Checkpoint::class);
+    }
 }

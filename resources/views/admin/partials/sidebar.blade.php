@@ -24,6 +24,10 @@
            class="list-group-item list-group-item-action waves-effect {{ request()->is('admin/typeBuild*') ? 'active' : '' }}">
             <i class="fas fa-cubes mr-3"></i></i>{{ __('Тип объектов') }}</a>
 
+        <a href="{{ route('admin.points.index') }}"
+           class="list-group-item list-group-item-action waves-effect {{ request()->is('admin/points*') ? 'active' : '' }}">
+            <i class="fas fa-cubes mr-3"></i></i>{{ __('Правило типов') }}</a>
+
 
     </div>
 </div>

@@ -6,6 +6,7 @@ use App\Build;
 use App\Check;
 use App\CheckViolation;
 use App\History;
+use App\Point;
 use App\Services\SetHistory;
 use App\Type;
 use App\TypeBuild;
@@ -23,6 +24,7 @@ class BuildController extends Controller
      */
     public function index()
     {
+
         return view('admin.builds.index');
     }
 
@@ -77,18 +79,20 @@ class BuildController extends Controller
      */
     public function show(Build $build)
     {
-        return view('admin.builds.show', compact('build'));
+        $shield = Point::where('name', 'Пожарный щит')->get();
+
+        return view('admin.builds.show', compact('build', 'shield'));
     }
 
 
     public function insp_show($id)
     {
-        $build = Build::find(2);
-        foreach ($build->checks as $check){
-            $violations = CheckViolation::where('check_id', $check->id)->get();
-        }
-        dd($violations);
-        return view('objects.show', compact('build', 'violations'));
+        $shield = Point::where('name', 'Пожарный щит')->get();
+
+        $build = Build::find($id);
+
+
+        return view('objects.show', compact('build', 'shield'));
     }
 
     /**
@@ -130,6 +134,10 @@ class BuildController extends Controller
             if ($history->object_id === $build->id) {
                 $history->delete();
             }
+        }
+        foreach ($build->checks as $check)
+        {
+            $check->delete();
         }
 
         $build->delete();
