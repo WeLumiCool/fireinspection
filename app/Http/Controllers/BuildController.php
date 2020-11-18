@@ -25,7 +25,7 @@ class BuildController extends Controller
     public function index()
     {
 
-        return view('admin.builds.index');
+        return view('admin.builds.index', ['types' => TypeBuild::all()]);
     }
 
     public function welcome() {

@@ -148,7 +148,13 @@
                                                         Количество:
                                                     </p>
                                                 </div>
+                                                <div class="col-6 offset-lg-3 col-lg-3">
+                                                    <p class="h6 font-weight-bold">
+                                                        Инспектор:
+                                                    </p>
+                                                </div>
                                             </div>
+
                                             <div class="col-12 d-flex text-left mb-3 px-lg-0">
                                                 @if(is_null($check->psp_count))
                                                     <div class="col-12 d-flex text-left mb-3 px-lg-0">
@@ -175,6 +181,11 @@
                                                         @endforeach
                                                     </div>
                                                 @endif
+                                                <div class="col-6 offset-lg-3 col-lg-3 mr-3">
+                                                    <p class="text-muted m-0 border-bottom py-1">
+                                                        <span class="text-dark font-weight-bold">{{ $check->user->name }}</span>
+                                                    </p>
+                                                </div>
                                             </div>
                                             @if(!is_null($check->images))
                                                 <div class="col-12 my-2">

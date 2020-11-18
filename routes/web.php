@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::prefix('admin')->name('admin.')/*->middleware('admin')*/
+Route::prefix('admin')->name('admin.')->middleware('admin')
 ->group(function () {
     Route::get('/', 'AdminController@index')->name('admin');
     Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
