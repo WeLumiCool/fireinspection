@@ -245,13 +245,13 @@
         });
     </script>
     <script>
-        document.getElementById("point_16").disabled;
+        document.getElementById("point_6").disabled;
         $('#counter').on('input', function () {
             let count = $(this).val();
             if (count > 0) {
-                $("#point_16").prop('checked', true);
+                $("#point_6").prop('checked', true);
             } else {
-                $("#point_16").prop('checked', false)
+                $("#point_6").prop('checked', false)
             }
         })
 

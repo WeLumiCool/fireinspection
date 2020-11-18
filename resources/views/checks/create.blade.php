@@ -305,13 +305,13 @@
         {{--    })--}}
     </script>
     <script>
-        document.getElementById("has_shield_check").disabled;
+        document.getElementById("point_6").disabled;
         $('#counter').on('input', function () {
             let count = $(this).val();
             if (count > 0) {
-                $("#has_shield_check").prop('checked', true);
+                $("#point_6").prop('checked', true);
             } else {
-                $("#has_shield_check").prop('checked', false)
+                $("#point_6").prop('checked', false)
             }
         })
 

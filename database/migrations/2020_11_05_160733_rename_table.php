@@ -24,6 +24,5 @@ class RenameTable extends Migration
     public function down()
     {
         Schema::rename('check_violation', 'checks_type');
-
     }
 }
