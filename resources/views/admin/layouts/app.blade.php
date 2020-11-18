@@ -32,12 +32,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class=" ml-auto navbar-nav nav-flex-icons">
-                        @if(Auth::user()->role->name == 'Начальник' or Auth::user()->role->name == 'Заместитель')
-                            <form action="http://inspection/api/login" method="POST">
+                            <form action="{{ env('INSPECTION') }}" method="POST">
                                 <input type="hidden" name="auth_hash" value="{{ hash('sha256', Auth::user()->email) }}">
                                 <button class="nav-link btn text-light mr-3" style="background: #B63A22" type="submit">ГСН</button>
                             </form>
-                        @endif
                         @if(Auth::user()->role->name=='Начальник')
                             <li class="nav-item">
                                 <button onclick="share_permission(this);"
